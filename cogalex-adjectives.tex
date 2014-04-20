@@ -30,49 +30,98 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-    Abstract
+    The ontology-lexicon interface has become an important and successful tool for handling problems in NLP (cite, cite, cite). The foundation of these models based on a separation of the ontological and lexical layers by means of the principle of semantics by reference to an ontology in description logics. However, as noted by other authors, the use of first order logic (hence also description logics) is while effective for nouns and verbs breaks down in the case of adjectives. We propose that this is primarily due to a lack of logical expressivity in the ontology. In particular, many adjectives are i) gradable requiring fuzzy or non-monotonic semantics or ii) operator adjectives require second-order logic. We consider  how we can handle the ontology-lexicon interface in the face of these more complex logical formalism, and show how these can be backward engineered into OWL based modelism by means of pseudo-classes, with application to question answering.
 \end{abstract}
+
+
 
 \section{Introduction}
 \label{intro}
-
-%
-% The following footnote without marker is needed for the camera-ready
-% version of the paper.
-% Comment out the instructions (first text) and uncomment the 8 lines
-% under "final paper" for your variant of English.
-% 
 \blfootnote{
-    %
-    % for review submission
-    %
     \hspace{-0.65cm}  % space normally used by the marker
     Place licence statement here for the camera-ready version, see
     Section~\ref{licence} of the instructions for preparing a
     manuscript.
-    %
-    % % final paper: en-uk version (to license, a licence)
-    %
-    % \hspace{-0.65cm}  % space normally used by the marker
-    % This work is licensed under a Creative Commons 
-    % Attribution 4.0 International Licence.
-    % Page numbers and proceedings footer are added by
-    % the organisers.
-    % Licence details:
-    % \url{http://creativecommons.org/licenses/by/4.0/}
-    % 
-    % % final paper: en-us version (to licence, a license)
-    %
-    % \hspace{-0.65cm}  % space normally used by the marker
-    % This work is licenced under a Creative Commons 
-    % Attribution 4.0 International License.
-    % Page numbers and proceedings footer are added by
-    % the organizers.
-    % License details:
-    % \url{http://creativecommons.org/licenses/by/4.0/}
+    
+     \hspace{-0.65cm}  % space normally used by the marker
+    
+     This work is licensed under a Creative Commons 
+     Attribution 4.0 International Licence.
+     Page numbers and proceedings footer are added by
+     the organisers.
+     Licence details:
+     \url{http://creativecommons.org/licenses/by/4.0/}
 }
 
+Ontology-lexicon models, such as the \emph{lemon} (Lexicon Model for Ontologies)\cite{mccrae2012interchanging}, have become an important model for handling a number of tasks in natural language processing. In particular, such ontology-lexica are built around the separation of a lexical layer describing how a word or phrase acts syntactically and morphology and a semantic layer describing how the meaning of a word is expressed in a formal logical model, such as the OWL (Web Ontology Language)\cite{}. It has been shown that this principle known as \emph{semantics by reference}\cite{} is an effective model that can be used in tasks such as question answering\cite{}. In particular, its suitability to the task is driven by the fact that the application of this model to answering facts based on the DBpedia\cite{} knowledge base requires mostly understanding the nouns and the verbs of the sentence. However, as has been shown by the Question Answering over Linked Data (QALD)\cite{} tasks there are many questions that can be asked over this database that require a deeper semantic understanding of the representation of language. For example, questions such as 
 
+\begin{quote}
+What is the highest mountain in Australia?
+\end{quote}
+
+Require understanding of the semantics of `high' in a manner that goes beyond the model of OWL based on classes, properties and individuals. The answer given in the QALD dataset for this question is as follows
+
+\begin{verbatim}
+SELECT DISTINCT ?uri WHERE { 
+  ?uri rdf:type dbo:Mountain . 
+  ?uri dbo:locatedInArea res:Australia . 
+  ?uri dbo:elevation ?elevation . 
+} ORDER BY DESC(?elevation) LIMIT 1
+\end{verbatim}
+
+In particular, the interpretation of this question involves the understanding of how the word `high' relates to the property {\tt dbo:elevation} and how to express this semantics in a formal manner.
+
+It has been claimed that first-order logic and thus by extension description logics, such as OWL, `fail decidely when it comes to adjectives'\cite{bankston2003modeling}. To this extent we largely agree that the semantics of many adjectives are difficult or impossible to describe in first-order logic, however from the point of view of the ontology-lexicon interface the logical expressivity of the ontology is not a limiting factor. In fact, due to the separation of the lexical and ontology layers in a model such as \emph{lemon}, it is possible to express the meaning of words without worrying about the formalism used in the ontology. To this extent we will first demonstrate that adjectives are in general a case where the use of description logics breakdown, and for which more sophisticated logical formalisms must be applied. We then consider to what extent this can be handled in the context of the ontology-lexicon, and introduce pseudo-classes, that is OWL classes with non-DL annotations, which we use to express the semantics of adjectives following in the vein of previously introduced design patterns\cite{mccrae??}. Finally, we show how these semantics can be helpful in practical applications of question answering over the DBpedia knowledge base.
+
+\section{Classification of adjectives}
+
+There are a number of classifications of adjectives, and first we will start with the most fundamental distinction of \emph{attributive} versus \emph{predicative} usage, that is the use of adjectives in noun phrases (``$X$ is a $A~N$'') versus as objects of the copula (``$X$ is $A$''). It should be noted that there are many adjectives for which only predicative or attributive usage is allowed.
+
+\begin{quote}
+	Clinton is a former president.
+	
+	$^*$Clinton is former.
+	
+	The baby is awake.
+	
+	$^*$The awake baby.
+\end{quote}
+
+One of the principle classifications of the semantics of adjectives (for example \cite{partee2003are}) is based on the meaning of adjective noun compounds relative to the meaning of the words by themselves. This classification is as follows (where $\Rightarrow$ means it entails)
+
+\begin{description}
+\item[Intersective] ($X\mathrm{~is~a~}A~N \Rightarrow X\mathrm{~is~}A \cap X\mathrm{~is~a~}N$) Such adjectives work as if they were another noun and indicate that the compound noun phrase is a member of both the class of the noun and the class of the adjective. For example, in the phrase ``Belgian violinist'' it refers to a person in the class intersection $Belgian \sqcap Violinist(X)$, and hence we can infer that a ``Belgian violinist'' is a subclass of a ``Belgian person''.
+\item[Subsective] ($X\mathrm{~is~a~}A~N \Rightarrow X\mathrm{~is~a~}N, X\mathrm{~is~a~}A~N \not\Rightarrow X\mathrm{~is~}A$) Such adjectives do not alter the meaning of the noun phrase itself, but only make sense with knowledge of the noun they refer to. For example, a ``skillful violinst'' is certainly in the class $Violinst(X)$, but if we knew that that person is a surgeon as well, we cannot conclude they are a skillful surgeon.
+\item[Privative] ($X\mathrm{~is~a~}A~N \Rightarrow X\mathrm{~is~a~}N$) These adjectives modify the meaning of a noun phrase to create a noun phrase that is incompatible with the original meaning. For example, a ``former president'' is not a member of the class of presidents.
+\end{description}
+
+This classification is useful, however one further case is important to distinguish and that is of \emph{relational} adjectives which have a meaning in that they express a relationship between two individuals or events, for example:
+
+\begin{quote}
+I would rather go to the sea than the mountains.
+
+He is related to her.
+\end{quote}
+
+Another important distinction to make with adjectives is whether they are \emph{gradable}, in that whether is makes semantic senses to make a comparative or superlative statement with these adjectives. For example, adjectives such as `big' or `tall' can express relationships such as `$X$ is bigger than $Y$', however it is not possible to say one individual is more former. Most gradable adjectives are subsective, for example `a big mouse' is not `a big animal'. An important group of gradable adjectives are, however, intersective, and we call such adjectives `absolute' (following \cite{rusiecki}) as they refer to an ideal point on some scale, for example a `dry towel' is `dry', as the meaning of dry is without water, however we can still talk about a towel being `drier', in the sense of closer to the ideal of having no water than some other object.
+
+Finally, we consider \emph{operator} or \emph{property-modifying} adjectives, which can be considered to be the same as privative adjectives, but in this case are understood as operators that change some property in the qualia structure of the class. For example, we may express the adjective `former' as follows in lambda calculus\cite{}:
+
+$$\lambda C [\lambda x \exists t C(x,t) \cap t < \mathrm{now}]$$
+
+Such adjectives have not only a difference in semantic meaning but also this can frequently have syntactic impact, for example in adjective ordering restrictions, as they may be reordered with no semantic impact~\cite{teodorescu2006adjective}, e.g.,
+
+\begin{quote}
+A big red car.
+
+$^?$ A red big car.
+
+A famous former actor.
+
+A former famous actor.
+\end{quote}
+
+A similar syntactic phenomen for Polish is explored by \cite{partee}.
 
 \section*{Acknowledgements}
 
