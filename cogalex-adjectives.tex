@@ -121,7 +121,83 @@ A famous former actor.
 A former famous actor.
 \end{quote}
 
-A similar syntactic phenomen for Polish is explored by \cite{partee}.
+A similar syntactic phenomena for Polish is explored by \cite{partee}.
+
+\section{Representation of adjectives in the ontology-lexicon interface}
+
+In general it is assumed that adjectives form frames with exactly one argument except for extra arguments given by adjuncts, typically prepositional phrases. Most adjectives are thus associated with a predicative frame, stereotyped in English as:
+
+$$X\mathrm{~is~}A$$
+
+And with a second attributive frame, whose stereotype cannot be realized in English, but we specify as:
+
+$$X [attr] A$$
+
+As such, when we encounter the attributive usage of an adjective such as in
+
+\begin{quote}
+Juan Carlos is the Spanish king.
+\end{quote}
+
+We understand this as the realization of two frames:
+
+\begin{quote}
+Juan Carlos is the king.
+
+Juan Carlos $[attr]$ Spanish.
+\end{quote}
+
+\begin{figure}
+\caption{\label{attr-pred-example}Example of the representation of attributive and predicative frames in \emph{lemon}}
+\end{figure}
+
+We see an example of such representation in figure \ref{attr-pred-example} given the frames for a simple adjective and the relationship to an ontology predicate.
+
+\subsection{Intersective adjectives}
+
+Intersective adjectives are the most straightforward class as in many cases they can simply be explained as either being noun-like (denomial adjectives such as `British') or verb-like (deverbal adjectives such as `broken'). Intersective adjectives have a single argument as with most adjectives and in this case it is natural that they refer to classes, which may be event classes such as described in \cite{}. It is commonly the case that the class referred to may be an anonymous class such as $\exists nationality.'gb'$ rather than a named class in the ontology. This is even more so the case with deverbal adjectives where a typical class is given as $\exists theme^{-1}.EventClass$ is a common definition.
+
+\subsection{Gradable adjectives}
+
+Gradable adjectives are naturally defined relative to a particular property, that is it is natural to say that big refers to size, however it is clear then that small also refers to size, however as antonyms it is clear that they cannot both refer to the same ontological concept. As such, we introduce the concept of \emph{covariance} and \emph{contravariance}, which refers to whether the comparative form indicates a higher property value for the subject or the object. That is that `big' is covariant with size, as bigger things have a higher size value, and `small' is contravariant with size. We also introduce a third concept of \emph{absolute gradability}, which states that these objects are better described by these adjectives as they approach some ideal value. A common example of this is colours, which where we may say that some object is redder than another if it is closer to some ideal value of red (e.g., RGB {\tt 0xff0000}). 
+
+While these concepts well handle the comparative usage of adjectives, the predicative and superlative usage of adjectives is complicated by three factors that we will outline below. Firstly, we notice that gradable classes are not clearly defined as with the case of many intersective adjectives, that is that while we can clearly define all people in the world as `British' or `non-British', by who holds a passport of the United Kingdom, it is not easy split the world's population into `tall' and `not tall'. In fact, while it may be easy to say that someone who is 6'6'' (198cm) tall is `tall' it is not clear whether someone of height 6' (182cm) is tall although they are above average height for a man. As such, the class boundary of a gradable adjective are naturally fuzzy. Secondly, we note that these class boundaries are non-monotonic, that is that with knowledge of more instances of the relative class we must revise our class boundaries. This is especially that case if we wish to define a class for the superlative expression, which by its nature is non-monotonic, as the discovery of a new tallest person in the world would remove the existing tallest person in the world from the class of tallest person in the world. This, non-monotonicity also affects the class boundaries of the gradable class itself, for example in the 18th century the average height of a male was 5'5'' (165cm) and as such a male of 6' would have been considered clearly to be tall. As such, we can conclude that each instance added to our ontology must revise the class boundaries of a gradable class, hence leading to the fact that gradable adjectives are fundamentally non-monotonic. Finally, we must notice that gradability can only be understood relative to the class that we wish to grade, that is that while it is unclear as to whether 6' is tall for a male, given the current average height of a female of about 5'4'' (162cm) it is clear that 6' is clearly tall for a female.
+
+(Francesca, default measures)
+
+As an example of a way in which it would be possible to define the nature of gradable classes, we can consider Markov Logic\cite{?}, which is an extension of first-order logic in which each clause is given a cost. The process of reasoning is thus transformed into an optimization problem of finding the extension, which violates the lowest summed weight of all clauses. As such we can formulate a gradable adjective based on the number of known instances as follows:
+
+$$\forall x \in C, y \in C : size(x) > size(y) \rightarrow big(x,C) : \alpha$$
+
+$$\forall x \in C, y \in C : size(x) < size(y) \rightarrow \neg big(x,C) : \beta$$
+
+\textbf{This is already second-order, oops!}
+
+In this way, the classification of an object into big or small is defined by
+
+\noident\textbf{Lemma}: An individual, $x \in C$, has $big(x,C)$ if and only if 
+
+$$|\{y \in C, size(y) > size(x)\}| \alpha > |\{y \in C, size(y) < size(x)\}| \beta$$
+
+The proof of this lemma is trivial, and we see the three properties clearly outlined above, in that we have non-monotonicity (in that more individuals may change whether we consider an individual to be `big' or not, that we have fuzziness, given by the strength of the probability of the proposition $\big(x,C)$ and we have context-sensitivity due to the second-order nature of the formulation.
+
+(pseudo-class, exhaustive DL formulation)
+
+\subsection{Operator adjectives}
+
+Operator adjectives are those that combine to alter the meaning of the adjective itself. There are two primary issues with the understanding of the adjective in this manner, firstly that the reference of the lexical item does not directly refer to an existing item in the ontology, but rather is novel and productive and secondly that the compositional nature of adjective-noun compounds is no longer simple as in the cases of intersective and gradable adjectives. This means that we must acknowledge operator adjectives in both the lexicon and the adjective. To this extent we define a frame known as the operator adjective frame, whose prototype is:
+
+$$X\mathrm{~is~a~}A~NP$$
+
+This leads to the odd case that operator adjectives are then considered the head of such a construction! \textbf{hmm...} This understanding is unambiguous assuming there is no attributive frame for the adjective as well. In this case we can understand the reference of the adjective as a property that relates an individual to a class. As such it is clear, that the reference of an operator adjective is a higher-order predicate. Fortunately, in the case of OWL we can cheat on this second-order nature by means of \emph{punning}, which allows a class to also be an individual. If we thus assume that operator adjectives are essentially puns, then it follows that we can assume that the reference of an operator adjective is thus a property. As such, for example, we can model an adjective such as `former' as referring to a property such as {\tt heldRole} whose range is a class of roles punned as individuals. This approach is effective, however it has limits in general \textbf{does it???}
+
+\section{Adjectives in question answering}
+
+(Christina, some examples for QALD)
+
+\section{Related work}
+
+\section{Conclusion}
 
 \section*{Acknowledgements}
 
