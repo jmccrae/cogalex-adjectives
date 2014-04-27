@@ -30,21 +30,14 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-    The ontology-lexicon interface has become an important and successful tool for handling problems in NLP (cite, cite, cite). The foundation of these models based on a separation of the ontological and lexical layers by means of the principle of semantics by reference to an ontology in description logics. However, as noted by other authors, the use of first order logic (hence also description logics) is while effective for nouns and verbs breaks down in the case of adjectives. We propose that this is primarily due to a lack of logical expressivity in the ontology. In particular, many adjectives are i) gradable requiring fuzzy or non-monotonic semantics or ii) operator adjectives require second-order logic. We consider  how we can handle the ontology-lexicon interface in the face of these more complex logical formalism, and show how these can be backward engineered into OWL based modelism by means of pseudo-classes, with application to question answering.
+    The ontology-lexicon interface has become an important and successful tool for handling problems in NLP. The foundation of these models based on a separation of the ontological and lexical layers by means of the principle of semantics by reference to an ontology in description logics. However, as noted by other authors, the use of first order logic (hence also description logics) is while effective for nouns and verbs breaks down in the case of adjectives. We propose that this is primarily due to a lack of logical expressivity in the ontology. In particular, many adjectives are i) gradable requiring fuzzy or non-monotonic semantics or ii) operator adjectives require second-order logic. We consider  how we can handle the ontology-lexicon interface in the face of these more complex logical formalism, and show how these can be backward engineered into OWL based modelism by means of pseudo-classes, with application to question answering.
 \end{abstract}
 
 
 
 \section{Introduction}
 \label{intro}
-\blfootnote{
-    \hspace{-0.65cm}  % space normally used by the marker
-    Place licence statement here for the camera-ready version, see
-    Section~\ref{licence} of the instructions for preparing a
-    manuscript.
-    
-     \hspace{-0.65cm}  % space normally used by the marker
-    
+\blfootnote{  
      This work is licensed under a Creative Commons 
      Attribution 4.0 International Licence.
      Page numbers and proceedings footer are added by
@@ -53,7 +46,7 @@
      \url{http://creativecommons.org/licenses/by/4.0/}
 }
 
-Ontology-lexicon models, such as the \emph{lemon} (Lexicon Model for Ontologies)\cite{mccrae2012interchanging}, have become an important model for handling a number of tasks in natural language processing. In particular, such ontology-lexica are built around the separation of a lexical layer describing how a word or phrase acts syntactically and morphology and a semantic layer describing how the meaning of a word is expressed in a formal logical model, such as the OWL (Web Ontology Language)\cite{}. It has been shown that this principle known as \emph{semantics by reference}\cite{} is an effective model that can be used in tasks such as question answering\cite{}. In particular, its suitability to the task is driven by the fact that the application of this model to answering facts based on the DBpedia\cite{} knowledge base requires mostly understanding the nouns and the verbs of the sentence. However, as has been shown by the Question Answering over Linked Data (QALD)\cite{} tasks there are many questions that can be asked over this database that require a deeper semantic understanding of the representation of language. For example, questions such as 
+Ontology-lexicon models, such as the \emph{lemon} (Lexicon Model for Ontologies)\cite{mccrae2012interchanging}, have become an important model for handling a number of tasks in natural language processing. In particular, such ontology-lexica are built around the separation of a lexical layer describing how a word or phrase acts syntactically and morphology and a semantic layer describing how the meaning of a word is expressed in a formal logical model, such as the OWL (Web Ontology Language)\cite{mcguinness2004owl}. It has been shown that this principle known as \emph{semantics by reference}\cite{buitelaar2010ontology} is an effective model that can be used in tasks such as question answering\cite{unger2011pythia} and natural language generation\cite{cimiano2013exploiting}. In particular, its suitability to the task is driven by the fact that the application of this model to answering facts based on the DBpedia\cite{auer2007dbpedia} knowledge base requires mostly understanding the nouns and the verbs of the sentence. However, as has been shown by the Question Answering over Linked Data (QALD)\cite{lopez2013evaluating} tasks there are many questions that can be asked over this database that require a deeper semantic understanding of the representation of language. For example, questions such as 
 
 \begin{quote}
 What is the highest mountain in Australia?
@@ -71,7 +64,7 @@ SELECT DISTINCT ?uri WHERE {
 
 In particular, the interpretation of this question involves the understanding of how the word `high' relates to the property {\tt dbo:elevation} and how to express this semantics in a formal manner.
 
-It has been claimed that first-order logic and thus by extension description logics, such as OWL, `fail decidely when it comes to adjectives'\cite{bankston2003modeling}. To this extent we largely agree that the semantics of many adjectives are difficult or impossible to describe in first-order logic, however from the point of view of the ontology-lexicon interface the logical expressivity of the ontology is not a limiting factor. In fact, due to the separation of the lexical and ontology layers in a model such as \emph{lemon}, it is possible to express the meaning of words without worrying about the formalism used in the ontology. To this extent we will first demonstrate that adjectives are in general a case where the use of description logics breakdown, and for which more sophisticated logical formalisms must be applied. We then consider to what extent this can be handled in the context of the ontology-lexicon, and introduce pseudo-classes, that is OWL classes with non-DL annotations, which we use to express the semantics of adjectives following in the vein of previously introduced design patterns\cite{mccrae??}. Finally, we show how these semantics can be helpful in practical applications of question answering over the DBpedia knowledge base.
+It has been claimed that first-order logic and thus by extension description logics, such as OWL, `fail decidely when it comes to adjectives'\cite{bankston2003modeling}. To this extent we largely agree that the semantics of many adjectives are difficult or impossible to describe in first-order logic, however from the point of view of the ontology-lexicon interface the logical expressivity of the ontology is not a limiting factor. In fact, due to the separation of the lexical and ontology layers in a model such as \emph{lemon}, it is possible to express the meaning of words without worrying about the formalism used in the ontology. To this extent we will first demonstrate that adjectives are in general a case where the use of description logics breakdown, and for which more sophisticated logical formalisms must be applied. We then consider to what extent this can be handled in the context of the ontology-lexicon, and introduce pseudo-classes, that is OWL classes with non-DL annotations, which we use to express the semantics of adjectives following in the vein of previously introduced design patterns\cite{mccrae2014design}. Finally, we show how these semantics can be helpful in practical applications of question answering over the DBpedia knowledge base.
 
 \section{Classification of adjectives}
 
@@ -87,7 +80,7 @@ There are a number of classifications of adjectives, and first we will start wit
 	$^*$The awake baby.
 \end{quote}
 
-One of the principle classifications of the semantics of adjectives (for example \cite{partee2003are}) is based on the meaning of adjective noun compounds relative to the meaning of the words by themselves. This classification is as follows (where $\Rightarrow$ means it entails)
+One of the principle classifications of the semantics of adjectives (for example \cite{partee2003there}) is based on the meaning of adjective noun compounds relative to the meaning of the words by themselves. This classification is as follows (where $\Rightarrow$ means it entails)
 
 \begin{description}
 \item[Intersective] ($X\mathrm{~is~a~}A~N \Rightarrow X\mathrm{~is~}A \cap X\mathrm{~is~a~}N$) Such adjectives work as if they were another noun and indicate that the compound noun phrase is a member of both the class of the noun and the class of the adjective. For example, in the phrase ``Belgian violinist'' it refers to a person in the class intersection $Belgian \sqcap Violinist(X)$, and hence we can infer that a ``Belgian violinist'' is a subclass of a ``Belgian person''.
@@ -103,9 +96,9 @@ I would rather go to the sea than the mountains.
 He is related to her.
 \end{quote}
 
-Another important distinction to make with adjectives is whether they are \emph{gradable}, in that whether is makes semantic senses to make a comparative or superlative statement with these adjectives. For example, adjectives such as `big' or `tall' can express relationships such as `$X$ is bigger than $Y$', however it is not possible to say one individual is more former. Most gradable adjectives are subsective, for example `a big mouse' is not `a big animal'. An important group of gradable adjectives are, however, intersective, and we call such adjectives `absolute' (following \cite{rusiecki}) as they refer to an ideal point on some scale, for example a `dry towel' is `dry', as the meaning of dry is without water, however we can still talk about a towel being `drier', in the sense of closer to the ideal of having no water than some other object.
+Another important distinction to make with adjectives is whether they are \emph{gradable}, in that whether is makes semantic senses to make a comparative or superlative statement with these adjectives. For example, adjectives such as `big' or `tall' can express relationships such as `$X$ is bigger than $Y$', however it is not possible to say one individual is more former. Most gradable adjectives are subsective, for example `a big mouse' is not `a big animal'. An important group of gradable adjectives are, however, intersective, and we call such adjectives `absolute' (following \cite{rusiecki1985adjectives}) as they refer to an ideal point on some scale, for example a `dry towel' is `dry', as the meaning of dry is without water, however we can still talk about a towel being `drier', in the sense of closer to the ideal of having no water than some other object.
 
-Finally, we consider \emph{operator} or \emph{property-modifying} adjectives, which can be considered to be the same as privative adjectives, but in this case are understood as operators that change some property in the qualia structure of the class. For example, we may express the adjective `former' as follows in lambda calculus\cite{}:
+Finally, we consider \emph{operator} or \emph{property-modifying} adjectives, which can be considered to be the same as privative adjectives, but in this case are understood as operators that change some property in the qualia structure of the class. For example, we may express the adjective `former' as follows in lambda calculus\cite{partee2003there}:
 
 $$\lambda C [\lambda x \exists t C(x,t) \cap t < \mathrm{now}]$$
 
@@ -121,7 +114,7 @@ A famous former actor.
 A former famous actor.
 \end{quote}
 
-A similar syntactic phenomena for Polish is explored by \cite{partee}.
+A similar syntactic phenomena for Polish is explored by \cite{partee2003there}.
 
 \section{Representation of adjectives in the ontology-lexicon interface}
 
@@ -155,7 +148,7 @@ We see an example of such representation in figure \ref{attr-pred-example} given
 
 \subsection{Intersective adjectives}
 
-Intersective adjectives are the most straightforward class as in many cases they can simply be explained as either being noun-like (denomial adjectives such as `British') or verb-like (deverbal adjectives such as `broken'). Intersective adjectives have a single argument as with most adjectives and in this case it is natural that they refer to classes, which may be event classes such as described in \cite{}. It is commonly the case that the class referred to may be an anonymous class such as $\exists nationality.'gb'$ rather than a named class in the ontology. This is even more so the case with deverbal adjectives where a typical class is given as $\exists theme^{-1}.EventClass$ is a common definition.
+Intersective adjectives are the most straightforward class as in many cases they can simply be explained as either being noun-like (denomial adjectives such as `British') or verb-like (deverbal adjectives such as `broken'). Intersective adjectives have a single argument as with most adjectives and in this case it is natural that they refer to classes, which may be event classes such as described in \cite{mccrae2014design}. It is commonly the case that the class referred to may be an anonymous class such as $\exists nationality.'gb'$ rather than a named class in the ontology. This is even more so the case with deverbal adjectives where a typical class is given as $\exists theme^{-1}.EventClass$ is a common definition.
 
 \subsection{Gradable adjectives}
 
@@ -165,7 +158,7 @@ While these concepts well handle the comparative usage of adjectives, the predic
 
 (Francesca, default measures)
 
-As an example of a way in which it would be possible to define the nature of gradable classes, we can consider Markov Logic\cite{?}, which is an extension of first-order logic in which each clause is given a cost. The process of reasoning is thus transformed into an optimization problem of finding the extension, which violates the lowest summed weight of all clauses. As such we can formulate a gradable adjective based on the number of known instances as follows:
+As an example of a way in which it would be possible to define the nature of gradable classes, we can consider Markov Logic\cite{richardson2006markov}, which is an extension of first-order logic in which each clause is given a cost. The process of reasoning is thus transformed into an optimization problem of finding the extension, which violates the lowest summed weight of all clauses. As such we can formulate a gradable adjective based on the number of known instances as follows:
 
 $$\forall x \in C, y \in C : size(x) > size(y) \rightarrow big(x,C) : \alpha$$
 
@@ -175,7 +168,7 @@ $$\forall x \in C, y \in C : size(x) < size(y) \rightarrow \neg big(x,C) : \beta
 
 In this way, the classification of an object into big or small is defined by
 
-\noident\textbf{Lemma}: An individual, $x \in C$, has $big(x,C)$ if and only if 
+\noindent\textbf{Lemma}: An individual, $x \in C$, has $big(x,C)$ if and only if 
 
 $$|\{y \in C, size(y) > size(x)\}| \alpha > |\{y \in C, size(y) < size(x)\}| \beta$$
 
