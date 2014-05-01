@@ -3,6 +3,8 @@
 \usepackage{times}
 \usepackage{url}
 \usepackage{latexsym}
+\usepackage{graphicx}
+\usepackage{amsmath}
 
 %\setlength\titlebox{5cm}
 
@@ -30,7 +32,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-    The ontology-lexicon interface has become an important and successful tool for handling problems in NLP. The foundation of these models based on a separation of the ontological and lexical layers by means of the principle of semantics by reference to an ontology in description logics. However, as noted by other authors, the use of first order logic (hence also description logics) is while effective for nouns and verbs breaks down in the case of adjectives. We propose that this is primarily due to a lack of logical expressivity in the ontology. In particular, many adjectives are i) gradable requiring fuzzy or non-monotonic semantics or ii) operator adjectives require second-order logic. We consider  how we can handle the ontology-lexicon interface in the face of these more complex logical formalism, and show how these can be backward engineered into OWL based modelism by means of pseudo-classes, with application to question answering.
+    The ontology-lexicon interface has become an important and successful tool for handling problems in NLP. The foundation of these models based on a separation of the ontological and lexical layers by means of the principle of semantics by reference to an ontology in description logics. However, as noted by other authors, the use of first order logic (hence also description logics) is while effective for nouns and verbs breaks down in the case of adjectives. We propose that this is primarily due to a lack of logical expressivity in the ontology. In particular, many adjectives are i) gradable requiring fuzzy or non-monotonic semantics or ii) operator adjectives require second-order logic. We consider  how we can handle the ontology-lexicon interface in the face of these more complex logical formalism, and show how these can be backward engineered into OWL based modelling by means of pseudo-classes, with application to question answering.
 \end{abstract}
 
 
@@ -183,6 +185,117 @@ Operator adjectives are those that combine to alter the meaning of the adjective
 $$X\mathrm{~is~a~}A~NP$$
 
 This leads to the odd case that operator adjectives are then considered the head of such a construction! \textbf{hmm...} This understanding is unambiguous assuming there is no attributive frame for the adjective as well. In this case we can understand the reference of the adjective as a property that relates an individual to a class. As such it is clear, that the reference of an operator adjective is a higher-order predicate. Fortunately, in the case of OWL we can cheat on this second-order nature by means of \emph{punning}, which allows a class to also be an individual. If we thus assume that operator adjectives are essentially puns, then it follows that we can assume that the reference of an operator adjective is thus a property. As such, for example, we can model an adjective such as `former' as referring to a property such as {\tt heldRole} whose range is a class of roles punned as individuals. This approach is effective, however it has limits in general \textbf{does it???}
+
+\section{Modelling adjectives with \emph{lemon}}
+
+The primary mechanism of modelling the syntax-semantics interface in the context of \emph{lemon} is by means of assigning a \emph{frame} as a \emph{syntactic behaviour} of an entry and giving it \emph{syntactic arguments}, which can then be linked to the \emph{lexical sense}, which stands in proxy for a true semantic frame in the ontology. For example, the modelling of an adjective such as `Belgian' can be achieved as follows (depicted in figure \ref{example-belgian}).
+
+\begin{figure}
+\includegraphics[width=\textwidth]{belgian-example}
+\caption{Modelling of an intersective adjective `Belgian' in \emph{lemon}\label{example-belgian}}
+\end{figure}
+
+\begin{verbatim}
+belgian: a lemon:LexicalEntry ;
+  lemon:canonicalForm belgian:Lemma ;
+  lemon:synBehavior belgian:AttrFrame , 
+                    belgian:PredFrame ;
+  lemon:sense belgian:Sense .
+
+belgian:Lemma lemon:writtenRep "Belgian"@eng .
+
+belgian:AttrFrame lexinfo:attributiveArg belgian:AttrSynArg .
+
+belgian:PredFrame lexinfo:copulativeArg belgian:PredSynArg .
+
+belgian:sense lemon:reference [
+    a owl:Restriction ;
+    owl:onProperty dbpedia:nationality ;
+    owl:hasValue dbpedia:Belgium ] ;
+  lemon:isA belgian:AttrSynArg ; belgian:PredSynArg .
+\end{verbatim}
+
+Note, that here we use the external vocabulary LexInfo\cite{cimiano2011lexinfo} to define the meaning of the arguments of the frame as the \emph{attributive argument}, corresponding to the frame stereotype ``an A X'' and and \emph{copulative argument} for the frame stereotype ``X is an A''. Furthermore, the class of Belgians is not named in our reference ontology DBpedia, so we introduce an anonymous class with the axiomatization, $\exists \text{nationality}.\text{Belgium}$.
+
+For the case of gradable adjectives, as discussed above, it is not possible to directly capture their semantics using a limited first-order model, such as OWL, and currently there are only limited models for representing fuzzy logic in the context of the web~\cite{zhao2008uncertainty}. As such, we introduce a new model, which we name \emph{lemonOILS} (The \emph{lemon} Ontology for the Interpretation of Lexical Semantics)\footnote{\url{http://lemon-model.net/oils}}. This ontology introduces three new classes:
+
+\begin{itemize}
+	\item {\tt CovariantScalar}: Indicating that the adjective is covariant with its bound property
+	\item {\tt ContravariantScalar}: As above, but contravariant
+	\item {\tt AbsoluteScalar}: Indicating that the property represents similarity to an absolute value
+\end{itemize}
+
+In addition, the following properties are introduced to enable the description of gradable adjectives. Note, that all of these properties are typed as \emph{annotation properties} in the OWL ontology, so that they do not interfere with the standard OWL reasoning.
+
+\begin{itemize}
+	\item {\tt boundTo}: Indicates the property that a scalar refers to (e.g., `size' for `big')
+	\item {\tt threshold}: A sensible minimal value by which the adjective can be said to hold.
+	\item {\tt degree}: One of {\tt weak}, {\tt medium}, {\tt strong} or {\tt very strong} corresponding to approximately 50\%, 25\%, 5\% or 1\% of all known individuals.
+	\item {\tt comparator}: Indicates an object property that is equivalent to the comparison of the adjective. e.g., an object property {\tt biggerThan} may be considered a comparator for the adjective class {\tt big}.
+	\item {\tt measure} (TODO)
+	\item {\tt default value} (TODO)
+\end{itemize}
+
+Using such classes we can capture the semantics of gradable adjectives syntactically but not formally within an OWL model, as such we call such introduced classes \emph{pseudo-classes}. An example of modelling an adjective such as `high' is given below (figure \ref{high-example}).
+
+\begin{figure}
+\includegraphics[width=\textwidth]{high-example}
+\caption{An example of the modelling of `high' in \emph{lemon}\label{high-example}}
+\end{figure}
+
+\begin{verbatim}
+high: a lemon:LexicalEntry ;
+  lemon:canonicalForm high:Lemma ;
+  lemon:synBehavior high:PredFrame ;
+  lemon:sense high:Sense .
+
+high:Lemma lemon:writtenRep "high"@eng .
+
+high:PredFrame lexinfo:copulativeArg high:PredArg .
+
+high:Sense lemon:reference [
+    rdfs:subClassOf oils:CovariantScalar ;
+    oils:boundTo dbpedia:elevation ;
+    oils:degree oils:strong ] ;
+  lemon:isA high:PredArg .
+\end{verbatim}
+
+\textbf{Thresholds and multiple classes}
+
+Finally, we turn to the case of operator adjectives, where we will not be able to easily create a vocabulary that can fully describe the semantics of the adjective within the context of OWL as the second nature order of the logic cannot be captured well within the framework of description logic. However, for many operator adjectives we can capture the semantics through the \emph{punning} method as described above. To this extent we can understand such adjectives as object properties, whose value is a punned class. To do this we need to add a frame on the syntax side, that indicates that the argument of the adjective is in fact the noun phrase. We would do this as follows (figure \ref{former-example}):
+
+\begin{figure}
+\includegraphics[width=\textwidth]{former-example}
+\caption{An example of modelling `former' in \emph{lemon}\label{former-example}}
+\end{figure}
+
+\begin{verbatim}
+former: a lemon:LexicalEntry ;
+	lemon:canonicalForm former:Lemma ;
+	lemon:synBehavior former:OperatorFrame ;
+	lemon:sense former:Sense .
+
+former:Lemma lemon:writtenRep "former"@eng .
+
+former:OperatorFrame lexinfo:copulativeArg former:Subject ;
+  lexinfo:attributiveOperator former:Object .
+  
+former:Sense lemon:reference onto:heldRole ;
+  lemon:subjOfProp former:Subject ;
+  lemon:objOfProp former:Object .
+\end{verbatim}
+
+The usage of this frame is intended such that a phrase such as
+
+\begin{quote}
+Clinton is a former president
+\end{quote}
+
+Is interpreted as
+
+\begin{verbatim}
+ontology:Clinton ontology:heldRole ontology:President .
+\end{verbatim}
 
 \section{Adjectives in question answering}
 
