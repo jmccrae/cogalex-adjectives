@@ -6,6 +6,7 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{enumitem}
+\usepackage{color}
 
 %\setlength\titlebox{5cm}
 
@@ -40,8 +41,9 @@ principle of semantics by reference to an ontology in description logics.
 However, as noted by other authors, the use of first order logic (hence also description logics),
 while effective for nouns and verbs, breaks down in the case of adjectives. 
 We propose that this is primarily due to a lack of logical expressivity in the 
-ontology. \textbf{In particular, many adjectives are i) gradable requiring fuzzy or 
-non-monotonic semantics or ii) operator adjectives require second-order logic. \textit{What about all the other classes of adjectives that you propose in the paper?}}
+ontology. In particular, beyond the straightforward intersective adjectives
+many adjectives are i) gradable requiring fuzzy or 
+non-monotonic semantics or ii) operator adjectives require second-order logic. 
 We consider how we can handle the ontology-lexicon interface in the face of 
 these more complex logical formalism, and show how these can be backward 
 engineered into OWL based modelling by means of pseudo-classes, with application
@@ -99,9 +101,10 @@ SELECT DISTINCT ?uri WHERE {
 \end{enumerate}
 \end{enumerate}
 
-\textbf{It has been claimed that first-order logic and thus by extension description 
+It has been claimed that first-order logic and thus by extension description 
 logics, such as OWL, ``fail decidedly when it comes to adjectives''
-\cite{bankston2003modeling}\textit{This statement motivates the whole paper. Further on Bankston's conclusions}}. To this extent, we largely agree that the semantics 
+\cite{bankston2003modeling} and similarly we reach the conclusion that 
+this is due to the issues of semantically modelling adjectives. In fact, we largely agree that the semantics 
 of many adjectives are difficult or impossible to describe in first-order logic. 
 However, from the point of view of the ontology-lexicon interface, the logical 
 expressivity of the ontology is not a limiting factor. In fact, due to the 
@@ -142,7 +145,9 @@ attributive usage is allowed, as shown in~\ref{ex:clinton} and~\ref{ex:baby}.
 \end{enumerate}
 
 \textbf{\textit{On Clinton: here it could be specified that ATTRIBUTIVE adjectives come in the first position (e.g. the blue sea, the old man), while PREDICATIVE adjectives follow a verb. While most adjectives can be both attributive and predicative, some can only take the attributive (e.g. the main reason, the former president) or only the predicative (e.g. *the awake baby, *the afraid child) position. 
-Ref.\url{http://www.ucl.ac.uk/internet-grammar/adjectiv/attribut.html}}}One of the principle classifications of the semantics of adjectives (for example \cite{partee2003there,bouillon1999description}) is based on the meaning of adjective noun compounds relative to the meaning of the words by themselves. This classification is as follows (where $\Rightarrow$ denotes entailment).
+Ref.\url{http://www.ucl.ac.uk/internet-grammar/adjectiv/attribut.html}}}
+\textbf{\textcolor{blue}{This is what it already says right?}}
+One of the principle classifications of the semantics of adjectives (for example \cite{partee2003there,bouillon1999description,morzycki2013modification}) is based on the meaning of adjective noun compounds relative to the meaning of the words by themselves. This classification is as follows (where $\Rightarrow$ denotes entailment).
 
 \begin{description}
 \item[Intersective] ($X\mathrm{~is~a~}A~N \Rightarrow X\mathrm{~is~}A \\text{\ and\ } X\mathrm{~is~a~}N$) 
@@ -150,8 +155,9 @@ Such adjectives work as if they were another noun and indicate that the compound
 noun phrase is a member of both the class of the noun and the class of the 
 adjective. For example, in the phrase ``Belgian violinist'' it refers to a 
 person in the class intersection $Belgian \sqcap Violinist(X)$, \textbf{and hence we 
-can infer that a ``Belgian violinist'' is a subclass of a ``Belgian''.\textit{rather than ending the intersective session with this example (which would remind somebody of ontological order), you can conclude by saying "hence the inference "He is a Belgian surgeon" from "He is a Belgian violinist. He is a surgeon." is still valid.  Also: Here it could be further explained by saying, since the adjective 'skilful' does not maintain a kind of truth-conditional independence from the noun it combines with. 
-Why I think Morzycki explains it better than Partee: \url{https://www.msu.edu/~morzycki/work/papers/chapter_notscales.pdf}}}
+can infer that a ``Belgian violinist'' is a subclass of a ``Belgian''. 
+Thus if we also knew that the ``violinist'' was a ``surgeon'' we could 
+conclude they were a ``Belgian surgeon''.
 \item[Subsective] ($X\mathrm{~is~a~}A~N \Rightarrow X\mathrm{~is~a~}N$, but $X\mathrm{~is~a~}A~N \not\Rightarrow X\mathrm{~is~}A$) 
 Such adjectives do not alter the meaning of the noun phrase itself, but only 
 make sense with knowledge of the noun they refer to. For example, a ``\textbf{skilful\textit{btw, Collins acknowledges 'skilful' with one 'l' but all the examples i have found in literature report 'skillful' with two 'l's.}}
@@ -159,13 +165,13 @@ violinist'' is certainly in the class $Violinist(X)$, but if we knew that that
 person is a surgeon as well, we cannot conclude that the person is a skilful surgeon. 
 \item[Privative] ($X\mathrm{~is~a~}A~N \not\Rightarrow X\mathrm{~is~a~}N$) 
 These adjectives modify the meaning of a noun phrase \textbf{to create a noun phrase 
-that is incompatible with the original meaning. For example, a 
-``fake gun'' is not a member of the class of guns.\textit{Put in these terms, the definition of privative adjectives could also justify idiomatic expressions, such as big shot, which is transparently non-compositional. In fact, the meaning of the noun phrase is incompatible with the original meaning of its parts. What could be said here in the case of privative adjectives, is more that these adjectives are not just non-intersective (as in the case of 'alleged thief, where the person can or cannot be a thief), but anti-intersective, since the adjectives CAN'T (instead of don't) entail reference to the objects denoted by the noun. In 'a fake gun' the 'gun' in question cannot for sure be a gun.}}
+that is potentially incompatible with the original meaning. For example, a 
+``fake gun'' is not a member of the class of guns.
 \end{description}
 
 In addition, we consider \textbf{operator} or \textbf{property-modifying} adjectives, 
-which can be considered to be the same as privative adjectives, but in this 
-case are understood as operators that change some property in the qualia 
+which can be considered to overlap with privative adjectives, but
+are understood as operators that change some property in the qualia 
 structure of the class. For example, we may express the adjective `former' 
 in lambda calculus as a function that takes a class $C$ as input and returns the class 
 of entities that were a member of $C$ to some prior time point $t$~\cite{partee2003there}:
@@ -180,7 +186,7 @@ impact~\cite{teodorescu2006adjective}, as exemplified in~\ref{ex:car} and~\ref{e
 \begin{enumerate}[resume]
 \item \begin{enumerate}
 \item \ A big red car.
-\item \textbf{$^?$A red big car.\textit{Given the possibility that somebody criticizes this particular example claiming that that Teodorescu's example is weak since it is feasible to change the syntactic order of operator adjectives, I found a paper by Beck, Sigrid: "The Semantics of Different : Comparison operator and relational adjective", Linguistics and Philosophy, 2000, vol. 23, Issue 2, 101-139. Instead of mentioned the exploration of Polish example by Partee (2003) below, you could directly take Berg's examples in German, where she analyzes anders and verschieden for 'different'. She claims that while verschieden is a relational adjective that induces a hidden reciprocal (e.d. Karl und Teo lesen verschiedene Buecher = Karl reads a different book from the book Teo is reading); anders is a comparison operator (Karl und Teo lesen andere Buecher = Karl und Teo read different books from the ones that are read by everyone else). From here derives that 'different' acts as relative and operator or property-modifying adjective. }}
+\item $^?$A red big car.
 \end{enumerate} 
 \label{ex:car}
 \item \begin{enumerate}
@@ -190,13 +196,11 @@ impact~\cite{teodorescu2006adjective}, as exemplified in~\ref{ex:car} and~\ref{e
 \label{ex:actor}
 \end{enumerate}
 
-A related syntactic phenomena for Polish is explored by Partee \shortcite{partee2003there}.
-
 One further case that is important to distinguish is that of \textbf{relational} adjectives which have a meaning 
 that expresses a relationship between two individuals or events, for example:
 
 \begin{enumerate}[resume]
-\item \textbf{He is related to her.\textit{For an example for this class of adjectives, I would go back to Morzycki. Some define 'relational' adjectives also 'classificatory' since they could be confused with 'relative'. McNally \& Boleda Torrent (2003) define them as adjectives that define properties of KINDS (e.g. a medical student, a technical architect, a religious official), where the adjective does not describe the person itself, but the KIND of person that is instantiated in the noun. }}
+\item He is related to her.
 \item She is similar to her brother. 
 \item This is useful for something. 
 \end{enumerate}
@@ -205,8 +209,8 @@ Another important distinction to make with adjectives, which is orthogonal to th
 is whether they are \emph{gradable}, in that whether it makes semantic senses to make a comparative 
 or superlative statement with these adjectives. For example, adjectives such as 
 `big' or `tall' can express relationships such as `$X$ is bigger than $Y$', 
-however it is not possible to say one individual is `more former'. \textbf{Most gradable 
-adjectives are subsective, for example `a big mouse' is not `a big animal'.\textit{In case you need a citation for this statement: Morzycki p. 23 ex. (55) (56): "the biggest classes of subsective adjectives are gradable"}} 
+however it is not possible to say one individual is `more former'. It should thus be noted that most gradable adjectives are mostly intersective,
+for example a `big mouse' is not a `big animal' \cite{morzycki2013modification}.
 An important group of gradable adjectives are, however, intersective, and we call 
 such adjectives \emph{absolute} (following \cite{rusiecki1985adjectives}) as they 
 refer to an ideal point on some scale, \textbf{for example a `dry towel' is `dry', in 
@@ -219,15 +223,15 @@ object.\textit{if the example of 'dry' poses a problem, since it seems to  be re
 
 In general it is assumed that adjectives form frames with exactly one argument 
 except for extra arguments given by adjuncts, typically prepositional phrases. 
-Most adjectives are thus associated with a predicative frame, stereotyped in 
-English as:
+Most adjectives are thus associated with a predicative frame, which much
+like the standard noun predicate frame\footnote{$X\text{ is a }N$} is stereotyped in English as:
 
 $$X\mathrm{~is~}A$$
 
-And with a second attributive frame, whose stereotype is not directly 
-realizable but we give as:
+For attributive, usage we associate this with a frame, which is stereotyped as,
+where the $N?$ argument is not sem
 
-$$X [attr] A$$
+$$X\text{ is }A~N?$$
 
 As such, when we encounter the attributive usage of an adjective such as in~\ref{ex:juan}, 
 we understand this as the realization of two frames, given in~\ref{ex:juan_frames}.
@@ -638,6 +642,10 @@ Amoia and Garden~\shortcite{amoia2006adjective} handled the problem of adjective
 Abdullah and Frost~\shortcite{abdullah2005adjectives} tackles the privative nature of adjectives by arguing that the adjectives modify the set themselves, in a manner that is naturally second-order. Similarly, Partee~\shortcite{partee2003there} proposed a limited second-order model by means of their `head primary principle' requiring that adjectives are interpreted within their context. The analysis of Bankston~\shortcite{bankston2003modeling} however shows that the fundamental nature of many adjectives is higher-order, and provides a very sophisticated formal representation framework for this syntactic class.
 
 The Generative Lexicon~\cite{pustejovsky1991generative} provides another approach to the representation of semantics, and the case of adjectives has also been considered in this context. Bouillion~\shortcite{bouillon1999adjective} consider the case of the French adjective `vieux' (`old') and...
+
+\cite{morzycki2013modification}
+
+\cite{mcnally2004relational}
 
 Peters and Peters~\shortcite{peters2000treatment} provide one of the few other practical reports on modelling adjectives with ontologies, in the context of the SIMPLE lexica. This work is primarily focussed on the categorization of by means of intensional and extensional properties, rather than due to their logical modelling. 
 
