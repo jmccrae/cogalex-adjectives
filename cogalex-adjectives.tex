@@ -5,8 +5,12 @@
 \usepackage{latexsym}
 \usepackage{graphicx}
 \usepackage{amsmath}
+<<<<<<< HEAD
+\usepackage{xcolor}
+=======
 \usepackage{enumitem}
 \usepackage{color}
+>>>>>>> f6601524d664b0fc8f7bf513e4e73e3d03dcaf15
 
 %\setlength\titlebox{5cm}
 
@@ -41,10 +45,16 @@ principle of semantics by reference to an ontology in description logics.
 However, as noted by other authors, the use of first order logic (hence also description logics),
 while effective for nouns and verbs, breaks down in the case of adjectives. 
 We propose that this is primarily due to a lack of logical expressivity in the 
+<<<<<<< HEAD
+ontology. \textbf{In particular, many adjectives are i) gradable requiring fuzzy or 
+non-monotonic semantics or ii) operator adjectives require second-order logic. \textcolor{blue}{What about all the other classes of adjectives that you propose in the paper?}}
+We consider  how we can handle the ontology-lexicon interface in the face of 
+=======
 ontology. In particular, beyond the straightforward intersective adjectives
 many adjectives are i) gradable requiring fuzzy or 
 non-monotonic semantics or ii) operator adjectives require second-order logic. 
 We consider how we can handle the ontology-lexicon interface in the face of 
+>>>>>>> f6601524d664b0fc8f7bf513e4e73e3d03dcaf15
 these more complex logical formalism, and show how these can be backward 
 engineered into OWL based modelling by means of pseudo-classes, with application
 to question answering.
@@ -103,10 +113,16 @@ SELECT DISTINCT ?uri WHERE {
 
 It has been claimed that first-order logic and thus by extension description 
 logics, such as OWL, ``fail decidedly when it comes to adjectives''
+<<<<<<< HEAD
+\cite{bankston2003modeling}\textcolor{blue}{This statement motivates the whole paper. Further on Bankston's conclusions}}. To this extent, we largely agree that the semantics 
+of many adjectives are difficult or impossible to describe in first-order logic, 
+however, from the point of view of the ontology-lexicon interface, the logical 
+=======
 \cite{bankston2003modeling} and similarly we reach the conclusion that 
 this is due to the issues of semantically modelling adjectives. In fact, we largely agree that the semantics 
 of many adjectives are difficult or impossible to describe in first-order logic. 
 However, from the point of view of the ontology-lexicon interface, the logical 
+>>>>>>> f6601524d664b0fc8f7bf513e4e73e3d03dcaf15
 expressivity of the ontology is not a limiting factor. In fact, due to the 
 separation of the lexical and ontology layers in a model such as \emph{lemon}, 
 it is possible to express the meaning of words without worrying about the 
@@ -144,10 +160,15 @@ attributive usage is allowed, as shown in~\ref{ex:clinton} and~\ref{ex:baby}.
 \label{ex:baby}
 \end{enumerate}
 
+<<<<<<< HEAD
+\textbf{\textcolor{blue}{On Clinton: here it could be specified that ATTRIBUTIVE adjectives come in the first position (e.g. the blue sea, the old man), while PREDICATIVE adjectives follow a verb. While most adjectives can be both attributive and predicative, some can only take the attributive (e.g. the main reason, the former president) or only the predicative (e.g. *the awake baby, *the afraid child) position. 
+Ref.\url{http://www.ucl.ac.uk/internet-grammar/adjectiv/attribut.html}}}One of the principle classifications of the semantics of adjectives (for example \cite{partee2003there,bouillon1999description}) is based on the meaning of adjective noun compounds relative to the meaning of the words by themselves. This classification is as follows (where $\Rightarrow$ means it entails)
+=======
 \textbf{\textit{On Clinton: here it could be specified that ATTRIBUTIVE adjectives come in the first position (e.g. the blue sea, the old man), while PREDICATIVE adjectives follow a verb. While most adjectives can be both attributive and predicative, some can only take the attributive (e.g. the main reason, the former president) or only the predicative (e.g. *the awake baby, *the afraid child) position. 
 Ref.\url{http://www.ucl.ac.uk/internet-grammar/adjectiv/attribut.html}}}
 \textbf{\textcolor{blue}{This is what it already says right?}}
 One of the principle classifications of the semantics of adjectives (for example \cite{partee2003there,bouillon1999description,morzycki2013modification}) is based on the meaning of adjective noun compounds relative to the meaning of the words by themselves. This classification is as follows (where $\Rightarrow$ denotes entailment).
+>>>>>>> f6601524d664b0fc8f7bf513e4e73e3d03dcaf15
 
 \begin{description}
 \item[Intersective] ($X\mathrm{~is~a~}A~N \Rightarrow X\mathrm{~is~}A \\text{\ and\ } X\mathrm{~is~a~}N$) 
@@ -155,16 +176,54 @@ Such adjectives work as if they were another noun and indicate that the compound
 noun phrase is a member of both the class of the noun and the class of the 
 adjective. For example, in the phrase ``Belgian violinist'' it refers to a 
 person in the class intersection $Belgian \sqcap Violinist(X)$, \textbf{and hence we 
+<<<<<<< HEAD
+can infer that a ``Belgian violinist'' is a subclass of a ``Belgian person''.\textcolor{blue}{rather than ending the intersective session with this example (which would remind somebody of ontological order), you can conclude by saying "hence the inference "He is a Belgian surgeon" from "He is a Belgian violinist. He is a surgeon." is still valid.  Also: Here it could be further explained by saying, since the adjective 'skilful' does not maintain a kind of truth-conditional independence from the noun it combines with. 
+Why I think Morzycki \cite{morzycki2013nonscales} explains it better than Partee \cite{partee2003there}: \url{https://www.msu.edu/~morzycki/work/papers/chapter_notscales.pdf}}}
+\item[Subsective] ($X\mathrm{~is~a~}A~N \Rightarrow X\mathrm{~is~a~}N, X\mathrm{~is~a~}A~N \not\Rightarrow X\mathrm{~is~}A$) 
+=======
 can infer that a ``Belgian violinist'' is a subclass of a ``Belgian''. 
 Thus if we also knew that the ``violinist'' was a ``surgeon'' we could 
 conclude they were a ``Belgian surgeon''.
 \item[Subsective] ($X\mathrm{~is~a~}A~N \Rightarrow X\mathrm{~is~a~}N$, but $X\mathrm{~is~a~}A~N \not\Rightarrow X\mathrm{~is~}A$) 
+>>>>>>> f6601524d664b0fc8f7bf513e4e73e3d03dcaf15
 Such adjectives do not alter the meaning of the noun phrase itself, but only 
 make sense with knowledge of the noun they refer to. For example, a ``\textbf{skilful\textit{btw, Collins acknowledges 'skilful' with one 'l' but all the examples i have found in literature report 'skillful' with two 'l's.}}
 violinist'' is certainly in the class $Violinist(X)$, but if we knew that that 
 person is a surgeon as well, we cannot conclude that the person is a skilful surgeon. 
 \item[Privative] ($X\mathrm{~is~a~}A~N \not\Rightarrow X\mathrm{~is~a~}N$) 
 These adjectives modify the meaning of a noun phrase \textbf{to create a noun phrase 
+<<<<<<< HEAD
+that is incompatible with the original meaning. For example, a 
+``fake gun'' is not a member of the class of guns.\textcolor{blue}{Put in these terms, the definition of privative adjectives could also justify idiomatic expressions, such as big shot, which is transparently non-compositional. In fact, the meaning of the noun phrase is incompatible with the original meaning of its parts. What could be said here in the case of privative adjectives, is more that these adjectives are not just non-intersective (as in the case of 'alleged thief, where the person can or cannot be a thief), but anti-intersective, since the adjectives CAN'T (instead of don't) entail reference to the objects denoted by the noun. In 'a fake gun' the 'gun' in question cannot for sure be a gun.}}
+\end{description}
+
+This classification is useful, however one further case is important to 
+distinguish and that is of \emph{relational} adjectives which have a meaning 
+that expresses a relationship between two individuals or events, for example:
+
+\begin{quote}
+\textbf{I would rather go to the sea than the mountains.\textcolor{blue}{No adjective here. I would skip the example}}
+
+\textbf{He is related to her.\textcolor{blue}{For an example for this class of adjectives, I would go back to Morzycki \cite{morzycki2013nonscales}. Some define 'relational' adjectives also 'classificatory' since they could be confused with 'relative'. McNally \& Boleda Torrent (2003) define them as adjectives that define properties of KINDS (e.g. a medical student, a technical architect, a religious official), where the adjective does not describe the person itself, but the KIND of person that is instantiated in the noun. }}
+\end{quote}
+
+Another important distinction to make with adjectives is whether they are 
+\emph{gradable}, in that whether it makes semantic senses to make a comparative 
+or superlative statement with these adjectives. For example, adjectives such as 
+`big' or `tall' can express relationships such as `$X$ is bigger than $Y$', 
+however it is not possible to say one individual is `more former'. \textbf{Most gradable 
+adjectives are subsective, for example `a big mouse' is not `a big animal'.\textcolor{blue}{In case you need a citation for this statement: Morzycki (\cite{morzycki2013nonscales}:23; ex. (55) (56)): "the biggest classes of subsective adjectives are gradable"}} An 
+important group of gradable adjectives are, however, intersective, and we call 
+such adjectives `absolute' (following \cite{rusiecki1985adjectives}) as they 
+refer to an ideal point on some scale, \textbf{for example a `dry towel' is `dry', in 
+that it has little or no water, however we can still talk about a towel being 
+`drier', in the sense of closer to the ideal of having no water than some other 
+object.\textcolor{blue}{if the example of 'dry' poses a problem, since it seems to  be relative to the context of use, you can use adjectives like "triangular", "bent" or "straight" and justify that absoluteness either because their arguments already possess the maximum degree of the measured concept (e.g. "straight"), or because they require their arguments to possess a zero-degree of the relevant concept (as in the case of "bent"). Here i am citing (\cite{kennedy2007vagueness}:4)}}
+
+Finally, we consider \emph{operator} or \emph{property-modifying} adjectives, 
+which can be considered to be the same as privative adjectives, but in this 
+case are understood as operators that change some property in the qualia 
+=======
 that is potentially incompatible with the original meaning. For example, a 
 ``fake gun'' is not a member of the class of guns.
 \end{description}
@@ -172,6 +231,7 @@ that is potentially incompatible with the original meaning. For example, a
 In addition, we consider \textbf{operator} or \textbf{property-modifying} adjectives, 
 which can be considered to overlap with privative adjectives, but
 are understood as operators that change some property in the qualia 
+>>>>>>> f6601524d664b0fc8f7bf513e4e73e3d03dcaf15
 structure of the class. For example, we may express the adjective `former' 
 in lambda calculus as a function that takes a class $C$ as input and returns the class 
 of entities that were a member of $C$ to some prior time point $t$~\cite{partee2003there}:
@@ -181,6 +241,14 @@ $$\lambda C [\lambda x \exists t C(x,t) \cap t < \mathrm{now}]$$
 Such adjectives have not only a difference in semantic meaning but can also 
 frequently have syntactic impact, for example in adjective ordering 
 restrictions, as they may be reordered with only semantic 
+<<<<<<< HEAD
+impact~\cite{teodorescu2006adjective}, e.g.,
+
+\begin{quote}
+A big red car.
+
+\textbf{$^?$A red big car.\textcolor{blue}{Given the possibility that somebody criticizes this particular example claiming that that Teodorescu's example is weak since it is feasible to change the syntactic order of operator adjectives, I found a paper by Beck \cite{beck2000relational}. Instead of mentioned the exploration of Polish example by Partee (2003) below, you could directly take Berg's examples in German, where she analyzes anders and verschieden for 'different'. She claims that while verschieden is a relational adjective that induces a hidden reciprocal (e.d. Karl und Teo lesen verschiedene Buecher = Karl reads a different book from the book Teo is reading); anders is a comparison operator (Karl und Teo lesen andere Buecher = Karl und Teo read different books from the ones that are read by everyone else). From here derives that 'different' acts as relative and operator or property-modifying adjective. }}
+=======
 impact~\cite{teodorescu2006adjective}, as exemplified in~\ref{ex:car} and~\ref{ex:actor}.
 
 \begin{enumerate}[resume]
@@ -198,6 +266,7 @@ impact~\cite{teodorescu2006adjective}, as exemplified in~\ref{ex:car} and~\ref{e
 
 One further case that is important to distinguish is that of \textbf{relational} adjectives which have a meaning 
 that expresses a relationship between two individuals or events, for example:
+>>>>>>> f6601524d664b0fc8f7bf513e4e73e3d03dcaf15
 
 \begin{enumerate}[resume]
 \item He is related to her.
@@ -237,6 +306,15 @@ $$X\text{ is }A~N?$$
 As such, when we encounter the attributive usage of an adjective such as in~\ref{ex:juan}, 
 we understand this as the realization of two frames, given in~\ref{ex:juan_frames}.
 
+<<<<<<< HEAD
+We understand this as the realization of two frames:
+
+\begin{quote}
+\textbf{Juan is a researcher.\textcolor{blue}{this point is tricky. Looks like you are mixing copula with attribute. Since later you just develop Belgian in LEMON, I'd leave this example out}}
+
+Juan $[attr]$ Spanish.
+\end{quote}
+=======
 \begin{enumerate}[resume]
 \item Juan is a Spanish researcher. \label{ex:juan}
 \item \begin{enumerate}
@@ -245,6 +323,7 @@ we understand this as the realization of two frames, given in~\ref{ex:juan_frame
 \end{enumerate}
 \label{ex:juan_frames}
 \end{enumerate}
+>>>>>>> f6601524d664b0fc8f7bf513e4e73e3d03dcaf15
 
 Note we do not provide modeling for adjectives that are part of a noun phrase,
 such as `polar bear', which we would capture as a normal noun phrase with 
@@ -314,13 +393,49 @@ for example `vandalized' may be $\exists\,\text{\em theme}^{-1}.\text{\em Vandal
 
 \subsection{Gradable adjectives}
 
+<<<<<<< HEAD
+\textbf{Gradable adjectives are naturally defined relative to a particular 
+property\textcolor{blue}{Before introducing variant and covariant, a list of the properties of gradable adjectives could be introduced. For this, I am referring to two papers of Kennedy, \cite{kennedy1999scalar,
+kennedy2007vagueness}).}}\footnote{Note in many cases the property is quite abstract such as in 
+`breakable' \textbf{moar}}
+\begin{itemize}
+\item \textbf{\textcolor{blue}{the property of comparative constructions is only true in the case of gradable adjectives (\cite{kennedy1999scalar}:3); non-gradable adjectives are in fact anomalous in comparisons (e.\,g. 
+`*less geological', `*more wooden' (\cite{kennedy2007vagueness}:22))}}
+\item \textbf{\textcolor{blue}{the interpretation of gradable adjectives is very context-dependent (\cite{kennedy1999scalar}:4)}}
+\item \textbf{\textcolor{blue}{\textit{relative} gradable adjectives, like `expensive', possess the feature of vagueness (\cite{kennedy2007vagueness}:3)}}
+\item \textbf{\textcolor{blue}{\textit{absolute} gradable adjectives, like `straight' or `bent' or `red' (to cite your part on colors below), are not vague}}
+\item \textbf{\textcolor{blue}{gradable adjectives have a context-dependent truth-conditional variability, meaning that their positive form is the sum of the relation between the degree of the concept possessed by the object (as measured by the predicate) and the context-dependent standard of comparison based on the same concept \cite{kennedy2007vagueness}. It follows that the properties denoted by adjectives like `expensive' or `small' or `big' vary in intensity according to the context (and time) of use. (at this place your example on `tall' could be introduced)}}
+\item \textbf{\textcolor{blue}{the arguments of gradable adjectives are mapped into abstract representations of measurements or degrees, whereas a set of degrees constitutes a scale (\cite{kennedy2007vagueness}:4)}}
+\item \textbf{\textcolor{blue}{Along with degrees and scales, one can also determine whether a gradable adjective (relative or absolute) has a minimum or a maximum standard. For instance, `transparent' has a maximum standard (complete transparency), while `opaque' has a minimum standard (partial visibility) (\cite{kennedy2007vagueness}:37). (This part could be added as well as left out; Kennedy (2007) claims that, apart from some exceptions, some closed scaled adjectives have fixed standards of comparisons (\cite{kennedy2007vagueness}:38), such as `closed', `hidden', `covered', while others have minimum standards, such as `acquainted with' (which is understandable), or `documented' (eben, not so clear why this has minimal standards))}}
+\end{itemize}
+
+, that is it is natural to say that \textbf{`big' refers to 
+=======
 Gradable adjectives are naturally defined relative to a particular 
 property\footnote{Note that in many cases the property is quite abstract such as in 
 `breakable'.} but do not denote that property. For example, it is natural to say that \textbf{`big' refers to 
+>>>>>>> f6601524d664b0fc8f7bf513e4e73e3d03dcaf15
 `size', however it is clear then that `small' also refers to `size' and as antonyms 
-they cannot both refer to the same ontological concept.\textit{You introduce here a gradable adjective such as 'big' already in conjunction with its antonym 'small'. A further premise to 'big' (citing Kennedy p. 6, reference given above) could be that 'big' is defined 'vague' as well as 'gradable' since it applies or measure distinct truth conditions. }} As such, we introduce 
+they cannot both refer to the same ontological concept.\textcolor{blue}{You introduce here a gradable adjective such as 'big' already in conjunction with its antonym 'small'. A further premise to 'big' (\cite{kennedy2007vagueness}:6) could be that 'big' is defined 'vague' as well as 'gradable' since it applies or measure distinct truth conditions. This could be included as example in the list above.}} \textbf{As such, we introduce 
 the concept of \emph{covariance} and \emph{contravariance}, which refers to 
 whether the comparative form indicates a higher property value for the subject 
+<<<<<<< HEAD
+or the object. That is that `big' is covariant with size, as bigger things have 
+a higher size value, and `small' is contravariant with size.\textcolor{blue}{See my comment below.**}} \textbf{We also introduce 
+a third concept of \emph{absolute gradability}, which states that these objects 
+are better described by these adjectives as they approach some ideal value. \textcolor{blue}{If you want to use Kennedy's definitions of gradable adjectives, this part is already in the itemized list.}}
+\textbf{A common example of this is colours, which where we may say that some object is 
+redder than another if it is closer to some ideal value of red 
+(e.g., RGB {\tt 0xff0000}).}
+
+\textbf{\textcolor{blue}{On variant and covariant** MORE TO COME}}
+  
+\textbf{\textcolor{blue}{You introduce here the concepts of covariance and contravariance with reference to antonymic adjectives and the concept they refer to (e.\,g. `big' / `small' and `size'). MORE TO COME}}
+
+While these concepts well handle the comparative usage of adjectives, the 
+predicative and superlative usage of adjectives is complicated by three factors 
+that we will outline below. Firstly, we notice that gradable classes are not 
+=======
 or the object. That is, `big' is covariant with size, as bigger things have 
 a higher size value, and `small' is contravariant with size, as smaller things have 
 a lower size value. We also introduce a third concept of \emph{absolute gradability}, 
@@ -331,6 +446,7 @@ redder than another if it is closer to some ideal value of red (e.g., RGB {\tt 0
 While these concepts handle the comparative usage of adjectives well, the 
 predicative and superlative usage of adjectives is complicated by three factors. 
 Firstly, we notice that gradable classes are not 
+>>>>>>> f6601524d664b0fc8f7bf513e4e73e3d03dcaf15
 crisply defined as with the case of many intersective adjectives, that is that 
 while we can clearly define all people in the world as `Belgian' or 
 `not Belgian', by who holds a passport of Belgium, it is not easy 
@@ -340,12 +456,12 @@ whether someone of height 6' (182cm) is `tall' although they are above average
 height for a man. As such, the class boundary of a gradable adjective is 
 naturally fuzzy. Secondly, we note that these class boundaries are 
 non-monotonic, that is that with knowledge of more instances of the relative 
-class we must revise our class boundaries. This is especially the case for the
+class we must revise our class boundaries. \textbf{This is especially the case for the
 superlative as the discovery of a new tallest person in the world would remove 
 the existing tallest person in the world from the class of tallest person in the 
 world. This, non-monotonicity also affects the class boundaries of the gradable 
 class itself, for example in the 18th century the average height of a male was 
-5'5'' (165cm)\footnote{\url{http://en.wikipedia.org/...}}
+5'5'' (165cm)\textcolor{blue}{This passage kind of reiterates what you have stated above.}}\footnote{\url{http://en.wikipedia.org/...}}
 and as such a male of 6' would have been considered clearly to be 
 tall. As such, we can conclude that each instance added to our ontology must 
 revise the class boundaries of a gradable class, hence leading to the fact that 
