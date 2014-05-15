@@ -10,6 +10,10 @@
 \usepackage{color}
 \usepackage{textcomp} %for copyright and registered symbols
 
+\usepackage{amssymb}%for \done and \crossed under itemize
+\newcommand{\done}{\item[\checkmark]}
+\newcommand{\crossed}{\item[$\times$]}
+
 %\setlength\titlebox{5cm}
 
 % You can expand the titlebox if you need extra space
@@ -332,7 +336,7 @@ Similarly, most deverbal adjectives refer to an event, and as such
 a common modelling is of the form $\exists\,\text{\em theme}^{-1}.\text{\em EventClass}$, 
 for example `vandalized' may be $\exists\,\text{\em theme}^{-1}.\text{\em VandalismEvent}$.
 
-\subsection{Gradable adjectives}
+\subsection{Gradable adjectives \textcolor{blue}{and relevant observables [since we analyze them too]}}
 
 Gradable adjectives have a number of properties, which differentiate them
 from intersective adjectives:
@@ -499,12 +503,41 @@ and it is context-sensitive (as whether an individual counts a big or not depend
 \end{enumerate}
 \end{enumerate}
 
-\textbf{\textcolor{blue}{The possibilities mentioned in $\diamond$(2) and $\diamond$$\diamond$ have already been contemplated in one recent extension of the SUMO ontology\footnote{The Suggested Upper Merged Ontology (SUMO); \cite{nilespease2001sumo}; \url{www.ontologyportal.com}}, namely the addition of defaultMeasurements for the Artifacts, Devices and Objects enlisted in the ontology. The SUMO ontology can be browsed either via English terms (as derived from the Princeton WordNet \textregistered), or KB terms, where the upper-level concepts have been converted in the formal language SUO-KIF.}}
+\textbf{\textcolor{blue}{The possibilities mentioned in $\diamond$(2) and $\diamond$$\diamond$ have already been contemplated in one recent extension of the SUMO ontology\footnote{The Suggested Upper Merged Ontology (SUMO); \cite{nilespease2001sumo}; \url{www.ontologyportal.com}}, namely the addition of defaultMeasurements for the Artifacts, Devices and Objects enlisted in the ontology (currently amounting to 300+). The SUMO ontology can be browsed either via English terms (as derived from the Princeton WordNet \textregistered), or KB terms, where the upper-level concepts have been converted in the formal first-order logic language SUO-KIF.}}
 
-%\begin{figure}
-%\includegraphics[width=\textwidth]{building_SUMO}
-%\caption{Excerpt of the SUMO graph structure for `Building', with number of direct-children for each entry and related documentation}\label{building_SUMO}}
-%\end{figure}
+
+\begin{figure}[h!]
+\includegraphics[width=\textwidth]{building_SUMO1}
+\caption{\textbf{\textcolor{blue}{Excerpt of the SUMO graph structure for `Building', with number of direct-children for each entry and related documentation}}}\label{building_SUMO}
+\end{figure}
+
+\textbf{\textcolor{blue}{The compilation of defaultMeasurements in SUMO has been just conducted on observables, not predicates. This means that, given an observable such as Book, listed under \texttt{Artifact > Document}, only the defaults of a \textit{standard} book have been measured, not those for \texttt{<predicate>$+$}Book.}}
+
+\begin{verbatim}
+;;Book
+(defaultMinimumHeight Book (MeasureFn 10 Inch))
+(defaultMaximumHeight Book (MeasureFn 11 Inch))
+(defaultMinimumLength Book (MeasureFn 5.5 Inch))
+(defaultMaximumLength Book (MeasureFn 7 Inch))
+(defaultMinimumWidth Book (MeasureFn 1.2 Inch))
+(defaultMaximumWidth Book (MeasureFn 5.5 Inch))
+\end{verbatim}
+
+\textbf{\textcolor{blue}{SUMO's pros}}
+\begin{itemize}[label=$\bar$]
+\done bla bla
+\done bla bla 
+\end{itemize}
+
+
+
+
+\textbf{\textcolor{blue}{SUMO's cons}}
+\begin{itemize}
+\crossed \textbf{\textcolor{blue}{almost all children of respectively Artifacts, Objects and Devices in SUMO could be assigned default values (`Train', `AircraftCarrier', `Fish'), basically because selective (i.\,e. rather precise) count nouns. Nevertheless, default measurements for their parents could not be defined, given their extreme vagueness. While it is in fact still feasible to determine, among for instance all different kinds of `Book', a standard volume (with implied arbitrary properties), the choice is to vast in the case of `Artifact' or `Device'.}}
+
+\crossed bla bla 
+\end{itemize}
 
 
 \textbf{Thresholds, defaults and multiple classes (Francesca to help)}
