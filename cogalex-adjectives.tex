@@ -212,7 +212,7 @@ impact~\cite{teodorescu2006adjective}, e.g.,
 \label{ex:actor}
 \end{enumerate}
 
-One further case that is important to distinguish is that of \textbf{relational} adjectives which have a meaning 
+One further case that is important to distinguish is that of \emph{relational} adjectives which have a meaning 
 that expresses a relationship between two individuals or events, for example:
 
 \begin{enumerate}[resume]
@@ -323,7 +323,7 @@ Similarly, most deverbal adjectives refer to an event, and as such
 a common modelling is of the form $\exists\,\text{\em theme}^{-1}.\text{\em EventClass}$, 
 for example `vandalized' may be $\exists\,\text{\em theme}^{-1}.\text{\em VandalismEvent}$.
 
-\subsection{Gradable adjectives \textcolor{blue}{and relevant observables [since we analyze them too]}}
+\subsection{Gradable adjectives and relevant observables}
 
 Gradable adjectives have a number of properties, which differentiate them
 from intersective adjectives:
@@ -331,7 +331,7 @@ from intersective adjectives:
 \begin{itemize}
 \item They occur in comparative constructions with either `-er' or `more' \cite{kennedy1999scalar}:3), c.f. `*less geological', `*more wooden'.
 \item Gradable adjectives have a context-dependent truth-conditional variability, meaning that their positive form is the sum of the relation between the degree of the concept possessed by the object (as measured by the predicate) and the context-dependent standard of comparison based on the same concept \cite{kennedy2007vagueness}. It follows that the properties denoted by adjectives like `expensive' or `small' or `big' vary in intensity according to the context (and time) of use. 
-\item They are frequently \emph{fuzzy} (or \emph{vague})~\cite{kennedy2007vagueness} (\textbf{\textcolor{blue}{more below}}).
+\item They are frequently \emph{fuzzy} (or \emph{vague})~\cite{kennedy2007vagueness}
 %\item \textbf{\textcolor{blue}{\textit{absolute} gradable adjectives, like `straight' or `bent' or `red' (to cite your part on colors below), are not vague}}
 \item The arguments of gradable adjectives are mapped into abstract representations of measurements or degrees~\cite{kennedy2007vagueness}.
 \item There may be a minimum or maximum of this scale, which can be determined
@@ -339,14 +339,15 @@ by, for example, whether they can modified by `completely'.
 \end{itemize}
 
 As such we define gradable adjectives relative to a particular 
-property, \textbf{\textcolor{blue}{hereby also called `observable' (from \cite{Bennett06kr}).}}\footnote{Note in many cases the property is quite abstract such as in 
+property, these adjectives are also called `observable'~\cite{Bennett06kr}.\footnote{Note in many cases the property is quite abstract such as in 
 `breakable'.}, that is it is natural to say that `big' refers to 
 `size', however it is clear then that `small' also refers to `size' and as antonyms 
 they cannot both refer to the same ontological concept. As such, we introduce 
 the concept of \emph{covariance} and \emph{contravariance}, which refers to 
 whether the comparative form indicates a higher property value for the subject 
 or the object. That is that `big' is covariant with size, as bigger things have 
-a higher size value, and `small' is contravariant with size.\footnote{\textbf{\textcolor{blue}{As clearly demonstrated in this example, the use of the terms `covariant' and `contravariant', although borrowed from mathematics and theoretical physics (covariance and contravariance of vectors), is not attributed the same original meaning the terms own in these two fields. The concept of covariance and contravariance we want to introduce here much more resembles the concept of `converse observables' as mentioned by (\cite{Bennett06kr}:42). As stated by the author, adjectives often come in pairs of polar opposites (e.\,g. $conv(tall)=short$, and both refer to the same observable (in this case \textit{size}. Some observables analogously hold converse relationships with other observables (e.\,g. $conv(flexibility)=rigidity$ or $conv(tallness)=shortness$).}}} We also introduce 
+a higher size value, and `small' is contravariant with size.\footnote{
+    The use of these terms is borrowed from type systems, and resembles the concept of `converse observables' as mentioned by (\cite{Bennett06kr}:42). As stated by the author, adjectives often come in pairs of polar opposites (e.\,g. $conv(tall)=short$, and both refer to the same observable (in this case \textit{size}. Some observables analogously hold converse relationships with other observables (e.\,g. $conv(flexibility)=rigidity$ or $conv(tallness)=shortness$).} We also introduce 
 a third concept of \emph{absolute gradability}, which states that these objects 
 are better described by these adjectives as they approach some ideal value. 
 A common example of this is colours, where we may say that some object is 
@@ -356,16 +357,19 @@ redder than another if it is closer to some ideal value of red
 
 While these concepts well handle the comparative usage of adjectives, the 
 predicative and superlative usage of adjectives is complicated by three factors
-that we will outline below. \textbf{We notice that gradable classes are not 
+that we will outline below. We notice that gradable classes are not 
 crisply defined as with the case of many intersective adjectives, that is that 
 while we can clearly define all people in the world as `Belgian' or 
 `not Belgian', by who holds a passport of Belgium, it is not easy 
-split the world's population into `tall' and `not tall'. \textcolor{blue}{This kind of dilemma is know as the \textit{sorites} paradox or \textit{sorites} vagueness (\cite{Bennett06kr}:36), for which many terms and adjectives in natural language are vague given the 
-existence of a specific threshold to relate them to other properties or observables.}} In fact, while it may 
+split the world's population into `tall' and `not tall' (This is known as \emph{sorites} paradox \cite{Bennett06kr}).
+%, for which many terms and adjectives in natural language are vague given the 
+%existence of a specific threshold to relate them to other properties or observables.}} 
+In fact, while it may 
 be easy to say that someone with height 6'6'' (198cm) is `tall', it is not clear 
-whether someone of height 6' (182cm) is `tall', \textbf{\textcolor{blue}{also given that this height should be compared to average (different)
-height for a man, or a woman.}} \textbf{As such, the class boundary of a gradable adjective is 
-naturally fuzzy. [\textcolor{blue}{Here i would say it: ``As such, one recurrently used way to deal with this class of vague adjectives (and nouns) is via fuzzy logic'', which enables a probabilistic approach to concepts (Goguen 1969; Zadeh 1965, 1975; Dubois \& Prade 1988; in: \cite{Bennett06kr}).}]} Secondly, we note that these class boundaries are 
+whether someone of height 6' (182cm) is `tall', also given that this height should be compared to average (different)
+height for a man, or a woman. 
+As such, one frequently used way to deal with this class of vague adjectives (and nouns) is via fuzzy logic \cite{Goguen1969,Zadeh1965,Zadeh1975,dubois1988,Bennett06kr}.
+Secondly, we note that these class boundaries are 
 non-monotonic, that is that with knowledge of more instances of the relative 
 class we must revise our class boundaries. This is especially the case for the
 superlative as the discovery of a new tallest person in the world would remove 
@@ -386,7 +390,8 @@ So we can conclude that gradable adjectives are \emph{fuzzy}, \emph{non-monotoni
 and \emph{context-sensitive}, all of which are incompatible with the description 
 logic used by OWL.
 
-\subsubsection{\textcolor{blue}{Fuzzy logic and LemonOILS}}
+\subsubsection{Vagueness}
+
 Currently there are only limited models for representing fuzzy 
 logic in the context of the web~\cite{zhao2008uncertainty}. In order to capture the 
 properties of gradable adjectives, we introduce a new model, which we name 
@@ -468,39 +473,49 @@ it is non-monotonic (in that more individuals may change whether we consider an 
 to be `big' or not), it is fuzzy (given by the strength of the probability of the proposition $big_C(x)$), 
 and it is context-sensitive (as whether an individual counts a big or not depends on the class $C$).
 
-\subsubsection{\textcolor{blue}{The \textit{supervaluation theory} and SUMO}}
+\subsubsection{The supervaluation theory and SUMO}
+
 \textbf{\textcolor{red}{Philipp: better integrate SUMO with the rest}}
-\textbf{\textcolor{blue}{Despite the successful application of fuzzy logics in the case of lemonOILS, we acknowledge at least two bottlenecks in the use of this kind of logic for modeling vague or gradable adjectives.}}
+%%%%% John: these criticisms don't really hold for Markov Logic, I think I remove them
+%\textbf{\textcolor{blue}{Despite the successful application of fuzzy logics in the case of lemonOILS, we acknowledge at least two bottlenecks in the use of this kind of logic for modeling vague or gradable adjectives.}}
+%
+%\begin{itemize}
+%\item \textbf{\textcolor{blue}{the values which are assigned to the thresholds or degrees to which an object satisfies a vague predicate are assigned \textit{ad hoc}, meaning that there is no objectivity in appointing them.}}
+%\item \textbf{\textcolor{blue}{Fuzzy logic is inferentially weak. Its fixed, domain-independent operators do not extensively work for uncertain information as in the case of vague predicates and observables, and could lead to unsatisfied or incorrect inferences (\cite{Elkan94fuzzy2}:5); \cite{Elkan93fuzzy1}.  Given for instance a vague piece of information such as `The mountain is far from the sea; and my house is beside the mountain'' (\cite{Bennett06kr}:36), one can automatically conclude `My house is far from the sea', a kind of inference that fuzzy logic cannot provide. \textcolor{violet}{[John, it would be useful to try to represent this with fuzzy logic operators]}}}
+%\end{itemize}
 
-\begin{itemize}
-\item \textbf{\textcolor{blue}{the values which are assigned to the thresholds or degrees to which an object satisfies a vague predicate are assigned \textit{ad hoc}, meaning that there is no objectivity in appointing them.}}
-\item \textbf{\textcolor{blue}{Fuzzy logic is inferentially weak. Its fixed, domain-independent operators do not extensively work for uncertain information as in the case of vague predicates and observables, and could lead to unsatisfied or incorrect inferences (\cite{Elkan94fuzzy2}:5); \cite{Elkan93fuzzy1}.  Given for instance a vague piece of information such as `The mountain is far from the sea; and my house is beside the mountain'' (\cite{Bennett06kr}:36), one can automatically conclude `My house is far from the sea', a kind of inference that fuzzy logic cannot provide. \textcolor{violet}{[John, it would be useful to try to represent this with fuzzy logic operators]}}}
-\end{itemize}
 
- \textbf{\textcolor{blue}{Another way to measure these vague terms can be achieved by \textit{supervaluation semantics}. Through supervaluation theory, the modeling or positioning of sorites vague concepts is grounded in a judgement or meaning that lies on arbitrary thresholds, but these thresholds are based on a number of \textit{relevant objective measures} (\cite{Bennett06kr}:36). The principle implies (a) that the thresholds used for semantically interdependent concepts (let them be predicates or observables) are used consistently (e.\,g. the thresholds for `tall/tallness' closely resemble the thresholds for `short/shortness'). It also implies (b) that not only the meaning of the gradables, but also the set value of the threshold is context-sensitive.}}
+Another way to capture the meaning of these vague terms can be achieved by \textit{supervaluation semantics}. 
+Through supervaluation theory, the modeling or positioning of \emph{sorites} vague concepts is grounded in a 
+judgement or meaning that lies on arbitrary thresholds, but these thresholds are based on a number of \textit{relevant objective measures} \cite{Bennett06kr}. 
+The principle implies (a) that the thresholds used for semantically interdependent concepts 
+(let them be predicates or observables) are used consistently (e.\,g. the thresholds for `tall/tallness' 
+closely resemble the thresholds for `short/shortness'). It also implies (b) that not only the meaning of 
+the gradables, but also the set value of the threshold is context-sensitive.
  
-\textbf{\textcolor{blue}{In the case of (as inspired by (\cite{kennedy1999scalar}:129)):}}
+%In the case of (as inspired by (\cite{kennedy1999scalar}:129)):
 
-\begin{enumerate}[resume]
-\item \textbf{\textcolor{blue}{Michael Jordan is tall. \label{ex:jordan}}}
-\begin{enumerate}[label=$\diamond$]
-\item \textbf{\textcolor{blue}{The threshold for `height' can either be set (1) with reference to the average height for baseball players, or (2) with reference to the average height for Human, namely Person (where the capital starting letter of the word stands for ontological concept or KB term).}}
-\end{enumerate}
-\item \textbf{\textcolor{blue}{The building is tall. \label{ex:building}}}
-\begin{enumerate}[label=$\diamond$$\diamond$]
-\item \textbf{\textcolor{blue}{The threshold for `height' can either be set with reference to the average height of a specific kind of Building, or with reference to a specific building.}}
-\end{enumerate}
-\end{enumerate}
-
-\textbf{\textcolor{blue}{The possibilities mentioned in $\diamond$(2) and $\diamond$$\diamond$ have already been contemplated in one recent extension of the SUMO ontology\footnote{The Suggested Upper Merged Ontology (SUMO); \cite{nilespease2001sumo}; \url{www.ontologyportal.com}}, namely the addition of defaultMeasurements for the Artifacts, Devices and Objects enlisted in the ontology (currently amounting to 300+). The SUMO ontology can be browsed either via English terms (as derived from the Princeton WordNet \textregistered), or KB terms, where the upper-level concepts have been converted in the formal first-order logic language SUO-KIF.}}
-
+%\begin{enumerate}[resume]
+%\item \textbf{\textcolor{blue}{Michael Jordan is tall. \label{ex:jordan}}}
+%\begin{enumerate}[label=$\diamond$]
+%\item \textbf{\textcolor{blue}{The threshold for `height' can either be set (1) with reference to the average height for baseball players, or (2) with reference to the average height for Human, namely Person (where the capital starting letter of the word stands for ontological concept or KB term).}}
+%\end{enumerate}
+%\item \textbf{\textcolor{blue}{The building is tall. \label{ex:building}}}
+%\begin{enumerate}[label=$\diamond$$\diamond$]
+%\item \textbf{\textcolor{blue}{The threshold for `height' can either be set with reference to the average height of a specific kind of Building, or with reference to a specific building.}}
+%\end{enumerate}
+%\end{enumerate}
 
 \begin{figure}[ht!]
 \includegraphics[width=\textwidth]{building_SUMO1}
 \caption{\textbf{\textcolor{blue}{Excerpt of the SUMO graph structure for `Building', with number of direct-children for each entry and related documentation}}}\label{building_SUMO}
 \end{figure}
 
-\textbf{\textcolor{blue}{The compilation of defaultMeasurements in SUMO has been just conducted on observables. Given for instance an Artifact such as `Book', the compilation of its default measurements would look like this:}}
+
+A recent extension of the SUMO ontology~\cite[Suggested Upper Merged Ontology]{nilespease2001sumo} has add
+default measurements for the Artifacts, Devices and Objects enlisted in the ontology (currently amounting to 300+). 
+%mentioned in $\diamond$(2) and $\diamond$$\diamond$ have already been contemplated in one recent extension of the SUMO ontology\footnote{The Suggested Upper Merged Ontology (SUMO); \cite{nilespease2001sumo}; \url{www.ontologyportal.com}}, namely the addition of defaultMeasurements for the Artifacts, Devices and Objects enlisted in the ontology (currently amounting to 300+). The SUMO ontology can be browsed either via English terms (as derived from the Princeton WordNet \textregistered), or KB terms, where the upper-level concepts have been converted in the formal first-order logic language SUO-KIF.}}
+The compilation of defaultMeasurements in SUMO has been just conducted on observables. Given for instance an Artifact such as `Book', the compilation of its default measurements would look like this:
 
 \begin{verbatim}
 ;;Book
@@ -513,27 +528,63 @@ and it is context-sensitive (as whether an individual counts a big or not depend
 \end{verbatim}
 
 
-\textcolor{blue}{The example for `Book' shows that the default measurements for the observable reflect a \textit{standard} kind of Book, i.\,e. the or one of the most commonly known kinds of the same Artifact. As for the case of `Book', SUMO implies it to be a physical Object with a certain length, height and width. The observable (hereby as $c$) is therefore treated not as a classical observable (unique in its kind), but rather as an instance of the same ($x$), to which specific (implied) default values are assigned (\textbf{$a$}): \[ [\textbf{a} \circ c](x)\]also representable as \[ \texttt{lsa}(x, \textbf{a}, c).\]}
+The example for `Book' shows that the default measurements for the observable reflect a \textit{standard} kind of Book,
+i.e., the or one of the most commonly known kinds of the same Artifact. As for the case of `Book', SUMO implies it to be a physical Object with a certain length, height and width. 
+A weakness here is that the there is no systematic connection between the {\tt defaultMinimumHeight} and the
+property {\tt height}\textcolor{green}{Is this correct?}. With lemonOILS we can add this information as follows:
+
+\begin{verbatim}
+sumo:Book oils:default [
+    oils:defaultFor sumo:height ;
+    oils:defaultMin "10in" ;
+    oils:defaultMax "11in" ] .
+\end{verbatim}
+
+Then if we understand a lexical entry `high' as referring to a scalar covariant pseudo-class for {\tt sumo:height},
+it is possible to understand that `high' objects exceed the default minimum.
+
+The primary weakness of this approach is captured by the following example:
+
+\begin{enumerate}[resume]
+    \item Avery Johnson is a short basketball player. \label{ex:avery}
+%\item Michael Jordan is tall. \label{ex:jordan}
+%\begin{enumerate}[label=$\diamond$]
+%\item \textbf{\textcolor{blue}{The threshold for `height' can either be set (1) with reference to the average height for baseball players, or (2) with reference to the average height for Human, namely Person (where the capital starting letter of the word stands for ontological concept or KB term).}}
+%\end{enumerate}
+%\item \textbf{\textcolor{blue}{The building is tall. \label{ex:building}}}
+%\begin{enumerate}[label=$\diamond$$\diamond$]
+%\item \textbf{\textcolor{blue}{The threshold for `height' can either be set with reference to the average height of a specific kind of Building, or with reference to a specific building.}}
+%\end{enumerate}
+\end{enumerate}
+
+Here, we see the difficulty in interpreting the sentence as Avery Johnson is in fact of average height (5'10'') but
+for the class of basketball players he is unusually short. As such we must introduce default values for
+every possible subclass of person. This potentially leads to an explosion in the amount of information we
+need to encode in the ontology, essentially forcing us to encode a class (or default values) for every
+combination of an adjective and a noun. 
 
 
-\textbf{\textcolor{blue}{SUMO's pros}}
-\begin{itemize}[label=$\bar$]
-\done \textbf{\textcolor{blue}{The compilation of default measurements limits the extent of first-order semantics that one could infer from SUMO.}}
-\done bla bla 
-\end{itemize}
-
-
-
-
-\textbf{\textcolor{blue}{SUMO's cons}}
-\begin{itemize}
-\crossed \textbf{\textcolor{blue}{Almost all children of the enlisted Artifacts in SUMO could be assigned default values, but default values for the parents (e.\,g. `Artifact', `OrganicObject', `Object') could not be defined being too vague. Also, while some Artifacts have extensively defined children (e.\,g. `CrewDormCar', `GalleryCar', `MotorRailcar', `FreightCar', `BoxCar', `RefrigeratorCar', `FiveWellStackCar', `FlatCar', `SpineCar', `HydraCushionFreightCar' and more just for `Car'), some Artifacts are still unspecified (e.\,g. `Person', as Instance for `Human', does not contain any disambiguation in terms of i.\,a. gender or age).}}
-
-\crossed \textcolor{blue}{Complex count nouns such as `TallBigMan' or `SmallRoundWoman' have not been contemplated among the defined valued Objects yet. The extension of these subsets (defined restrictive adjectives by \cite{Bennett06kr}) should nevertheless be a feasible task to accomplish, provided that these predicates belong to the accepted collocational\footnote{One condition for the predicates of the observable / observable's instance to be analyzed is that they count as collocational forms once merged to it in a subset. In other words, while it can be feasible to set default values for a subset such as `BroadShoulder' (since the adjective `broad' standardly collocates with the noun `shoulder'), the same cannot be said for e.\.g. `BroadWoman', where the adj.+noun matching is novel or unconventional. A stand-alone case is also represented by idiomatic or metaphorical expressions, such as `high risk' or `to keep one's head up high'.} cluster of the observable and of its instance. This extension should therefore include all the cases in which the default value \textbf{$a$} is not implied, but explicited ($\texttt{lsa}(x, \textbf{a}, c)$, with \textbf{$a$} being `big' as for instance in the case of `BigMan').}
-\end{itemize}
-
-
-\textbf{Thresholds, defaults and multiple classes (meaning context-sensitivity but also predicate+observable, e.\,g. should the ontology have a different class for BigMan, BigWoman, BigBasketballPlayer..) (Francesca to help)}
+%%The observable (hereby as $c$) is therefore treated not as a classical observable (unique in its kind), but rather as an instance of the same ($x$), to which specific (implied) default values are assigned (\textbf{$a$}): \[ [\textbf{a} \circ c](x)\]also representable as \[ \texttt{lsa}(x, \textbf{a}, c).\]}
+%
+%
+%\textbf{\textcolor{blue}{SUMO's pros}}
+%\begin{itemize}[label=$\bar$]
+%\done \textbf{\textcolor{blue}{The compilation of default measurements limits the extent of first-order semantics that one could infer from SUMO.}}
+%\done bla bla 
+%\end{itemize}
+%
+%
+%
+%
+%\textbf{\textcolor{blue}{SUMO's cons}}
+%\begin{itemize}
+%\crossed \textbf{\textcolor{blue}{Almost all children of the enlisted Artifacts in SUMO could be assigned default values, but default values for the parents (e.\,g. `Artifact', `OrganicObject', `Object') could not be defined being too vague. Also, while some Artifacts have extensively defined children (e.\,g. `CrewDormCar', `GalleryCar', `MotorRailcar', `FreightCar', `BoxCar', `RefrigeratorCar', `FiveWellStackCar', `FlatCar', `SpineCar', `HydraCushionFreightCar' and more just for `Car'), some Artifacts are still unspecified (e.\,g. `Person', as Instance for `Human', does not contain any disambiguation in terms of i.\,a. gender or age).}}
+%
+%\crossed \textcolor{blue}{Complex count nouns such as `TallBigMan' or `SmallRoundWoman' have not been contemplated among the defined valued Objects yet. The extension of these subsets (defined restrictive adjectives by \cite{Bennett06kr}) should nevertheless be a feasible task to accomplish, provided that these predicates belong to the accepted collocational\footnote{One condition for the predicates of the observable / observable's instance to be analyzed is that they count as collocational forms once merged to it in a subset. In other words, while it can be feasible to set default values for a subset such as `BroadShoulder' (since the adjective `broad' standardly collocates with the noun `shoulder'), the same cannot be said for e.\.g. `BroadWoman', where the adj.+noun matching is novel or unconventional. A stand-alone case is also represented by idiomatic or metaphorical expressions, such as `high risk' or `to keep one's head up high'.} cluster of the observable and of its instance. This extension should therefore include all the cases in which the default value \textbf{$a$} is not implied, but explicited ($\texttt{lsa}(x, \textbf{a}, c)$, with \textbf{$a$} being `big' as for instance in the case of `BigMan').}
+%\end{itemize}
+%
+%
+%\textbf{Thresholds, defaults and multiple classes (meaning context-sensitivity but also predicate+observable, e.\,g. should the ontology have a different class for BigMan, BigWoman, BigBasketballPlayer..) (Francesca to help)}
 
 \subsection{Operator adjectives}
 
@@ -552,22 +603,25 @@ we introduce a frame \emph{operator attributive}, that has one argument
 which is the noun. As such the interpretation of a phrase such as
 
 \begin{quote}
-Clinton is a former president.
+Obama is the President. Clinton is a former president.
 \end{quote}
 
 Is understood as:
 
 \[
-[former(President)](Clinton)
+President(Obama) \sqcap [former(President)](Clinton)
 \]
 
-\textbf{\textcolor{red}{better explain this part}}
-Where $former$ applies to $President$ to create a new class in the ontology.
+Where if we understand $President$ as selecting objects that have the role of being president of a country
+and therefore being true for $Obama$, then $former$ creates a new class which selects
+people who had the role of being a president, which has ended. Thus it
+can be said that $[former(President)]$ creates a new class in the ontology.\footnote{An alternative
+    interpretation would be that former modifies the role of Clinton, however this raises the
+    question of why the role property of presidents would be selected, and as such
+is also unsatisfactory}.
 As there is at the moment no agreed representation for such an operator in an
 ontology, it underlines the fact that more sophisticated ontology representations than first-order logic are required to understood natural
 language in general.
-
-\textbf{this kind of wusses out, but what else can we do?}
 
 %This means that we must acknowledge operator adjectives in both the lexicon and the ontology. 
 %To this extent we define a frame called operator adjective frame, whose prototype is:
@@ -783,8 +837,8 @@ require models that are non-monotonic, fuzzy and second-order. As such, we
 conclude that more sophisticated semantic models are required to represent the semantics
 of such words, however the separation of syntax and semantics remains a robust
 model, which can easily be adapted to the task of representing adjectives. As 
-a final note we consider the fact that not all languages even have adjectives
-\cite{?} and as such we must wonder to what extent this analysis is applicable
+a final note we consider the claims that not all languages even have adjectives
+\footnote{http://linguistlist.org/issues/4/4-442.html} and as such we must wonder to what extent this analysis is applicable
 beyond English. We contend, that the underlying semantics of the words we discuss here
 is representable in all nearly languages and based on our analysis of realistic
 questions as applied in QALD, we believe that this model should be applicable
