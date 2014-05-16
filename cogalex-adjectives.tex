@@ -22,7 +22,7 @@
 % in the camera-ready version and ask you to change it back.
 
 
-\title{Modelling of Adjectives in the Ontology-Lexicon Interface}
+\title{Modelling the Semantics of Adjectives in the Ontology-Lexicon Interface}
 
 \author{John P. M\textsuperscript{c}Crae \\
   Affiliation / Address line 1 \\
@@ -40,19 +40,14 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-    The ontology-lexicon interface has become an important and successful tool 
-for handling problems in natural language processing. The foundation of these models 
-is based on the separation of the ontological and lexical layers by means of the 
-principle of semantics by reference to an ontology in description logics. 
+The treatment of the semantics of adjectives is notorously challenging, also in the context of the so called ontology-lexicon interface which attempts to capture the semantics of words by reference to an ontology in description logics or some other, typically first-order, logical formalism.
 However, as noted by other authors, the use of first order logic (hence also description logics),
 while effective for nouns and verbs, breaks down in the case of adjectives. 
-We propose that this is primarily due to a lack of logical expressivity in the 
-ontology. In particular, beyond the straightforward intersective adjectives
-many adjectives are i) gradable requiring fuzzy or 
-non-monotonic semantics or ii) operator adjectives require second-order logic. 
-We consider how we can handle the ontology-lexicon interface in the face of 
-these more complex logical formalism, and show how these can be backward 
-engineered into OWL based modelling by means of pseudo-classes, with application
+We argue that this is primarily due to a lack of logical expressivity in the 
+ontology. In particular, beyond the straightforward intersective adjectives, there exist i) \emph{gradable adjectives} requiring fuzzy or
+non-monotonic semantics as well as ii) \emph{operator adjectives} requiring second-order logic for modelling. 
+We consider how we can extend the ontology-lexicon interface as realized by extant models such as lemon in the face of the issues mentioned above, in particular those arising in the context of modelling the ontological semantics of adjectives. We show how more complex logical formalisms required to capture the ontological semantics of adjectives can be backward 
+engineered into OWL-based modelling by means of pseudo-classes, with application
 to question answering.
 \end{abstract}
 
