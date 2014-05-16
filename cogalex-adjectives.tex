@@ -8,6 +8,10 @@
 \usepackage{xcolor}
 \usepackage{enumitem}
 \usepackage{color}
+\usepackage{xcolor,cancel} %for strikeout in math
+\newcommand\hcancel[2][black]{\setbox0=\hbox{$#2$}%
+\rlap{\raisebox{.45\ht0}{\textcolor{#1}{\rule{\wd0}{1pt}}}}#2} 
+
 \usepackage{textcomp} %for copyright and registered symbols
 
 \usepackage{amssymb}%for \done and \crossed under itemize
@@ -367,8 +371,8 @@ redder than another if it is closer to some ideal value of red
 (e.g., RGB {\tt 0xff0000}).
 
 
-While these concepts well handle the comparative usage of adjectives, \textbf{\textcolor{red}{the 
-predicative and superlative usage of adjectives is complicated by three factors}}
+While these concepts well handle the comparative usage of adjectives, the 
+predicative and superlative usage of adjectives is complicated by three factors
 that we will outline below. \textbf{We notice that gradable classes are not 
 crisply defined as with the case of many intersective adjectives, that is that 
 while we can clearly define all people in the world as `Belgian' or 
@@ -377,26 +381,26 @@ split the world's population into `tall' and `not tall'. \textcolor{blue}{This k
 be easy to say that someone with height 6'6'' (198cm) is `tall', it is not clear 
 whether someone of height 6' (182cm) is `tall', \textbf{\textcolor{blue}{also given that this height should be compared to average (different)
 height for a man, or a woman.}} \textbf{As such, the class boundary of a gradable adjective is 
-naturally fuzzy. [\textcolor{blue}{Here i would say it: ``As such, one recurrently used way to deal with this class of vague adjectives (and nouns) is via fuzzy logic'', which enables a probabilistic approach to concepts (Goguen 1969; Zadeh 1965, 1975; Dubois \& Prade 1988; in: \cite{Bennett06kr}).}]} \textbf{\textcolor{red}{Secondly, we note that these class boundaries are 
+naturally fuzzy. [\textcolor{blue}{Here i would say it: ``As such, one recurrently used way to deal with this class of vague adjectives (and nouns) is via fuzzy logic'', which enables a probabilistic approach to concepts (Goguen 1969; Zadeh 1965, 1975; Dubois \& Prade 1988; in: \cite{Bennett06kr}).}]} Secondly, we note that these class boundaries are 
 non-monotonic, that is that with knowledge of more instances of the relative 
-class we must revise our class boundaries.}} This is especially the case for the
+class we must revise our class boundaries. This is especially the case for the
 superlative as the discovery of a new tallest person in the world would remove 
 the existing tallest person in the world from the class of tallest person in the 
 world. This, non-monotonicity also affects the class boundaries of the gradable 
 class itself, for example in the 18th century the average height of a male was 
 5'5'' (165cm).\footnote{\url{https://en.wikipedia.org/wiki/Human_height}}
 and as such a male of 6' would have been considered clearly to be 
-tall. \textbf{\textcolor{red}{As such, we can conclude that each instance added to our ontology must 
+tall. As such, we can conclude that each instance added to our ontology must 
 revise the class boundaries of a gradable class, hence leading to the fact that 
 gradable adjectives are fundamentally non-monotonic. Finally, we must notice 
 that gradability can only be understood relative to the class that we wish to 
-grade}}, that is that while it is unclear as to whether 6' is tall for a male, 
+grade, that is that while it is unclear as to whether 6' is tall for a male, 
 given the current average height of a female of about 5'4'' (162cm) it is clear 
 that 6' is tall for a female.
 
-\textbf{\textcolor{red}{So we can conclude that gradable adjectives are \emph{fuzzy}, \emph{non-monotonic} 
+So we can conclude that gradable adjectives are \emph{fuzzy}, \emph{non-monotonic} 
 and \emph{context-sensitive}, all of which are incompatible with the description 
-logic used by OWL.}} 
+logic used by OWL.
 
 \subsubsection{\textcolor{blue}{Fuzzy logic and LemonOILS}}
 Currently there are only limited models for representing fuzzy 
@@ -511,7 +515,7 @@ and it is context-sensitive (as whether an individual counts a big or not depend
 \caption{\textbf{\textcolor{blue}{Excerpt of the SUMO graph structure for `Building', with number of direct-children for each entry and related documentation}}}\label{building_SUMO}
 \end{figure}
 
-\textbf{\textcolor{blue}{The compilation of defaultMeasurements in SUMO has been just conducted on observables, not predicates. This means that, given an observable such as Book, listed under \texttt{Artifact > Document}, only the defaults of a \textit{standard} book have been measured, not those for \texttt{<predicate>$+$}Book.}}
+\textbf{\textcolor{blue}{The compilation of defaultMeasurements in SUMO has been just conducted on observables. Given for instance an Artifact such as `Book', the compilation of its default measurements would look like this:}}
 
 \begin{verbatim}
 ;;Book
@@ -523,9 +527,13 @@ and it is context-sensitive (as whether an individual counts a big or not depend
 (defaultMaximumWidth Book (MeasureFn 5.5 Inch))
 \end{verbatim}
 
+
+\textcolor{blue}{The example for `Book' shows that the default measurements for the observable reflect a \textit{standard} kind of Book, i.\,e. the or one of the most commonly known kinds of the same Artifact. As for the case of `Book', SUMO implies it to be a physical Object with a certain length, height and width. The observable (hereby as $c$) is therefore treated not as a classical observable (unique in its kind), but rather as an instance of the same ($x$), to which specific (implied) default values are assigned (\textbf{$a$}): \[ [\textbf{a} \circ c](x)\]also representable as \[ \texttt{lsa}(x, \textbf{a}, c).\]}
+
+
 \textbf{\textcolor{blue}{SUMO's pros}}
 \begin{itemize}[label=$\bar$]
-\done bla bla
+\done \textbf{\textcolor{blue}{The compilation of default measurements limits the extent of first-order semantics that one could infer from SUMO. We can in fact state that  \[\texttt{Michael is a Man} \Longrightarrow \texttt{Man}(michael) \wedge \texttt{Mammal}(michael) \hcancel[black]{\wedge \texttt{Dog}}\] given the different defaults for respectively `Person' and `Dog'.}} 
 \done bla bla 
 \end{itemize}
 
@@ -534,9 +542,9 @@ and it is context-sensitive (as whether an individual counts a big or not depend
 
 \textbf{\textcolor{blue}{SUMO's cons}}
 \begin{itemize}
-\crossed \textbf{\textcolor{blue}{almost all children of respectively Artifacts, Objects and Devices in SUMO could be assigned default values (`Train', `AircraftCarrier', `Fish'), basically because selective (i.\,e. rather precise) count nouns. Nevertheless, default measurements for their parents could not be defined, given their extreme vagueness. While it is in fact still feasible to determine, among for instance all different kinds of `Book', a standard volume (with implied arbitrary properties), the choice is to vast in the case of `Artifact' or `Device'.}}
+\crossed \textbf{\textcolor{blue}{Almost all children of the enlisted Artifacts in SUMO could be assigned default values, but default values for the parents (e.\,g. `Artifact', `OrganicObject', `Object') could not be defined being too vague. Also, while some Artifacts have extensively defined children (e.\,g. `CrewDormCar', `GalleryCar', `MotorRailcar', `FreightCar', `BoxCar', `RefrigeratorCar', `FiveWellStackCar', `FlatCar', `SpineCar', `HydraCushionFreightCar' and more just for `Car'), some Artifacts are still unspecified (e.\,g. `Person', as Instance for `Human', does not contain any disambiguation in terms of i.\,a. gender or age).}}
 
-\crossed bla bla 
+\crossed \textcolor{blue}{Complex count nouns such as `TallBigMan' or `SmallRoundWoman' have not been contemplated among the defined valued Objects yet. The extension of these subsets (defined restrictive adjectives by \cite{Bennett06kr}) should nevertheless being a feasible task to accomplish, provided that they belong to the accepted collocational\footnote{One condition for the predicates of the observable / observable's instance to be analyzed is that they count as collocational forms once merged to it in a subset. In other words, while it can be feasible to set default values for a subset such as `BroadShoulder' (since the adjective `broad' standardly collocates with the noun `shoulder'), the same cannot be said for e.\.g. `BroadWoman', where the adj.+noun matching is novel or unconventional. A stand-alone case is also represented in this regard by idiomatic or metaphorical expressions, such as `high risk' or `to keep one's head up high'.} cluster of the observable and of its instance. This extension should therefore include all the cases in which the default value \textbf{$a$} is not implied, but explicited ($\texttt{lsa}(x, \textbf{a}, c)$, with \textbf{$a$} being `big' as for instance in the case of `BigMan').}
 \end{itemize}
 
 
