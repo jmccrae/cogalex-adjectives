@@ -8,10 +8,6 @@
 \usepackage{xcolor}
 \usepackage{enumitem}
 \usepackage{color}
-\usepackage{xcolor,cancel} %for strikeout in math
-\newcommand\hcancel[2][black]{\setbox0=\hbox{$#2$}%
-\rlap{\raisebox{.45\ht0}{\textcolor{#1}{\rule{\wd0}{1pt}}}}#2} 
-
 \usepackage{textcomp} %for copyright and registered symbols
 
 \usepackage{amssymb}%for \done and \crossed under itemize
@@ -26,7 +22,7 @@
 % in the camera-ready version and ask you to change it back.
 
 
-\title{Modelling of Adjectives in the Ontology-Lexicon Interface}
+\title{Modelling the Semantics of Adjectives in the Ontology-Lexicon Interface}
 
 \author{John P. M\textsuperscript{c}Crae \\
   Affiliation / Address line 1 \\
@@ -44,20 +40,14 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-    The ontology-lexicon interface has become an important and successful tool 
-for handling problems in natural language processing. The foundation of these models 
-is based on the separation of the ontological and lexical layers by means of the 
-principle of semantics by reference to an ontology in description logics. 
-However, as noted by other authors, the use of first order logic (hence also description logics),
+The treatment of the semantics of adjectives is notoriously challenging, particularly in the context of the so called ontology-lexicon interface which attempts to capture the semantics of words by reference to an ontology in description logics or some other, typically first-order, logical formalism.
+The use of first order logic (hence also description logics),
 while effective for nouns and verbs, breaks down in the case of adjectives. 
-We propose that this is primarily due to a lack of logical expressivity in the 
-ontology. In particular, beyond the straightforward intersective adjectives
-many adjectives are i) gradable requiring fuzzy or 
-non-monotonic semantics or ii) operator adjectives require second-order logic. 
-We consider how we can handle the ontology-lexicon interface in the face of 
-these more complex logical formalism, and show how these can be backward 
-engineered into OWL based modelling by means of pseudo-classes, with application
-to question answering.
+We argue that this is primarily due to a lack of logical expressivity in the 
+underlying ontology languages. In particular, beyond the straightforward intersective adjectives, there exist i) \emph{gradable adjectives}, requiring fuzzy or
+non-monotonic semantics as well as ii) \emph{operator adjectives}, requiring second-order logic for modelling. 
+We consider how we can extend the ontology-lexicon interface as realized by extant models such as lemon in the face of the issues mentioned above, in particular those arising in the context of modelling the ontological semantics of adjectives. We show how more complex logical formalisms required to capture the ontological semantics of adjectives can be backward 
+engineered into OWL-based modelling by means of pseudo-classes. We discuss the implications of this modelling in the context of an application to ontology-based question answering.
 \end{abstract}
 
 
@@ -81,17 +71,15 @@ how a word or phrase acts syntactically and morphologically, and a semantic laye
 describing how the meaning of a word is expressed in a formal logical model, 
 such as OWL (Web Ontology Language)~\cite{mcguinness2004owl}. It has been 
 shown that this principle known as \emph{semantics by reference}~
-\cite{buitelaar2010ontology} is an effective model that can be used in tasks 
-such as question answering \cite{unger2011pythia} and natural language 
-generation \cite{cimiano2013exploiting}. In particular, its suitability to the 
-task is driven by the fact that the application of this model to answering questions 
-based on the DBpedia \cite{auer2007dbpedia} knowledge base requires mostly 
-understanding the nouns and the verbs of the sentence. However, as has been 
+\cite{buitelaar2010ontology} is an effective model that can support the task of developing
+question answering systems \cite{unger2011pythia} and natural language 
+generation \cite{cimiano2013exploiting} over backends based on Semantic Web data models.
+The Pythia system, which builds on the lemon formalism to declaratively capture the lexicon-ontology interface, for example, has been instantiated to the case of answering questions from DBpedia \cite{unger2011pythia}
+However, as has been 
 shown by the Question Answering over Linked Data \cite[QALD]{lopez2013evaluating}
-tasks, there are many questions that can be asked over this database that require 
-a deeper semantic understanding of the representation of language. For example, 
-questions such as~\ref{ex:australia} require understanding of the semantics of `high' in a manner that goes beyond 
-the model of OWL based on classes, properties and individuals. The answer given 
+benchmarking campaigns, there are many questions that can be asked over this database that require 
+a deeper representation of the semantics of words, adjectives in particular. For example, 
+questions such as~\ref{ex:australia} require understanding of the semantics of `high' in a manner that goes beyond the expressivity of OWL. The answer given 
 in the QALD dataset for this question is shown in~\ref{ex:australia_query}. 
 In particular, the interpretation of this question involves the understanding of 
 how the word `high' relates to the property {\tt dbo:elevation}, including ordering 
@@ -113,8 +101,7 @@ SELECT DISTINCT ?uri WHERE {
 
 It has been claimed that first-order logic and thus by extension description 
 logics, such as OWL, ``fail decidedly when it comes to adjectives''
-\cite{bankston2003modeling} and similarly we reach the conclusion that 
-this is due to the issues of semantically modelling adjectives. In fact, we largely agree that the semantics 
+\cite{bankston2003modeling}. In fact, we largely agree that the semantics 
 of many adjectives are difficult or impossible to describe in first-order logic. 
 However, from the point of view of the ontology-lexicon interface, the logical 
 expressivity of the ontology is not a limiting factor. In fact, due to the 
@@ -135,7 +122,7 @@ of question answering over the DBpedia knowledge base.
 \section{Classification of adjectives}
 
 There are a number of classifications of adjectives \cite{}. First we will start 
-with the most fundamental distinction of \emph{attributive} versus 
+with the most fundamental distinction between \emph{attributive} versus 
 \emph{predicative} usage, that is the use of adjectives in noun phrases 
 (``$X$ is a $A~N$'') versus as objects of the copula (``$X$ is $A$''). 
 It should be noted that there are many adjectives for which only predicative or 
@@ -157,47 +144,45 @@ attributive usage is allowed, as shown in~\ref{ex:clinton} and~\ref{ex:baby}.
 One of the principle classifications of the semantics of adjectives (for example \cite{partee2003there,bouillon1999description,morzycki2013modification}) is based on the meaning of adjective noun compounds relative to the meaning of the words by themselves. This classification is as follows (where $\Rightarrow$ denotes entailment).
 
 \begin{description}
-\item[Intersective] ($X\mathrm{~is~a~}A~N \Rightarrow X\mathrm{~is~}A \cap  X\mathrm{~is~a~}N$) 
+\item[Intersective] ($X\mathrm{~is~a~}A~N \Rightarrow X\mathrm{~is~}A \wedge  X\mathrm{~is~a~}N$) 
 Such adjectives work as if they were another noun and indicate that the compound 
 noun phrase is a member of both the class of the noun and the class of the 
 adjective. For example, in the phrase ``Belgian violinist'' it refers to a 
 person in the class intersection $Belgian \sqcap Violinist(X)$, and hence we 
 can infer that a ``Belgian violinist'' is a subclass of a ``Belgian''. 
-Thus if we also knew that the ``violinist'' was a ``surgeon'' we could 
-conclude they were a ``Belgian surgeon''.
+
 \item[Subsective] ($X\mathrm{~is~a~}A~N \Rightarrow X\mathrm{~is~a~}N$, but $X\mathrm{~is~a~}A~N \not\Rightarrow X\mathrm{~is~}A$) 
-Such adjectives do not alter the meaning of the noun phrase itself, but only 
-make sense with knowledge of the noun they refer to. For example, a ``skilful 
-violinist'' is certainly in the class $Violinist(X)$, but if we knew that that 
-person is a surgeon as well, we cannot conclude that the person is a skilful surgeon. 
+Such adjectives acquire their specific meaning in combination with the noun the modify. For example, a ``skilful 
+violinist'' is certainly in the class $Violinist(X)$ but the described person is `skilful as a violinist', but not skilful in general, e.g. as a surgeon.
+
 \item[Privative] ($X\mathrm{~is~a~}A~N \not\Rightarrow X\mathrm{~is~a~}N$) 
 These adjectives modify the meaning of a noun phrase to create a noun phrase 
 that is potentially incompatible with the original meaning. For example, a 
 ``fake gun'' is not a member of the class of guns.
 \end{description}
 
-This classification is useful, however one further case is important to 
-distinguish and that is of \emph{relational} adjectives\footnote{Which mean in the sense of 
-    expressing a relatioship, as opposed to in the sense of McNally and Boleda~\shortcite{mcnally2004relational}}
-    which have a meaning 
-that expresses a relationship between two individuals or events, for example:
+%This classification is useful, however one further case is important to 
+%distinguish and that is of \emph{relational} adjectives\footnote{Which mean in the sense of 
+%    expressing a relatioship, as opposed to in the sense of McNally and Boleda~\shortcite{mcnally2004relational}}
+%    which have a meaning 
+%that expresses a relationship between two individuals or events, for example:
+%
+%\begin{quote}
+%
+%He is related to her.
+%\end{quote}
 
-\begin{quote}
-
-He is related to her.
-\end{quote}
-
-Another important distinction to make with adjectives is whether they are 
-\emph{gradable}, in that whether it makes semantic senses to make a comparative 
-or superlative statement with these adjectives. For example, adjectives such as 
-`big' or `tall' can express relationships such as `$X$ is bigger than $Y$', 
-however it is not possible to say one individual is `more former'. Most gradable 
+Another important distinction is whether adjectives are 
+\emph{gradable}, i.e. whether a comparative 
+or superlative statement with these adjectives makes sense. For example, adjectives such as 
+`big' or `tall' can express relationships such as `$X$ is bigger than $Y$'. 
+However it is not possible to say one individual is `more former'. Most gradable 
 adjectives are subsective, for example `a big mouse' is not `a big animal'\cite{morzycki2013nonscales}. An 
-important group of gradable adjectives are, however, intersective, and we call 
+important group of gradable adjectives are intersective; we call 
 such adjectives `absolute' (following \cite{rusiecki1985adjectives}) as they 
-refer to an ideal point on some scale, for example a `straight line' is `straight', in 
-that it has no bends or kinks, however we can still talk about a line being 
-`straighter', in the sense of closer to the ideal of straightness than some other object
+refer to an ideal point on some scale For example, a `straight line' is `straight' in 
+that it has no bends or kinks. However, we can still talk about a line being 
+`straighter' in the sense of closer to the ideal of straightness than some other object
 
 Finally, we consider \emph{operator} or \emph{property-modifying} adjectives, 
 which can be considered to be the same as privative adjectives, but in this 
@@ -235,17 +220,17 @@ that expresses a relationship between two individuals or events, for example:
 \item This is useful for something. 
 \end{enumerate}
 
-Another important distinction to make with adjectives, which is orthogonal to the above classification, 
-is whether they are \emph{gradable}, in that whether it makes semantic senses to make a comparative 
-or superlative statement with these adjectives. For example, adjectives such as 
-`big' or `tall' can express relationships such as `$X$ is bigger than $Y$', 
-however it is not possible to say one individual is `more former'. It should thus be noted that most gradable adjectives are mostly intersective,
-for example a `big mouse' is not a `big animal' \cite{morzycki2013modification}.
-An important group of gradable adjectives are, however, intersective, and we call 
-such adjectives \emph{absolute} (following \cite{rusiecki1985adjectives}) as they 
-refer to an ideal point on some scale, such as `straight', and frequently refer
-to an endpoint of a scale, which Kennedy~\shortcite{kennedy1999scalar} calls
-a \emph{trivial standard}.
+%Another important distinction to make with adjectives, which is orthogonal to the above classification, 
+%is whether they are \emph{gradable}, in that whether it makes semantic senses to make a comparative 
+%or superlative statement with these adjectives. For example, adjectives such as 
+%`big' or `tall' can express relationships such as `$X$ is bigger than $Y$', 
+%however it is not possible to say one individual is `more former'. It should thus be noted that most gradable adjectives are mostly intersective,
+%for example a `big mouse' is not a `big animal' \cite{morzycki2013modification}.
+%An important group of gradable adjectives are, however, intersective, and we call 
+%such adjectives \emph{absolute} (following \cite{rusiecki1985adjectives}) as they 
+%refer to an ideal point on some scale, such as `straight', and frequently refer
+%to an endpoint of a scale, which Kennedy~\shortcite{kennedy1999scalar} calls
+%a \emph{trivial standard}.
 
 \section{Representation of adjectives in the ontology-lexicon interface}
 
@@ -281,11 +266,8 @@ meaning \emph{ursus maritimus}.
 \subsection{Intersective adjectives}
 
 Intersective adjectives are the most straightforward class as in many cases they 
-can be explained as either being noun-like (denominal adjectives such as 
-`Belgian') or verb-like (deverbal adjectives such as `broken'). Intersective 
-adjectives have a single argument as with most adjectives and in this case it is 
-natural that they refer to classes, which may be event classes such as described 
-in \cite{mccrae2014design}. For practical modeling examples we will use the
+can be modelled essentially as a noun or verb (e.g. deverbal adjectives such as `broken'). Intersective 
+adjectives take one argument and can thus be modelled as unary predicates in FOL or classes in OWL as described by McCrae et al. \cite{mccrae2014design}. For practical modeling examples we will use the
 \emph{lemon} model as it is the most prominent implementation of the 
 ontology-lexicon interface.
 
