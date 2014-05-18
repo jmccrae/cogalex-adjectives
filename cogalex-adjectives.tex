@@ -531,7 +531,7 @@ The compilation of defaultMeasurements in SUMO has been just conducted on observ
 The example for `Book' shows that the default measurements for the observable reflect a \textit{standard} kind of Book,
 i.e., the or one of the most commonly known kinds of the same Artifact. As for the case of `Book', SUMO implies it to be a physical Object with a certain length, height and width. 
 A weakness here is that the there is no systematic connection between the {\tt defaultMinimumHeight} and the
-property {\tt height}\textcolor{green}{Is this correct?}. With lemonOILS we can add this information as follows:
+property {\tt Height}, since . With lemonOILS we can add this information as follows:
 
 \begin{verbatim}
 sumo:Book oils:default [
@@ -541,9 +541,9 @@ sumo:Book oils:default [
 \end{verbatim}
 
 Then if we understand a lexical entry `high' as referring to a scalar covariant pseudo-class for {\tt sumo:height},
-it is possible to understand that `high' objects exceed the default minimum.
+it is possible to understand that \textbf{\textcolor{blue}{an}}`high' objects exceeds the default minimum \textbf{\textcolor{blue}{set for the same and owns at the same time a value for `high' which does not go beyond the established default maximum. The decision to set an arbitrary threshold for objective measures to every specific kind of Artifact enlisted in SUMO presents advantages and disadvantages or bottlenecks. One obvious advantage is that SUMO poses itself, with this further extension on default physical measurements, as the first ontology of its kind to present defaults in correlation with its Artifacts. These approximated values, which ideally should represent the most commonly known form of each of the Artifact, can become handy in need of measurements or further information on the Artifacts. The approximated value also enable to draw a comparison between the children of the same parent. In this way, it might be possible, given for instance the defaults for `Bed', to approximate the defaults for `KingBed', `SingleBed', `SofaBed' `Futon' or `DoubleBed', simply by adding or subtracting height, width, length and weight values starting with `Bed' as threshold. On the other side though, the SUMO default measurements serve no less and no more the purpose they were originally conceived to serve, namely to be a reliable (since double-checked) approximation of physical measures.}}
 
-The primary weakness of this approach is captured by the following example:
+\textbf{\textcolor{blue}{A further}} weakness of this approach is captured by the following example:
 
 \begin{enumerate}[resume]
     \item Avery Johnson is a short basketball player. \label{ex:avery}
@@ -558,8 +558,8 @@ The primary weakness of this approach is captured by the following example:
 \end{enumerate}
 
 Here, we see the difficulty in interpreting the sentence as Avery Johnson is in fact of average height (5'10'') but
-for the class of basketball players he is unusually short. As such we must introduce default values for
-every possible subclass of person. This potentially leads to an explosion in the amount of information we
+for the class of basketball players he is unusually short. \textbf{\textcolor{blue}{While SUMO has some very specific listings of subsets for the same Artifact (e.\,g. see the subset for `Car')\footnote{`CrewDormCar', `GalleryCar', `MotorRailcar', `FreightCar', `BoxCar', `RefrigeratorCar', `FiveWellStackCar', `FlatCar', `SpineCar', `HydraCushionFreightCar' and more as subsets for for `Car'.} for which it is then relatively simple to define maximum and minimum defaults for each for them and therefore consequently readjust the defaults for `Car' so to be the most prototypical possible, in some other places of its conceptual taxonomy, the ontology is still behind and needs further extension. For instance, and in line with this example of the basketball player, SUMO does not provide a well-structured subset net for Person, which is just enlisted as an ``instance for Human''. Further classification of `Person' (e.\,g. gender, age, profession) is still missing.}}\textbf{As such we must introduce default values for
+every possible subclass of person. \textcolor{blue}{A way to solve this bottleneck could be by introducing every possible subclass of person. Nevertheless, this can potentially lead}} to an explosion in the amount of information we
 need to encode in the ontology, essentially forcing us to encode a class (or default values) for every
 combination of an adjective and a noun. 
 
