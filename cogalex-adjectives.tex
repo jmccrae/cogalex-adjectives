@@ -25,17 +25,17 @@
 
 \title{Modelling the Semantics of Adjectives in the Ontology-Lexicon Interface}
 
-\author{John P. M\textsuperscript{c}Crae \\
+\author{\textcolor{blue}{John P. M\textsuperscript{c}Crae (blind rev.)}\\
   Affiliation / Address line 1 \\
   Affiliation / Address line 2 \\
   Affiliation / Address line 3 \\
   {\tt email@domain} \\\And
-  Francesca Quattri \\
+  \textcolor{blue}{Francesca Quattri)} \\
   Affiliation / Address line 1 \\
   Affiliation / Address line 2 \\
   Affiliation / Address line 3 \\
   {\tt email@domain} \\\And
-  Christina Unger, Philipp Cimiano \\
+  \textcolor{blue}{Christina Unger, Philipp Cimiano} \\
   Affiliation / Address line 1 \\
   Affiliation / Address line 2 \\
   Affiliation / Address line 3 \\
@@ -70,7 +70,7 @@ engineered into OWL-based modelling by means of pseudo-classes. We discuss the i
 }
 
 Ontology-lexicon models, such as \emph{lemon} (Lexicon Model for Ontologies)~
-\cite{mccrae2012interchanging}, have become an important model for handling a 
+\cite{mccrae2012inter}, have become an important model for handling a 
 number of tasks in natural language processing. In particular, such 
 ontology-lexica are built around the separation of a lexical layer describing 
 how a word or phrase acts syntactically and morphologically, and a semantic layer 
@@ -120,7 +120,7 @@ consider to what extent this can be handled in the context of the
 ontology-lexicon, and introduce pseudo-classes, that is OWL classes with 
 annotations, which we use to express the semantics of adjectives in a manner
 that would allow reasoning with fuzzy, high-order models. To this extent, we base
-our models on the previously introduced design patterns~\cite{mccrae2014design}
+our models on the previously introduced design patterns~\textbf{\textcolor{blue}{\cite{mccrae2014design} John, go back to the bib file and add pages and chapter for this reference, cause otherwise you have open question marks in the References}}
 for modeling ontology-lexica. 
 Finally, we show how these semantics can be helpful in practical applications 
 of question answering over the DBpedia knowledge base.
@@ -139,7 +139,7 @@ attributive usage is allowed, as shown in~\ref{ex:clinton} and~\ref{ex:baby}.
 \item \ \,Mary is a technical engineer. \label{ex:engineer}
 \item $^*$Mary is technical.
 \end{enumerate}
-\label{ex:clinton}
+\label{ex:technical}
 \item \begin{enumerate}	
 \item \ \,The baby is awake.
 \item $^*$The awake baby.
@@ -373,7 +373,8 @@ In fact, while it may
 be easy to say that someone with height 6'6'' (198cm) is `tall', it is not clear 
 whether someone of height 6' (182cm) is `tall', also given that this height should be compared to average (different)
 height for a man, or a woman. 
-As such, one frequently used way to deal with this class of vague adjectives (and nouns) is via fuzzy logic \cite{Goguen1969,Zadeh1965,Zadeh1975,dubois1988,Bennett06kr}.
+As such, one frequently used way to deal with this class of vague adjectives (and nouns) is via fuzzy logic \cite{Goguen1969fuzzy,Zadeh1975fuzzy,Zadeh1965fuzzy,DuboisPrade88en,Bennett06kr}.
+\textbf{\textcolor{blue}{John, you put here the following citations: Goguen 1969, Zadeh 1965, Zadeh 1975, Dubois 1988. Since they had not been added in the bib file, the compiler generated a ``?'', I have added them. Check whether these are the papers that you were referring to. For your indicated reference `dubois1988' i found DuboisPrade88en}}
 Secondly, we note that these class boundaries are 
 non-monotonic, that is that with knowledge of more instances of the relative 
 class we must revise our class boundaries. This is especially the case for the
@@ -593,7 +594,7 @@ need to encode in the ontology.
 
 \subsection{Operator adjectives}
 
-\textbf{\textcolor{blue}{To clarify why we introduce operator and relational adjectives at this point, we might want to tell that these kinds of adjectives are not gradable, but they are usually related to their `classificatory' or `taxonomic' meaning \cite{mcnally2004relational}, which makes them particularly suitable for being modeled in ontologies. Both operator and relational adjectives are characterized by a not-postnominal position (this is why i don't think `known' below is an ok example for relational adjective [we can in fact say `he is known' out of `he is a known actor']), meaning that they cannot be put after the noun.}}
+\textbf{\textcolor{blue}{To clarify why we introduce operator and relational adjectives at this point, we might want to tell that these kinds of adjectives are not gradable, but they are usually related to their `classificatory' or `taxonomic' meaning \cite{mcnally2004relational}, which should make them particularly suitable for being modeled in ontologies (although we present here some bottlenecks as well). Both operator and relational adjectives are characterized by a not-postnominal position (this is why i don't think `known' below is an ok example for relational adjective [we can in fact say `he is known' out of `he is a known actor']).}}
 
 \begin{enumerate}[resume]
 \item \textbf{\textcolor{blue}{Clinton is a male tall former president}} \label{ex:clinton}
@@ -603,7 +604,7 @@ need to encode in the ontology.
 \item \textbf{\textcolor{blue}{$\emptyset  \ Clinton \ is \ former.$}} \textbf{\textcolor{blue}{(Since this example was the same as (2a,b) above, I've changed 2(a)(b) into `Mary is a technical engineer $\Rightarrow$ *Mary is technical)}}
 \end{enumerate}
 
-Operator adjectives are those that combine to alter the meaning of the adjective itself. 
+\textbf{Operator adjectives are those that combine to alter the meaning of the adjective itself. \textcolor{blue}{Fran: not clear.}} 
 There are two primary issues with the understanding of the adjective in this manner. 
 \textbf{Firstly, the reference of the lexical item does not directly refer to an existing item 
 in the ontology, but rather is novel and productive. Secondly, the compositional nature 
@@ -621,7 +622,7 @@ which is the noun. The interpretation of a phrase like
 Obama is the president. Clinton is a former president.
 \end{quote}
 
-is understood as:
+is like:
 
 \[
 President(Obama) \sqcap [former(President)](Clinton)
@@ -630,10 +631,10 @@ President(Obama) \sqcap [former(President)](Clinton)
 If we understand $President$ as Artifact or Human that has the role of leading a country
 (and therefore being true for $Obama$ and $Clinton$), then $former$ creates a new class in the ontology (i.\,e.`FormerPresident') which selects
 people who were presidents. \textbf{Thus it
-can be said that $[former(President)]$ creates a new class in the ontology.\textcolor{blue}{Just said.}}\footnote{An alternative
-    interpretation would be that former modifies the role of Clinton, however this raises the
+can be said that $[former(President)]$ creates a new class in the ontology. \textcolor{blue}{Just said.}}\footnote{An alternative
+    interpretation would be that `former' modifies the role of Clinton, however this raises the
     question of why the role property of presidents would be selected, and as such
-is also unsatisfactory}.
+is also unsatisfactory.\textbf{\textcolor{blue}{In a way, we have already answered this statement by means of the grammatical definition that we have given for relational and operator adjectives, namely that they cannot take a postnominal position (unlike gradable adjectives). It follows that we can avoid discussing the case that `former' modifies the role of Clinton, given that the statement `Clinton is former' is \textit{de facto} ungrammatical.}}}
 As there is at the moment no agreed representation for such an operator in an
 ontology, it underlines the fact that more sophisticated ontology representations than first-order logic are required to understood natural
 language in general.
@@ -855,7 +856,18 @@ itself. In this way, the introduction of two senses for `vieux' is avoided,
 however it remains unclear if such reasoning introduces more complexity than
 the the extra senses.\textcolor{blue}{More than Buillon's study (we could then also cite the German study of \cite{beck2000relational} or the Spanish study of \cite{mcnally2004relational}) we could spend some more words on Pustejovsky. Here what I would suggest:}}
 
-\textbf{\textcolor{blue}{In his analysis of adjectives, Larson \shortcite{larson1998event} suggests that many adjectives denote properties of \textit{events}, rather than of simple heads or nouns (which does not fall very far from the statement, made above, that relational adjectives denote properties of kinds).}}
+\textbf{\textcolor{blue}{In his analysis of adjectives, Larson \shortcite{larson1998event} suggests that many adjectives denote properties of \textit{events}, rather than of simple heads or nouns (which does not fall very far from the statement, made above, that relational adjectives denote properties of kinds). Pustejovsky \shortcite{pustejovsky1992event,pustejovsky1991generative} and \cite{lenci2000qualia} state that lexical and semantic decomposition can be achieved \textit{generatively}, assigning to each lexical item a specific \textit{qualia structure}. For instance, in an expression like:}}
+
+\begin{enumerate}[resume]
+\item The round, heavy, wooden, inlaid magnifying glass \label{ex:qualia}
+\begin{itemize}
+\item \textbf{\textcolor{blue}{`round' represents the \textit{Formal} role (giving indications of shape and dimensionality)}}
+\item \textbf{\textcolor{blue}{`heavy' and `wooden' is the \textit{Constitutive} role and indicates the relation between the object and its parts (e.\,g. by specifying weight, material, parts and components)}}
+\item \textbf{\textcolor{blue}{`inlaid' is the \textit{Agentive} role of the lexical item, denoting the factors that have been involved in the generation of the objects, such as creator, artifact, natural kind, and causal chain}}
+\item \textbf{\textcolor{blue}{`magnifying' describes the \textit{Telic} role of `glass', since it shows its purpose and function}}
+\end{itemize}
+\end{enumerate}
+
 
 
 Peters and Peters~\shortcite{peters2000treatment} provide one of the few other practical reports on modelling adjectives with ontologies, in the context of the SIMPLE lexica. This work is primarily focussed on the categorization of by means of intensional and extensional properties, rather than due to their logical modelling. 
