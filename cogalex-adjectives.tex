@@ -10,6 +10,7 @@
 \usepackage{color}
 \usepackage{textcomp} %for copyright and registered symbols
 \usepackage{soul}
+\usepackage{semantic}
 
 \usepackage{amssymb}%for \done and \crossed under itemize
 \newcommand{\done}{\item[\checkmark]}
@@ -136,13 +137,15 @@ attributive usage is allowed, as shown in~\ref{ex:clinton} and~\ref{ex:baby}.
 
 \begin{enumerate}[resume]
 \item \begin{enumerate}	
+%\item \ \,Clinton is a former president.
+%\item $^\ast$Clinton is former.
 \item \ \,Mary is a technical engineer. \label{ex:engineer}
-\item $^*$Mary is technical.
+\item $^\ast$Mary is technical.
 \end{enumerate}
 \label{ex:technical}
 \item \begin{enumerate}	
 \item \ \,The baby is awake.
-\item $^*$The awake baby.
+\item $^\ast$The awake baby.
 \end{enumerate}
 \label{ex:baby}
 \end{enumerate}
@@ -269,7 +272,7 @@ Note we do not provide modeling for adjectives that are part of a noun phrase,
 such as `polar bear', which we would capture as a normal noun phrase with 
 meaning \emph{ursus maritimus}.
 
-\subsection{Intersective adjectives}
+\subsection{Intersective adjectives} \label{sec:intersectives}
 
 Intersective adjectives are the most straightforward class as in many cases they 
 can be modelled essentially as a noun or verb (e.g. deverbal adjectives such as `broken'). Intersective 
@@ -328,7 +331,7 @@ Similarly, most deverbal adjectives refer to an event, and as such
 a common modelling is of the form $\exists\,\text{\em theme}^{-1}.\text{\em EventClass}$, 
 for example `vandalized' may be $\exists\,\text{\em theme}^{-1}.\text{\em VandalismEvent}$.
 
-\subsection{Gradable adjectives and relevant observables}
+\subsection{Gradable adjectives and relevant observables} \label{sec:gradables}
 
 Gradable adjectives have a number of properties, which differentiate them
 from intersective adjectives:
@@ -592,7 +595,7 @@ need to encode in the ontology.
 %
 %\textbf{Thresholds, defaults and multiple classes (meaning context-sensitivity but also predicate+observable, e.\,g. should the ontology have a different class for BigMan, BigWoman, BigBasketballPlayer..) (Francesca to help)}
 
-\subsection{Operator adjectives}
+\subsection{Operator adjectives} \label{sec:operators}
 
 \textbf{\textcolor{blue}{To clarify why we introduce operator and relational adjectives at this point, we might want to tell that these kinds of adjectives are not gradable, but they are usually related to their `classificatory' or `taxonomic' meaning \cite{mcnally2004relational}, which should make them particularly suitable for being modeled in ontologies (although we present here some bottlenecks as well). Both operator and relational adjectives are characterized by a not-postnominal position (this is why i don't think `known' below is an ok example for relational adjective [we can in fact say `he is known' out of `he is a known actor']).}}
 
@@ -740,103 +743,133 @@ known:Object lemon:marker lexicon:to .
 
 \section{Adjectives in question answering}
 
-Most common adjective kinds in QALD-4:
+Of the 150 training and test questions of the QALD-4 benchmark\footnote{\url{http://www.sc.cit-ec.uni-bielefeld.de/qald/}} 
+for question answering over linked data, 67 contain adjectives. 
+The most common kinds of adjectives among them are intersective and gradable adjectives.
 
-\textbf{Intersective adjectives}
+Some of the intersective adjectives do not have a semantic contribution, or at least none that is separable from the noun, 
+as exemplified in the noun phrases in \ref{ex:intersectives1} and \ref{ex:intersectives2} (where $|[\cdot|]$ stands for 
+`denotes' and the prefixes \texttt{dbo} and \texttt{res} abbreviate the DBpedia namespaces \texttt{http://dbpedia.org/ontology/} 
+and \texttt{http://dbpedia.org/resource/}, respectively).
+\begin{enumerate}[resume]
+\item \begin{enumerate}
+ \item $|[$official website$|]=\texttt{dbo:website}$
+ \item $|[$artistic movement$|]=\texttt{dbo:movement}$
+ \item $|[$national anthem$|]=\texttt{dbo:anthem}$
+ \end{enumerate}
+ \label{ex:intersectives1}
+\item \begin{enumerate}
+ \item $|[$official languages$|]=\texttt{dbo:officialLanguages}$
+ \item $|[$military conflicts$|]=\texttt{dbo:battle}$
+ \end{enumerate}
+ \label{ex:intersectives2}
+\end{enumerate}
+All other intersective adjectives denote restriction classes that are not explicitely named in DBpedia, 
+in correspondence with the modelling proposed in Section~\ref{sec:intersectives} above, for example:
+\begin{enumerate}[resume]
+\item \begin{enumerate}
+ \item $|[$Danish$|]=\exists\,\texttt{dbo:country}\,.\,\texttt{res:Denmark}$
+ \item $|[$female$|]=\exists\,\texttt{dbo:gender}\,.\,\texttt{res:Female}$
+ \item $|[$Methodist$|]=\exists\,\texttt{dbo:religion}\,.\,\texttt{res:Methodism}$
+ \end{enumerate}
+\end{enumerate}
 
-\begin{itemize}
-\item denoting a restriction class, e.g.
- \begin{itemize}
- \item Danish films ($\exists\,\texttt{dbo:country}.\texttt{res:Denmark}$)
- \item female given names ($\exists\,\texttt{dbo:gender}.\texttt{res:Female}$)
- \item Methodist politicians ($\exists\,\texttt{dbo:religion}.\texttt{res:Methodism}$)
- \end{itemize}
+All gradable adjectives that occur in the QALD-4 question set can be captured in terms of \emph{lemonOILS} 
+as \texttt{CovariantScalar} (e.g. `high') or \texttt{ContravariantScalar} (e.g. `young'), cf. Section~\ref{sec:gradables} above, 
+bound to a DBpedia datatype property (e.g. \texttt{elevation} or \texttt{birthDate}). 
+The positive form of those adjectives only occurs in `how' questions, denoting the property they are bound to, for example:
+\begin{enumerate}[resume] 
+\item \begin{enumerate}
+ \item $|[$deep$|]=\texttt{dbo:depth}$ in `How deep is Lake Placid?'
+ %\item how heavy (\texttt{dbo:mass})
+ \item $|[$tall$|]=\texttt{dbo:height}$ in `How tall is Michael Jordan?'
+ %\item how high (\texttt{dbo:elevation})
+ \end{enumerate}
+\end{enumerate}
+The comparative form denotes the property they are bound to together with an aggregation operation, usually a filter 
+invoking a comparator that depends on whether the adjective is covariant or contravariant.
+\begin{enumerate}[resume]
+\item \begin{enumerate}
+ \item $|[$Which mountains are higher than the Nanga Parbat?$|]=$
+       \begin{verbatim}
+       SELECT DISTINCT ?uri WHERE { 
+        res:Nanga_Parbat dbo:elevation ?x .
+        ?uri rdf:type dbo:Mountain .
+        ?uri dbo:elevation ?y . 
+        FILTER (?y > ?x) 
+       }
+       \end{verbatim} 
+ \item $|[$Was the Cuban Missile Crisis earlier than the Bay of Pigs Invasion?$|]=$ 
+       \begin{verbatim}
+       ASK WHERE {
+        res:Cuban_missile_crisis dbo:date ?x . 
+        res:Bay_of_Pigs_Invasion dbo:date ?y . 
+        FILTER (?x < ?y) 
+       }
+       \end{verbatim}
+\end{enumerate}
+\end{enumerate}
+Finally, the superlative form denotes the property they are bound to together with an aggregation operation, 
+usually an ordering with a cut-off of all results except the first one, as expemplified in~\ref{ex:superlative2}. 
+The only exception are two cases where the superlative has a semantic contribution that is not separable from the noun, 
+see~\ref{ex:superlative1} (where the prefix \texttt{dbp} abbreviates the DBpedia namespace \texttt{http://dbpedia.org/property/}).
+\begin{enumerate}[resume]
+\item $|[$What is the longest river?$|]=$
+       \begin{verbatim}
+       SELECT DISTINCT ?uri WHERE { 
+        ?uri rdf:type dbo:River . 
+        ?uri dbo:length ?l . 
+       } ORDER BY DESC(?l) OFFSET 0 LIMIT 1 
+       \end{verbatim}
+\label{ex:superlative2}
+\item \begin{enumerate}
+\item $|[$highest place$|]=\texttt{dbo:highestPlace}$
+\item $|[$lowest rank in the FIFA World Ranking$|]=\texttt{dbp:fifaMin}$
+\end{enumerate}
+\label{ex:superlative1}
+\end{enumerate}
 
-\item empty semantic contribution, e.g.
- \begin{itemize}
- \item official website (\texttt{dbo:website})
- \item artistic movement (\texttt{dbo:movement})
- \item national anthem (\texttt{dbo:anthem})
- \end{itemize}
+In addition, there is a range of operator adjectives that do not directly refer to an element in the ontology 
+(cf. Section~\ref{sec:operators} above). In the QALD-4 question set their meaning is captured in terms 
+of SPARQL aggregation operations, as shown in~\ref{ex:operator}. 
+\begin{enumerate}[resume]
+\item $|[$What is the most frequent death cause?$|]=$
+       \begin{verbatim}
+       SELECT DISTINCT ?uri WHERE {
+        ?x dbo:deathCause ?uri . 
+       } ORDER BY DESC( COUNT(DISTINCT ?uri) ) 
+         OFFSET 0 LIMIT 1
+       \end{verbatim}
+       \label{ex:operator1}
+\end{enumerate}
 
-\item non-separable semantic contribution (whole NP corresponds to class or property), e.g.
- \begin{itemize}
- \item American inventions (\texttt{yago:AmericanInventions})
- \item official languages (\texttt{dbo:officialLanguages})
- \item military conflicts (\texttt{dbo:battle})
- \end{itemize}
-\end{itemize}
+There is only one instance of a privative adjective, used in a context where it does not have a specific semantic contribution:
+\begin{enumerate}[resume]
+\item $|[$the former Dutch queen Juliana$|]=\texttt{res:Juliana}$
+\end{enumerate}
 
+Similarly, there is only one instance of a subsective adjective, which denotes a property:
+\begin{enumerate}[resume]
+\item $|[$professional$|]=\texttt{dbo:occupation}$ (as opposed to, e.g., hobby),\\
+       for example $|[$professional surfer$|]=\exists\,\texttt{dbo:occupation}\,.\,\texttt{res:Surfing}$
+\end{enumerate}
 
-\textbf{Subsective adjectives}
+Finally, there are a few adjectives whose meaning are not subsumed by the canonical modellings as proposed in this paper, 
+as they have a highly ontology-specific meaning, for example:
+\begin{enumerate}[resume]
+\item \begin{enumerate}
+\item $|[$first president of the United States$|]=\exists\,\texttt{dbo:office}\,.\,\text{`1st President of the United States'}$
+\item $|[$first season$|]=\exists\,\texttt{dbo:seasonNumber}\,.\,1$
+\end{enumerate}
+\end{enumerate}
 
-\begin{itemize}
-\item denoting a property
- \begin{itemize}
- \item professional (\texttt{dbo:occupation}, as opposed to hobby)\\
-       e.g. professional surfer = $\exists\,\texttt{dbo:occupation}.\texttt{res:Surfing}$
- \end{itemize}
-\end{itemize}
+% highest population density ?uri dbp:densityrank ?x . } ORDER BY ASC(?x) OFFSET 0 LIMIT 1
+% `second' in `the second highest' (\texttt{dbo:elevation} + \texttt{ORDER BY DESC($\cdot$) OFFSET 1 LIMIT 2})
 
-\textbf{Privative adjectives}
+% first album (\texttt{releaseDate} + \texttt{ORDER BY ASC($\cdot$) OFFSET 0 LIMIT 1})
+% past two years (\texttt{year} + \texttt{FILTER})
+% alive (\texttt{deathDate} + \texttt{FILTER !BOUND})
 
-\begin{itemize}
-\item not treated 
- \begin{itemize}
- \item former Dutch queen Juliana = \texttt{res:Juliana}
- \end{itemize}
-\end{itemize}
-
-
-\textbf{Gradable adjectives}
-
-\begin{itemize}
-\item positive form only occurs with \texttt{how}, denoting a property, e.g.
- \begin{itemize}
- \item how deep (\texttt{dbo:depth})
- \item how heavy (\texttt{dbo:mass})
- \item how tall (\texttt{dbo:height})
- \item how high (\texttt{dbo:elevation})
- \end{itemize}
-\item comparative denotes a property plus aggregation, e.g. 
- \begin{itemize}
- \item higher than (\texttt{dbo:elevation} + \texttt{FILTER} with comparision operator that depends on polarity) 
- \item earlier than (\texttt{dbo:date} or \texttt{year} + \texttt{FILTER} with comparision operator that depends on polarity)
- \end{itemize}
-\item superlative denotes a property plus aggregation, e.g. 
- \begin{itemize}
- \item the highest (\texttt{dbo:elevation} + \texttt{ORDER BY DESC($\cdot$) OFFSET 0 LIMIT 1}) \\
-       the second highest (\texttt{dbo:elevation} + \texttt{ORDER BY DESC($\cdot$) OFFSET 1 LIMIT 2})
-       the highest after (\texttt{dbo:elevation} + \texttt{FILTER} + \texttt{ORDER BY DESC($\cdot$) OFFSET 0 LIMIT 1})
- \item the longest (\texttt{dbo:length} + \texttt{ORDER BY DESC($\cdot$) OFFSET 0 LIMIT 1}) 
- \item the youngest (\texttt{dbo:birthDate} + \texttt{ORDER BY DESC($\cdot$) OFFSET 0 LIMIT 1})
- \item the most frequent (ordering \texttt{COUNT})
- \end{itemize}
-\item superlative denotes an aggregation operation (whereas the property is contributed by the noun)
- \begin{itemize}
- \item highest population density 
- \item lowest rank 
- \item longest span 
- \end{itemize}
-\item superlative has a non-separable contribution 
- \begin{itemize}
- \item the highest place (\texttt{dbo:highestPlace}) 
- \end{itemize}
-\end{itemize}
-
-
-\textbf{Others}
-
-\begin{itemize}
-\item temporal
- \begin{itemize}
- \item first album (\texttt{releaseDate} + \texttt{ORDER BY ASC($\cdot$) OFFSET 0 LIMIT 1})
- \item first president ($\exists\,\texttt{dbo:office}.\text{`1st President of the United States'}$)
- \item past two years (\texttt{year} + \texttt{FILTER})
- \end{itemize}
-\item first season ($\exists\,\texttt{dbo:seasonNumber}.1$)
-\item alive (\texttt{deathDate} + \texttt{FILTER !BOUND})
-\end{itemize}
 
 
 
