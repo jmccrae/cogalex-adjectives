@@ -31,7 +31,7 @@
   Affiliation / Address line 2 \\
   Affiliation / Address line 3 \\
   {\tt email@domain} \\\And
-  \textcolor{blue}{Francesca Quattri)} \\
+  \textcolor{blue}{Francesca Quattri} \\
   Affiliation / Address line 1 \\
   Affiliation / Address line 2 \\
   Affiliation / Address line 3 \\
@@ -338,10 +338,11 @@ from intersective adjectives:
 
 \begin{itemize}
 \item They occur in comparative constructions with either `-er' or `more' \cite{kennedy1999scalar}:3), c.f. `*less geological', `*more wooden'.
-\item Gradable adjectives have a context-dependent truth-conditional variability, meaning that their positive form is the sum of the relation between the degree of the concept possessed by the object (as measured by the predicate) and the context-dependent standard of comparison based on the same concept \cite{kennedy2007vagueness}. It follows that the properties denoted by adjectives like `expensive' or `small' or `big' vary in intensity according to the context (and time) of use. 
+\item \textbf{\textcolor{violet}{Gradable adjectives have a context-dependent truth-conditional variability, meaning that their positive form is the sum of the relation between the degree of the concept possessed by the object (as measured by the predicate) and the context-dependent standard of comparison based on the same concept \cite{kennedy2007vagueness}. It follows that the properties denoted by adjectives like `expensive' or `small' or `big' vary in intensity according to the context (and time) of use.} \textcolor{blue}{This part was considered not to be clear by Philipp, he comments: ``Examples would help here definitely, e.g. for what we mean with standard of comparison, intensity, sum of relation between the degree and context-depenedent standard etc. These notions are hard to grasp.''. We could rephrase it by saying: Gradable adjectives have a context-dependent truth-conditional variability. This means that the value of the adjective depends (and is gradable) according to the object it qualifies \cite{kennedy2007vagueness}. Adjectives such `big', `expensive' or `small' are given different values according to the objects they are associated with.}} 
+\item \textbf{\textcolor{violet}{The arguments of gradable adjectives are mapped into abstract representations of measurements or degrees~\cite{kennedy2007vagueness}.} \textcolor{blue}{This part was considered not clear by Philipp. Possible rephrase: It follows that gradable adjectives can be defined as `scalar' or `gradable', since their value can ideally be measured on a scale of set degrees, which changes with the object of the adjective (`big' owns a certain degree or value if combined with `building' and another degree or value if combined with `body').}}
 \item They are frequently \emph{fuzzy} (or \emph{vague})~\cite{kennedy2007vagueness}
 %\item \textbf{\textcolor{blue}{\textit{absolute} gradable adjectives, like `straight' or `bent' or `red' (to cite your part on colors below), are not vague}}
-\item The arguments of gradable adjectives are mapped into abstract representations of measurements or degrees~\cite{kennedy2007vagueness}.
+
 \item There may be a minimum or maximum of this scale, which can be determined
 by, for example, whether they can modified by `completely'.
 \end{itemize}
@@ -455,6 +456,11 @@ high:Sense lemon:reference [
   lemon:isA high:PredArg .
 \end{verbatim}
 
+\textbf{\textcolor{blue}{Philipp's comment}\textcolor{violet}{3.2.1. it becomes now clear that Markov Logic is one way of implementing the oils-based description.
+Still, it would be nice to provide some alternatives, grounded in the DBpedia data. Another way would be to construct a distribution of the top 5\% (oils:strong) elements according to size for different classes and show the distributions graphically. Fuzzy sets would essentially be similar as they are essentially approximations of distributions without normalization I would say.
+One problem I see with the modelling in 3.2.1 of high we do not model the actual reference class, i.e. the noun. That's fine, but it is worth mentioning that the semantics (at least the degree and contravariance/variance) is independent of the specific noun (e.g. whether we talk about mountains or mice), but the threshold for instance and defaultValue are surely going to be specific for the noun/class modified. This needs to be pointed out IMHO.}}
+
+
 As an example of a way in which it would be possible to interpret these 
 annotations, we consider Markov Logic~\cite{richardson2006markov}, which is an 
 extension of first-order logic in which each clause is given a cost. The process 
@@ -483,8 +489,6 @@ to be `big' or not), it is fuzzy (given by the strength of the probability of th
 and it is context-sensitive (as whether an individual counts a big or not depends on the class $C$).
 
 \subsubsection{The supervaluation theory and SUMO}
-
-\textbf{\textcolor{red}{Philipp: better integrate SUMO with the rest}}
 %%%%% John: these criticisms don't really hold for Markov Logic, I think I remove them
 %\textbf{\textcolor{blue}{Despite the successful application of fuzzy logics in the case of lemonOILS, we acknowledge at least two bottlenecks in the use of this kind of logic for modeling vague or gradable adjectives.}}
 %
@@ -634,10 +638,10 @@ President(Obama) \sqcap [former(President)](Clinton)
 If we understand $President$ as Artifact or Human that has the role of leading a country
 (and therefore being true for $Obama$ and $Clinton$), then $former$ creates a new class in the ontology (i.\,e.`FormerPresident') which selects
 people who were presidents. \textbf{Thus it
-can be said that $[former(President)]$ creates a new class in the ontology. \textcolor{blue}{Just said.}}\footnote{An alternative
+can be said that $[former(President)]$ creates a new class in the ontology. \textcolor{blue}{Just said.}} An alternative
     interpretation would be that `former' modifies the role of Clinton, however this raises the
     question of why the role property of presidents would be selected, and as such
-is also unsatisfactory.\textbf{\textcolor{blue}{In a way, we have already answered this statement by means of the grammatical definition that we have given for relational and operator adjectives, namely that they cannot take a postnominal position (unlike gradable adjectives). It follows that we can avoid discussing the case that `former' modifies the role of Clinton, given that the statement `Clinton is former' is \textit{de facto} ungrammatical.}}}
+is also unsatisfactory. {\textbf{\textcolor{blue}{In a way, we have already answered this statement by means of the grammatical definition that we have given for relational and operator adjectives, namely that they cannot take a postnominal position (unlike gradable adjectives). It follows that we can avoid discussing the case that `former' modifies the role of Clinton, given that the statement `Clinton is former' is \textit{de facto} ungrammatical. Not only this, but the adjective `former' (as other operator adjectives such as `alleged' or `counterfeit') is neither intersective, nor subsective, but privative \cite{partee2011privative}, meaning that it \textit{entails the negation of the noun property}. Therefore, to answer the question of why the role property of presidents would be selected, we can state that the operator adjective raised the role of the object, but dismissed it at the same time.}}
 As there is at the moment no agreed representation for such an operator in an
 ontology, it underlines the fact that more sophisticated ontology representations than first-order logic are required to understood natural
 language in general.
@@ -701,13 +705,18 @@ language in general.
 %ontology:Clinton ontology:heldRole ontology:President .
 %\end{verbatim}
 
+
+\textbf{\textcolor{blue}{Philipp's original comment (prior to my change):}\textcolor{violet}{On operational adjectives and the specific example "Clinton is a former president".
+I have problems with this example, I see the class of president as containing a set of individuals representing a role played by someone beginning and ending at some time point.
+So former would be a class that out of these role individuals selects all those with ending point before now. This seems quite doable in FOL to me ;-)}}
+
 \subsection{Relational adjectives}
 
 \textbf{Relational adjectives are among the simplest and modeled with another frame,
 which extends the attributive frame by allowing for a prepositional phrase
 adjunct.\textcolor{blue}{Fran: not very clear}} As such we can model `known' with the frame `$X$ is known to $Y$' and
 reference {\tt foaf:knows} as:
-\textbf{\textcolor{blue}{Another example apart from `known' (that you can use in postnominal position, and therefore does not really represent relational adjective) could be: ``Jemma is a single parent'' $\Rightarrow$ Jemma is a parent, but $\emptyset$ Jemma is single}}
+\textbf{\textcolor{blue}{Another example, apart from `known', (that you can use in postnominal position, and therefore does not really represent relational adjective) could be: ``Jemma is a single parent'' $\Rightarrow$ Jemma is a parent, but $\emptyset$ Jemma is single}}
 
 
 \begin{verbatim}
@@ -728,7 +737,7 @@ known:Sense lemon:reference foaf:knows ;
 known:Object lemon:marker lexicon:to .
 \end{verbatim}
 
-\textbf{\textcolor{blue}{Relational adjectives can also have another definition in literature \cite{morzycki2013nonscales}. They represent a particular class of adjectives that denotes properties of kinds, rather than of simple nouns. In the case for instance of:}}
+\textbf{\textcolor{blue}{It is important to specify that relational adjectives can also have another definition in literature \cite{morzycki2013nonscales}. They represent a particular class of adjectives that denotes properties of kinds, rather than of simple nouns. In the case for instance of:}}
 
 \begin{enumerate}[resume]
 \item \textbf{\textcolor{blue}{Rose is a gastrointestinal surgeon}} \label{ex:gastro}
@@ -754,13 +763,13 @@ and \texttt{http://dbpedia.org/resource/}, respectively).
 \begin{enumerate}[resume]
 \item \begin{enumerate}
  \item $|[$official website$|]=\texttt{dbo:website}$
- \item $|[$artistic movement$|]=\texttt{dbo:movement}$
+ \item $|[$artistic movement$|]=\texttt{dbo:movement}$ \textbf{\textcolor{blue}{subsective rather than intersective? It acquires its specific meaning in combination with the the noun it modifies, e.\,g. `an artistic movement' (meaning a group of artists) versus `an artistic mind' (a creative, art-oriented mind)}}
  \item $|[$national anthem$|]=\texttt{dbo:anthem}$
  \end{enumerate}
  \label{ex:intersectives1}
 \item \begin{enumerate}
  \item $|[$official languages$|]=\texttt{dbo:officialLanguages}$
- \item $|[$military conflicts$|]=\texttt{dbo:battle}$
+ \item $|[$military conflicts$|]=\texttt{dbo:battle}$ \textbf{\textcolor{blue}{relational rather than intersective? (in the second proposed definition for relational adjectives? it stands for everything that goes with `military' (e.g. social disruption, economic distruction, etc.), not just weapons}}
  \end{enumerate}
  \label{ex:intersectives2}
 \end{enumerate}
@@ -787,7 +796,7 @@ The positive form of those adjectives only occurs in `how' questions, denoting t
  \end{enumerate}
 \end{enumerate}
 The comparative form denotes the property they are bound to together with an aggregation operation, usually a filter 
-invoking a comparator that depends on whether the adjective is covariant or contravariant.
+invoking a term of comparison that depends on whether the adjective is covariant or contravariant.
 \begin{enumerate}[resume]
 \item \begin{enumerate}
  \item $|[$Which mountains are higher than the Nanga Parbat?$|]=$
@@ -810,7 +819,7 @@ invoking a comparator that depends on whether the adjective is covariant or cont
 \end{enumerate}
 \end{enumerate}
 Finally, the superlative form denotes the property they are bound to together with an aggregation operation, 
-usually an ordering with a cut-off of all results except the first one, as expemplified in~\ref{ex:superlative2}. 
+usually an ordering with a cut-off of all results except the first one, as exemplified in~\ref{ex:superlative2}. 
 The only exception are two cases where the superlative has a semantic contribution that is not separable from the noun, 
 see~\ref{ex:superlative1} (where the prefix \texttt{dbp} abbreviates the DBpedia namespace \texttt{http://dbpedia.org/property/}).
 \begin{enumerate}[resume]
@@ -843,6 +852,8 @@ of SPARQL aggregation operations, as shown in~\ref{ex:operator}.
        \label{ex:operator1}
 \end{enumerate}
 
+\textbf{\textcolor{blue}{`Frequent' here does not appear to be an operator (and thus privative) adjective, but rather a gradable one. `Former' below on the contrary is definitely operator.}}
+
 There is only one instance of a privative adjective, used in a context where it does not have a specific semantic contribution:
 \begin{enumerate}[resume]
 \item $|[$the former Dutch queen Juliana$|]=\texttt{res:Juliana}$
@@ -854,7 +865,7 @@ Similarly, there is only one instance of a subsective adjective, which denotes a
        for example $|[$professional surfer$|]=\exists\,\texttt{dbo:occupation}\,.\,\texttt{res:Surfing}$
 \end{enumerate}
 
-Finally, there are a few adjectives whose meaning are not subsumed by the canonical modellings as proposed in this paper, 
+Finally, there are a few adjectives whose meaning are not subsumed by the canonical modelings as proposed in this paper, 
 as they have a highly ontology-specific meaning, for example:
 \begin{enumerate}[resume]
 \item \begin{enumerate}
@@ -863,6 +874,9 @@ as they have a highly ontology-specific meaning, for example:
 \end{enumerate}
 \end{enumerate}
 
+\textbf{\textcolor{blue}{We can argue that there are at least two interpretations for these adjectives: (a) either they are absolute gradable (on the same line of other adjective, such as `straight' or `sole'), or (b) they are a kind of privative and again operator adjectives. In fact, contrarily to their definition, they do not entail the negation of the noun property (as in the case of former president), in an explicit, but in an implicit way (`first' necessarily denies `second', and it is not gradable).}}
+
+\textbf{\textcolor{blue}{We miss some examples for relational adjectives. An example (as taken from DBpedia) could be: ``Give me all cars that are produced in Germany'' (`all' relates to `produced in Germany'). This the only example I found in the list of questions proposed in one of the first drafts of this paper.}}
 % highest population density ?uri dbp:densityrank ?x . } ORDER BY ASC(?x) OFFSET 0 LIMIT 1
 % `second' in `the second highest' (\texttt{dbo:elevation} + \texttt{ORDER BY DESC($\cdot$) OFFSET 1 LIMIT 2})
 
@@ -912,14 +926,14 @@ ontology-lexicon model, \emph{lemon}. In particular, we found that adjectives
 frequently go beyond the first-order logic model used by OWL, but instead 
 require models that are non-monotonic, fuzzy and second-order. As such, we 
 conclude that more sophisticated semantic models are required to represent the semantics
-of such words, however the separation of syntax and semantics remains a robust
+of such words. However the separation of syntax and semantics remains a robust
 model, which can easily be adapted to the task of representing adjectives. As 
-a final note we consider the claims that not all languages even have adjectives
+a final note, we consider the claims that not all languages have adjectives
 \footnote{http://linguistlist.org/issues/4/4-442.html} and as such we must wonder to what extent this analysis is applicable
-beyond English. We contend, that the underlying semantics of the words we discuss here
-is representable in all nearly languages and based on our analysis of realistic
-questions as applied in QALD, we believe that this model should be applicable
-to a range of domains and languages with little issue, however further 
+beyond English. We contend that the underlying semantics of the words we discuss here
+is representable in all nearly languages. Based on our analysis of realistic
+questions as applied in QALD, we furthermore believe that this model should be applicable
+to a range of domains and languages with little issue, even if further 
 validation is naturally necessary.
 
 \section*{Acknowledgements}
