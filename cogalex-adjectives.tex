@@ -51,9 +51,9 @@ The treatment of the semantics of adjectives is notoriously challenging, particu
 The use of first order logic (hence also description logics),
 while effective for nouns and verbs, breaks down in the case of adjectives. 
 We argue that this is primarily due to a lack of logical expressivity in the 
-underlying ontology languages. In particular, beyond the straightforward intersective adjectives, there exist i) \emph{gradable adjectives}, requiring fuzzy or
-non-monotonic semantics as well as ii) \emph{operator adjectives}, requiring second-order logic for modelling. 
-We consider how we can extend the ontology-lexicon interface as realized by extant models such as lemon in the face of the issues mentioned above, in particular those arising in the context of modelling the ontological semantics of adjectives. We show how more complex logical formalisms required to capture the ontological semantics of adjectives can be backward 
+underlying ontology languages. In particular, beyond the straightforward \emph{intersective adjectives}, there exist \emph{gradable adjectives}, requiring fuzzy or
+non-monotonic semantics, as well as \emph{operator adjectives}, requiring second-order logic for modelling. 
+We consider how we can extend the ontology-lexicon interface as realized by extant models such as \emph{lemon} in the face of the issues mentioned above, in particular those arising in the context of modelling the ontological semantics of adjectives. We show how more complex logical formalisms required to capture the ontological semantics of adjectives can be backward 
 engineered into OWL-based modelling by means of pseudo-classes. We discuss the implications of this modelling in the context of an application to ontology-based question answering.
 \end{abstract}
 
@@ -81,7 +81,7 @@ shown that this principle known as \emph{semantics by reference}~
 \cite{buitelaar2010ontology} is an effective model that can support the task of developing
 question answering systems \cite{unger2011pythia} and natural language 
 generation \cite{cimiano2013exploiting} over backends based on Semantic Web data models.
-The Pythia system, which builds on the lemon formalism to declaratively capture the lexicon-ontology interface, for example, has been instantiated to the case of answering questions from DBpedia \cite{unger2011pythia}
+The Pythia system, which builds on the \emph{lemon} formalism to declaratively capture the lexicon-ontology interface, for example, has been instantiated to the case of answering questions from DBpedia \cite{unger2011pythia}
 However, as has been 
 shown by the Question Answering over Linked Data \cite[QALD]{lopez2013evaluating}
 benchmarking campaigns, there are many questions that can be asked over this database that require 
@@ -186,10 +186,10 @@ Another important distinction is whether adjectives are
 or superlative statement with these adjectives makes sense. For example, adjectives such as 
 `big' or `tall' can express relationships such as `$X$ is bigger than $Y$'. 
 However it is not possible to say one individual is `more former'. Most gradable 
-adjectives are subsective, for example `a big mouse' is not `a big animal'\cite{morzycki2013nonscales}. An 
+adjectives are subsective, for example `a big mouse' is not `a big animal' \cite{morzycki2013nonscales}. An 
 important group of gradable adjectives are intersective; we call 
 such adjectives `absolute' (following \cite{rusiecki1985adjectives}) as they 
-refer to an ideal point on some scale For example, a `straight line' is `straight' in 
+refer to an ideal point on some scale. For example, a `straight line' is `straight' in 
 that it has no bends or kinks. However, we can still talk about a line being 
 `straighter' in the sense of closer to the ideal of straightness than some other object
 
@@ -246,7 +246,7 @@ that expresses a relationship between two individuals or events, for example:
 In general it is assumed that adjectives form frames with exactly one argument 
 except for extra arguments given by adjuncts, typically prepositional phrases. 
 Most adjectives are thus associated with a predicative frame, which much
-like the standard noun predicate frame\footnote{$X\text{ is a }N$} is stereotyped in English as:
+like the standard noun predicate frame ($X\text{ is a }N$) is stereotyped in English as:
 
 $$X\mathrm{~is~}A$$
 
@@ -316,11 +316,11 @@ belgian:sense lemon:reference [ a owl:Restriction ;
 
 Note, that here we use the external vocabulary LexInfo \cite{cimiano2011lexinfo} 
 to define the meaning of the arguments of the frame as the \emph{attributive 
-argument}, corresponding to the frame stereotype ``A $[attr]$ X'' and the 
-\emph{copulative argument} for the frame stereotype ``X is an A''. Furthermore,
+argument}, corresponding to the frame stereotype `$X\text{ is }A~N?$' and the 
+\emph{copulative argument} for the frame stereotype `$X\mathrm{~is~}A$'. Furthermore,
 the class of Belgians is not named in our reference ontology DBpedia, so we 
 introduce an anonymous class with the axiomatization, 
-$\exists\,\text{nationality}.\text{Belgium}$. It is in fact common that the 
+$\exists\,\text{\em nationality}\,.\,\text{\em Belgium}$. It is in fact common that the 
 referent of an adjective is not named in an ontology and as such we tend to 
 model denomial adjectives as classes of the form $\exists\,\text{\em prop}.\text{\em Value}$, 
 where $\text{\em Value}$ is the reference of the noun from which the adjective is
@@ -328,7 +328,7 @@ derived. This modelling is so common that it has already been encoded as two
 patterns, called {\tt IntersectiveObjectPropertyAdjective} and {\tt
 IntersectiveDatatypePropertyAdjective}, see McCrae and Unger \shortcite{mccrae2014design}.
 Similarly, most deverbal adjectives refer to an event, and as such
-a common modelling is of the form $\exists\,\text{\em theme}^{-1}.\text{\em EventClass}$, 
+a common modelling is of the form $\exists\,\text{\em theme}^{-1}.\,\text{\em EventClass}$, 
 for example `vandalized' may be $\exists\,\text{\em theme}^{-1}.\text{\em VandalismEvent}$.
 
 \subsection{Gradable adjectives and relevant observables} \label{sec:gradables}
@@ -337,18 +337,18 @@ Gradable adjectives have a number of properties, which differentiate them
 from intersective adjectives:
 
 \begin{itemize}
-\item They occur in comparative constructions with either `-er' or `more' \cite{kennedy1999scalar}:3), c.f. `*less geological', `*more wooden'.
+\item They occur in comparative constructions, in English with either `-er' or `more' \cite{kennedy1999scalar}:3), e.g. `smaller' and `more frequent', as opposed to intersectives such as `*less geological' and `*more wooden'.
 \item \textbf{\textcolor{violet}{Gradable adjectives have a context-dependent truth-conditional variability, meaning that their positive form is the sum of the relation between the degree of the concept possessed by the object (as measured by the predicate) and the context-dependent standard of comparison based on the same concept \cite{kennedy2007vagueness}. It follows that the properties denoted by adjectives like `expensive' or `small' or `big' vary in intensity according to the context (and time) of use.} \textcolor{blue}{This part was considered not to be clear by Philipp, he comments: ``Examples would help here definitely, e.g. for what we mean with standard of comparison, intensity, sum of relation between the degree and context-depenedent standard etc. These notions are hard to grasp.''. We could rephrase it by saying: Gradable adjectives have a context-dependent truth-conditional variability. This means that the value of the adjective depends (and is gradable) according to the object it qualifies \cite{kennedy2007vagueness}. Adjectives such `big', `expensive' or `small' are given different values according to the objects they are associated with.}} 
 \item \textbf{\textcolor{violet}{The arguments of gradable adjectives are mapped into abstract representations of measurements or degrees~\cite{kennedy2007vagueness}.} \textcolor{blue}{This part was considered not clear by Philipp. Possible rephrase: It follows that gradable adjectives can be defined as `scalar' or `gradable', since their value can ideally be measured on a scale of set degrees, which changes with the object of the adjective (`big' owns a certain degree or value if combined with `building' and another degree or value if combined with `body').}}
-\item They are frequently \emph{fuzzy} (or \emph{vague})~\cite{kennedy2007vagueness}
+\item They are frequently \emph{fuzzy} (or \emph{vague})~\cite{kennedy2007vagueness}.
 %\item \textbf{\textcolor{blue}{\textit{absolute} gradable adjectives, like `straight' or `bent' or `red' (to cite your part on colors below), are not vague}}
 
-\item There may be a minimum or maximum of this scale, which can be determined
+\item There may be a minimum or maximum of this scale \textbf{(Which scale?)}, which can be determined
 by, for example, whether they can modified by `completely'.
 \end{itemize}
 
 As such we define gradable adjectives relative to a particular 
-property, these adjectives are also called `observable'~\cite{Bennett06kr}.\footnote{Note in many cases the property is quite abstract such as in 
+property, these adjectives are also called `observable'~\cite{Bennett06kr}\footnote{Note in many cases the property is quite abstract such as in 
 `breakable'.}, that is it is natural to say that `big' refers to 
 `size', however it is clear then that `small' also refers to `size' and as antonyms 
 they cannot both refer to the same ontological concept. As such, we introduce 
@@ -356,7 +356,7 @@ the concept of \emph{covariance} and \emph{contravariance}, which refers to
 whether the comparative form indicates a higher property value for the subject 
 or the object. That is that `big' is covariant with size, as bigger things have 
 a higher size value, and `small' is contravariant with size.\footnote{
-    The use of these terms is borrowed from type systems, and resembles the concept of `converse observables' as mentioned by (\cite{Bennett06kr}:42). As stated by the author, adjectives often come in pairs of polar opposites (e.\,g. $conv(tall)=short$, and both refer to the same observable (in this case \textit{size}. Some observables analogously hold converse relationships with other observables (e.\,g. $conv(flexibility)=rigidity$ or $conv(tallness)=shortness$).} We also introduce 
+    The use of these terms is borrowed from type systems, and resembles the concept of `converse observables' as mentioned by (\cite{Bennett06kr}:42). As stated by the author, adjectives often come in pairs of polar opposites (e.\,g. $\text{\em conv}(\text{\em tall})=\text{\em short}$, and both refer to the same observable (in this case \textit{size}. Some observables analogously hold converse relationships with other observables (e.\,g. $\text{\em conv}(\text{\em flexibility})=\text{\em rigidity}$ or $\text{\em conv}(\text{\em tallness})=\text{\em shortness}$).} We also introduce 
 a third concept of \emph{absolute gradability}, which states that these objects 
 are better described by these adjectives as they approach some ideal value. 
 A common example of this is colours, where we may say that some object is 
@@ -501,9 +501,9 @@ and it is context-sensitive (as whether an individual counts a big or not depend
 Another way to capture the meaning of these vague terms can be achieved by \textit{supervaluation semantics}. 
 Through supervaluation theory, the modeling or positioning of \emph{sorites} vague concepts is grounded in a 
 judgement or meaning that lies on arbitrary thresholds, but these thresholds are based on a number of \textit{relevant objective measures} \cite{Bennett06kr}. 
-The principle implies (a) that the thresholds used for semantically interdependent concepts 
+The principle implies that the thresholds used for semantically interdependent concepts 
 (let them be predicates or observables) are used consistently (e.\,g. the thresholds for `tall/tallness' 
-closely resemble the thresholds for `short/shortness'). It also implies (b) that not only the meaning of 
+closely resemble the thresholds for `short/shortness'). It also implies that not only the meaning of 
 the gradables, but also the set value of the threshold is context-sensitive.
  
 %In the case of (as inspired by (\cite{kennedy1999scalar}:129)):
@@ -521,14 +521,14 @@ the gradables, but also the set value of the threshold is context-sensitive.
 
 \begin{figure}[ht!]
 \includegraphics[width=\textwidth]{building_SUMO1}
-\caption{Excerpt of the SUMO graph structure for `Building', with number of direct-children for each entry and related documentation}\label{building_SUMO}
+\caption{Excerpt of the SUMO graph structure for \texttt{Building}, with number of direct children for each entry and related documentation}\label{building_SUMO}
 \end{figure}
 
 
 A recent extension of the SUMO ontology~\cite[Suggested Upper Merged Ontology]{nilespease2001sumo} has add
-default measurements for the Artifacts, Devices and Objects enlisted in the ontology (currently amounting to 300+). 
+default measurements for the \texttt{Artifact}s, \texttt{Device}s and \texttt{Object}s enlisted in the ontology (currently amounting to 300+). 
 %mentioned in $\diamond$(2) and $\diamond$$\diamond$ have already been contemplated in one recent extension of the SUMO ontology\footnote{The Suggested Upper Merged Ontology (SUMO); \cite{nilespease2001sumo}; \url{www.ontologyportal.com}}, namely the addition of defaultMeasurements for the Artifacts, Devices and Objects enlisted in the ontology (currently amounting to 300+). The SUMO ontology can be browsed either via English terms (as derived from the Princeton WordNet \textregistered), or KB terms, where the upper-level concepts have been converted in the formal first-order logic language SUO-KIF.}}
-The compilation of defaultMeasurements in SUMO has been just conducted on observables. Given for instance an Artifact such as `Book', the compilation of its default measurements would look like this:
+The compilation of \texttt{defaultMeasurements} in SUMO has been just conducted on observables. Given for instance an \texttt{Artifact} such as \texttt{Book}, the compilation of its default measurements would look like this:
 
 \begin{verbatim}
 ;;Book
@@ -540,10 +540,9 @@ The compilation of defaultMeasurements in SUMO has been just conducted on observ
 (defaultMaximumWidth Book (MeasureFn 5.5 Inch))
 \end{verbatim}
 
-
-The example for `Book' shows that the default measurements for the observable reflect a \textit{standard} kind of Book,
-i.e., the or one of the most commonly known kinds of the same Artifact. As for the case of `Book', SUMO implies it to be a physical Object with a certain length, height and width. 
-A weakness here is that the there is no systematic connection between the {\tt defaultMinimumHeight} and {\tt Height}, since \textbf{\textcolor{blue}{properties like this have solely been defined in SUMO in terms of first-order logic, not in terms of default measurements}}. With lemonOILS we can add this information as follows:
+The example for \texttt{Book} shows that the default measurements for the observable reflect a \textit{standard} kind of book,
+i.e., one of the most commonly known kinds of the same artifact. As for the case of \texttt{Book}, SUMO implies it to be a physical object with a certain length, height and width. 
+A weakness here is that the there is no systematic connection between the {\tt defaultMinimumHeight} and {\tt Height}, since \textbf{\textcolor{blue}{properties like this have solely been defined in SUMO in terms of first-order logic, not in terms of default measurements}}. With \emph{lemonOILS} we can add this information as follows:
 
 \begin{verbatim}
 sumo:Book oils:default [
@@ -553,7 +552,7 @@ sumo:Book oils:default [
 \end{verbatim}
 
 Then if we understand a lexical entry `high' as referring to a scalar covariant pseudo-class for {\tt sumo:height},
-it is possible to understand that \textbf{\textcolor{blue}{an}}`high' objects exceeds the default minimum \textbf{\textcolor{blue}{set established for the same and owns at the same time a value for `high' which does not go beyond the established default maximum. The decision to set an arbitrary threshold for objective measures to every specific kind of Artifact enlisted in SUMO presents advantages and disadvantages or bottlenecks. One obvious advantage is that SUMO poses itself, with this further extension on default physical measurements, as the first ontology of its kind to present defaults in correlation with its Artifacts. These approximated values, which ideally should represent the most commonly known form of each of the Artifact, can become handy in need of measurements or further information on the Artifacts. The approximated values also enable to draw a comparison between the children of the same parent. In this way, it might be possible, given for instance the defaults for `Bed', to approximate the defaults for `KingBed', `SingleBed', `SofaBed' `Futon' or `DoubleBed', simply by adding or subtracting height, width, length and weight values with `Bed' as threshold. On the other side though, the SUMO default measurements serve no less and no more the purpose they were originally conceived for, namely to be a reliable (since double-checked), yet arbitrary, approximation of physical measures.}}
+it is possible to understand that a `high' object exceeds the default minimum \textbf{\textcolor{blue}{set established for the same and owns at the same time a value for `high' which does not go beyond the established default maximum. The decision to set an arbitrary threshold for objective measures to every specific kind of \texttt{Artifact} enlisted in SUMO presents advantages and disadvantages or bottlenecks. One obvious advantage is that SUMO poses itself, with this further extension on default physical measurements, as the first ontology of its kind to present defaults in correlation with its \texttt{Artifact}s. These approximated values, which ideally should represent the most commonly known form of each of the \texttt{Artifact}, can become handy in need of measurements or further information on the \texttt{Artifact}s. The approximated values also enable to draw a comparison between the children of the same parent. In this way, it might be possible, given for instance the defaults for \texttt{Bed}, to approximate the defaults for \texttt{KingBed}, \texttt{SingleBed}, \texttt{SofaBed}, \texttt{Futon} or \texttt{DoubleBed}, simply by adding or subtracting height, width, length and weight values with \texttt{Bed} as threshold. On the other side though, the SUMO default measurements serve no less and no more the purpose they were originally conceived for, namely to be a reliable (since double-checked), yet arbitrary, approximation of physical measures.}}
 
 \textbf{\textcolor{blue}{A further}} weakness of this approach is captured by the following example:
 
@@ -570,7 +569,7 @@ it is possible to understand that \textbf{\textcolor{blue}{an}}`high' objects ex
 \end{enumerate}
 
 Here, we see the difficulty in interpreting the sentence as Avery Johnson is in fact of average height (5'10'') but
-for the class of basketball players he is unusually short. \textbf{\textcolor{blue}{While SUMO has some very specific listings of subsets for the same Artifact (e.\,g. see the subset for `Car')\footnote{`CrewDormCar', `GalleryCar', `MotorRailcar', `FreightCar', `BoxCar', `RefrigeratorCar', `FiveWellStackCar', `FlatCar', `SpineCar', `HydraCushionFreightCar' and more as subsets for for `Car'.} for which it is then relatively simple to define maximum and minimum defaults for each for them and therefore consequently readjust the defaults for `Car' so to be the most prototypical possible, in some other places of its conceptual taxonomy, the ontology is still behind and needs further extension. For instance, with reference to this example of the basketball player, SUMO does not provide a well-structured subset net for Person, which is just enlisted as an ``instance for Human''. Further classifications of `Person' (e.\,g. in terms of gender or age) are still missing.}}\textbf{As such we must introduce default values for
+for the class of basketball players he is unusually short. \textbf{\textcolor{blue}{While SUMO has some very specific listings of subsets for the same \texttt{Artifact}\footnote{For example, the subsets for \texttt{Car} are \texttt{CrewDormCar}, \texttt{GalleryCar}, \texttt{MotorRailcar}, \texttt{FreightCar}, \texttt{BoxCar}, \texttt{RefrigeratorCar}, \texttt{FiveWellStackCar}, \texttt{FlatCar}, \texttt{SpineCar}, \texttt{HydraCushionFreightCar} and more.} for which it is then relatively simple to define maximum and minimum defaults for each for them and therefore consequently readjust the defaults for \texttt{Car} so to be the most prototypical possible, in some other places of its conceptual taxonomy, the ontology is still behind and needs further extension. For instance, with reference to this example of the basketball player, SUMO does not provide a well-structured subset net for \texttt{Person}, which is just enlisted as an `instance for \texttt{Human}'. Further classifications of \texttt{Person} (e.\,g. in terms of gender or age) are still missing.}}\textbf{As such we must introduce default values for
 every possible subclass of person. \textcolor{blue}{A way to solve this bottleneck could be to introduce, for every possible subclass of person, default values, as well as to introduce default values for the same Artifact in conjunction with a predicate or adjective. Nevertheless, this can potentially lead}} to an explosion in the amount of information we
 need to encode in the ontology.
 %, essentially forcing us to encode a class (or default values) for every
@@ -605,13 +604,13 @@ need to encode in the ontology.
 
 \begin{enumerate}[resume]
 \item \textbf{\textcolor{blue}{Clinton is a male tall former president}} \label{ex:clinton}
-\item \textbf{\textcolor{blue}{$ |=  Clinton is president.$}}
-\item \textbf{\textcolor{blue}{$ |= Clinton is male $ (male $\Rightarrow$ intersective gradable adjective)}}
-\item \textbf{\textcolor{blue}{$ |= Clinton is tall $ (tall $ \Rightarrow$ subsective gradable adjective)}}
-\item \textbf{\textcolor{blue}{$\emptyset  \ Clinton \ is \ former.$}} \textbf{\textcolor{blue}{(Since this example was the same as (2a,b) above, I've changed 2(a)(b) into `Mary is a technical engineer $\Rightarrow$ *Mary is technical)}}
+\item \textbf{\textcolor{blue}{$ |= $ Clinton is president.}}
+\item \textbf{\textcolor{blue}{$ |= $ Clinton is male (male $\Rightarrow$ intersective gradable adjective)}}
+\item \textbf{\textcolor{blue}{$ |= $ Clinton is tall (tall $ \Rightarrow$ subsective gradable adjective)}}
+\item \textbf{\textcolor{blue}{$\emptyset$ Clinton is former.}} \textbf{\textcolor{blue}{(Since this example was the same as (2a,b) above, I've changed 2(a)(b) into `Mary is a technical engineer $\Rightarrow$ *Mary is technical)}}
 \end{enumerate}
 
-\textbf{Operator adjectives are those that combine to alter the meaning of the adjective itself. \textcolor{blue}{Fran: not clear.}} 
+Operator adjectives are those that combine with a noun to alter the meaning of the noun itself. \textbf{\textcolor{blue}{Fran: not clear.}} 
 There are two primary issues with the understanding of the adjective in this manner. 
 \textbf{Firstly, the reference of the lexical item does not directly refer to an existing item 
 in the ontology, but rather is novel and productive. Secondly, the compositional nature 
@@ -623,22 +622,18 @@ the reference of an operator adjective must be a higher order predicate.
 If we assume that there are operators of the form of a function, then
 the argument of a operator is the attributed noun phrase. As such
 we introduce a frame \emph{operator attributive}, that has one argument
-which is the noun. The interpretation of a phrase like
+which is the noun. The interpretation of a phrase like \ref{ex:president1} is like \ref{ex:president2}.
 
-\begin{quote}
-Obama is the president. Clinton is a former president.
-\end{quote}
+\begin{enumerate}[resume]
+\item \begin{enumerate}
+\item Obama is the president. Clinton is a former president. \label{ex:president1}
+\item $\text{\em President}(\text{\em Obama}) \sqcap [\text{\em former}(\text{\em President})](\text{\em Clinton})$ \label{ex:president2}
+\end{enumerate}
+\end{enumerate}
 
-is like:
-
-\[
-President(Obama) \sqcap [former(President)](Clinton)
-\]
-
-If we understand $President$ as Artifact or Human that has the role of leading a country
-(and therefore being true for $Obama$ and $Clinton$), then $former$ creates a new class in the ontology (i.\,e.`FormerPresident') which selects
-people who were presidents. \textbf{Thus it
-can be said that $[former(President)]$ creates a new class in the ontology. \textcolor{blue}{Just said.}} An alternative
+If we understand {\em President} as \texttt{Artifact} or \texttt{Human} that has the role of leading a country
+(and therefore being true for {\em Obama} and {\em Clinton}), then {\em former} creates a new class in the ontology (i.e. \texttt{FormerPresident}) which selects
+people who were presidents. \textbf{Thus it can be said that $[\text{\em former}(\text{\em President})]$ creates a new class in the ontology. \textcolor{blue}{Just said.}} An alternative
     interpretation would be that `former' modifies the role of Clinton, however this raises the
     question of why the role property of presidents would be selected, and as such
 is also unsatisfactory. {\textbf{\textcolor{blue}{In a way, we have already answered this statement by means of the grammatical definition that we have given for relational and operator adjectives, namely that they cannot take a postnominal position (unlike gradable adjectives). It follows that we can avoid discussing the case that `former' modifies the role of Clinton, given that the statement `Clinton is former' is \textit{de facto} ungrammatical. Not only this, but the adjective `former' (as other operator adjectives such as `alleged' or `counterfeit') is neither intersective, nor subsective, but privative \cite{partee2001privative}, meaning that it \textit{entails the negation of the noun property}. Therefore, to answer the question of why the role property of presidents would be selected, we can state that the operator adjective raised the role of the object, but dismissed it at the same time.}}
@@ -706,7 +701,7 @@ language in general.
 %\end{verbatim}
 
 
-\textbf{\textcolor{blue}{Philipp's original comment (prior to my change):}\textcolor{violet}{On operational adjectives and the specific example "Clinton is a former president".
+\textbf{\textcolor{blue}{Philipp's original comment (prior to my change):}\textcolor{violet}{On operational adjectives and the specific example `Clinton is a former president'.
 I have problems with this example, I see the class of president as containing a set of individuals representing a role played by someone beginning and ending at some time point.
 So former would be a class that out of these role individuals selects all those with ending point before now. This seems quite doable in FOL to me ;-)}}
 
@@ -716,14 +711,14 @@ So former would be a class that out of these role individuals selects all those 
 which extends the attributive frame by allowing for a prepositional phrase
 adjunct.\textcolor{blue}{Fran: not very clear}} As such we can model `known' with the frame `$X$ is known to $Y$' and
 reference {\tt foaf:knows} as:
-\textbf{\textcolor{blue}{Another example, apart from `known', (that you can use in postnominal position, and therefore does not really represent relational adjective) could be: ``Jemma is a single parent'' $\Rightarrow$ Jemma is a parent, but $\emptyset$ Jemma is single}}
+\textbf{\textcolor{blue}{Another example, apart from `known', (that you can use in postnominal position, and therefore does not really represent relational adjective) could be: `Jemma is a single parent' $\Rightarrow$ `Jemma is a parent', but $\emptyset$ `Jemma is single'}}
 
 
 \begin{verbatim}
 lexicon:known a lemon:LexicalEntry ;
   lemon:canonicalForm known:Lemma ;
-	lemon:sense known:Sense ;
-	lemon:synBehavior known:Frame .
+  lemon:sense known:Sense ;
+  lemon:synBehavior known:Frame .
 
 known:Lemma lemon:writtenRep "known"@eng .
 
@@ -732,7 +727,7 @@ known:Frame lexinfo:attributeArg known:Subject ;
 
 known:Sense lemon:reference foaf:knows ;
   lemon:subjOfProp known:Subject ;
-	lemon:objOfProp known:Object .
+  lemon:objOfProp known:Object .
 	
 known:Object lemon:marker lexicon:to .
 \end{verbatim}
@@ -754,26 +749,30 @@ known:Object lemon:marker lexicon:to .
 
 Of the 150 training and test questions of the QALD-4 benchmark\footnote{\url{http://www.sc.cit-ec.uni-bielefeld.de/qald/}} 
 for question answering over linked data, 67 contain adjectives. 
-The most common kinds of adjectives among them are intersective and gradable adjectives.
 
-Some of the intersective adjectives do not have a semantic contribution, or at least none that is separable from the noun, 
+Some of the occurring adjectives do not have a semantic contribution, or at least none that is separable from the noun, 
 as exemplified in the noun phrases in \ref{ex:intersectives1} and \ref{ex:intersectives2} (where $|[\cdot|]$ stands for 
-`denotes' and the prefixes \texttt{dbo} and \texttt{res} abbreviate the DBpedia namespaces \texttt{http://dbpedia.org/ontology/} 
+`denotes' and the prefixes \texttt{dbo} and \texttt{res} abbreviate the DBpedia namespaces \texttt{http://dbpedia.org/ontology/}  
 and \texttt{http://dbpedia.org/resource/}, respectively).
 \begin{enumerate}[resume]
 \item \begin{enumerate}
  \item $|[$official website$|]=\texttt{dbo:website}$
- \item $|[$artistic movement$|]=\texttt{dbo:movement}$ \textbf{\textcolor{blue}{subsective rather than intersective? It acquires its specific meaning in combination with the the noun it modifies, e.\,g. `an artistic movement' (meaning a group of artists) versus `an artistic mind' (a creative, art-oriented mind)}}
+ %\item $|[$artistic movement$|]=\texttt{dbo:movement}$ \textbf{\textcolor{blue}{subsective rather than intersective? It acquires its specific meaning in combination with the the noun it modifies, e.\,g. `an artistic movement' (meaning a group of artists) versus `an artistic mind' (a creative, art-oriented mind)}}
  \item $|[$national anthem$|]=\texttt{dbo:anthem}$
  \end{enumerate}
  \label{ex:intersectives1}
 \item \begin{enumerate}
  \item $|[$official languages$|]=\texttt{dbo:officialLanguages}$
- \item $|[$military conflicts$|]=\texttt{dbo:battle}$ \textbf{\textcolor{blue}{relational rather than intersective? (in the second proposed definition for relational adjectives? it stands for everything that goes with `military' (e.g. social disruption, economic distruction, etc.), not just weapons}}
+% \item $|[$American inventions$|]=\texttt{yago:AmericanIventions}$
+ \item $|[$military conflicts$|]=\texttt{dbo:battle}$ 
+ %\textbf{\textcolor{blue}{relational rather than intersective? (in the second proposed definition for relational adjectives? it stands for everything that goes with `military' (e.g. social disruption, economic distruction, etc.), not just weapons}}
  \end{enumerate}
  \label{ex:intersectives2}
 \end{enumerate}
-All other intersective adjectives denote restriction classes that are not explicitely named in DBpedia, 
+
+Otherwise, the most common kinds of adjectives among them are intersective and gradable adjectives.
+
+All intersective adjectives denote restriction classes that are not explicitely named in DBpedia, 
 in correspondence with the modelling proposed in Section~\ref{sec:intersectives} above, for example:
 \begin{enumerate}[resume]
 \item \begin{enumerate}
@@ -837,10 +836,9 @@ see~\ref{ex:superlative1} (where the prefix \texttt{dbp} abbreviates the DBpedia
 \end{enumerate}
 \label{ex:superlative1}
 \end{enumerate}
-
-In addition, there is a range of operator adjectives that do not directly refer to an element in the ontology 
-(cf. Section~\ref{sec:operators} above). In the QALD-4 question set their meaning is captured in terms 
-of SPARQL aggregation operations, as shown in~\ref{ex:operator}. 
+In addition, there are gradable adjectives that are bound to a property that constitutes the semantic contribution 
+of the noun. Examples are `frequent' and `long'; the meaning of their superlative forms is captured in terms of 
+SPARQL aggregation operations, as shown in~\ref{ex:frequent} and~\ref{ex:span}. 
 \begin{enumerate}[resume]
 \item $|[$What is the most frequent death cause?$|]=$
        \begin{verbatim}
@@ -849,24 +847,26 @@ of SPARQL aggregation operations, as shown in~\ref{ex:operator}.
        } ORDER BY DESC( COUNT(DISTINCT ?uri) ) 
          OFFSET 0 LIMIT 1
        \end{verbatim}
-       \label{ex:operator}
+       \label{ex:frequent}
+\item $|[$What is the bridge with the longest span?$|]=$
+\begin{verbatim}
+SELECT DISTINCT ?uri 
+WHERE {
+        ?uri rdf:type dbo:Bridge .
+        ?uri dbo:mainspan ?s . 
+} 
+ORDER BY DESC(?s) 
+OFFSET 0 LIMIT 1
+\end{verbatim}
 \end{enumerate}
 
-\textbf{\textcolor{blue}{`Frequent' here does not appear to be an operator (and thus privative) adjective, but rather a gradable one. `Former' below on the contrary is definitely operator.}}
-
-There is only one instance of a privative adjective, used in a context where it does not have a specific semantic contribution:
+There are some instances of operator adjectives, e.g. `former', which is used in a context 
+where it does not have a specific semantic contribution:
 \begin{enumerate}[resume]
 \item $|[$the former Dutch queen Juliana$|]=\texttt{res:Juliana}$
 \end{enumerate}
-
-Similarly, there is only one instance of a subsective adjective, which denotes a property:
-\begin{enumerate}[resume]
-\item $|[$professional$|]=\texttt{dbo:occupation}$ (as opposed to, e.g., hobby),\\
-       for example $|[$professional surfer$|]=\exists\,\texttt{dbo:occupation}\,.\,\texttt{res:Surfing}$
-\end{enumerate}
-
-Finally, there are a few adjectives whose meaning are not subsumed by the canonical modelings as proposed in this paper, 
-as they have a highly ontology-specific meaning, for example:
+Another example is `first', which has a context-dependent and highly ontology-specific meaning, 
+often tightly interwoven with the meaning of the noun, as in the following examples:
 \begin{enumerate}[resume]
 \item \begin{enumerate}
 \item $|[$first president of the United States$|]=\exists\,\texttt{dbo:office}\,.\,\text{`1st President of the United States'}$
@@ -874,7 +874,13 @@ as they have a highly ontology-specific meaning, for example:
 \end{enumerate}
 \end{enumerate}
 
-\textbf{\textcolor{blue}{We can argue that there are at least two interpretations for these adjectives: (a) either they are absolute gradable (on the same line of other adjective, such as `straight' or `sole'), or (b) they are a kind of privative and again operator adjectives. In fact, contrarily to their definition, they do not entail the negation of the noun property (as in the case of former president), in an explicit, but in an implicit way (`first' necessarily denies `second', and it is not gradable).}}
+Finally, there is only one instance of a non-empty subsective adjective, denoting a property:
+\begin{enumerate}[resume]
+\item $|[$professional$|]=\texttt{dbo:occupation}$ (as opposed to, e.g., hobby),\\
+       for example $|[$professional surfer$|]=\exists\,\texttt{dbo:occupation}\,.\,\texttt{res:Surfing}$
+\end{enumerate}
+
+%\textbf{\textcolor{blue}{We can argue that there are at least two interpretations for these adjectives: (a) either they are absolute gradable (on the same line of other adjective, such as `straight' or `sole'), or (b) they are a kind of privative and again operator adjectives. In fact, contrarily to their definition, they do not entail the negation of the noun property (as in the case of former president), in an explicit, but in an implicit way (`first' necessarily denies `second', and it is not gradable).}}
 
 \textbf{\textcolor{blue}{We miss some examples for relational adjectives. An example (as taken from DBpedia) could be: ``Give me all cars that are produced in Germany'' (`all' relates to `produced in Germany'). This the only example I found in the list of questions proposed in one of the first drafts of this paper.}}
 % highest population density ?uri dbp:densityrank ?x . } ORDER BY ASC(?x) OFFSET 0 LIMIT 1
