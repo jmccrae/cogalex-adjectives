@@ -121,14 +121,14 @@ consider to what extent this can be handled in the context of the
 ontology-lexicon, and introduce pseudo-classes, that is OWL classes with 
 annotations, which we use to express the semantics of adjectives in a manner
 that would allow reasoning with fuzzy, high-order models. To this extent, we base
-our models on the previously introduced design patterns~\textbf{\textcolor{blue}{\cite{mccrae2014design} John, go back to the bib file and add pages and chapter for this reference, cause otherwise you have open question marks in the References}}
+our models on the previously introduced design patterns~\cite{mccrae2014design}
 for modeling ontology-lexica. 
 Finally, we show how these semantics can be helpful in practical applications 
 of question answering over the DBpedia knowledge base.
 
 \section{Classification of adjectives}
 
-There are a number of classifications of adjectives \cite{}. First we will start 
+There are a number of classifications of adjectives. First we will start 
 with the most fundamental distinction between \emph{attributive} versus 
 \emph{predicative} usage, that is the use of adjectives in noun phrases 
 (``$X$ is a $A~N$'') versus as objects of the copula (``$X$ is $A$''). 
@@ -641,7 +641,7 @@ people who were presidents. \textbf{Thus it
 can be said that $[former(President)]$ creates a new class in the ontology. \textcolor{blue}{Just said.}} An alternative
     interpretation would be that `former' modifies the role of Clinton, however this raises the
     question of why the role property of presidents would be selected, and as such
-is also unsatisfactory. {\textbf{\textcolor{blue}{In a way, we have already answered this statement by means of the grammatical definition that we have given for relational and operator adjectives, namely that they cannot take a postnominal position (unlike gradable adjectives). It follows that we can avoid discussing the case that `former' modifies the role of Clinton, given that the statement `Clinton is former' is \textit{de facto} ungrammatical. Not only this, but the adjective `former' (as other operator adjectives such as `alleged' or `counterfeit') is neither intersective, nor subsective, but privative \cite{partee2011privative}, meaning that it \textit{entails the negation of the noun property}. Therefore, to answer the question of why the role property of presidents would be selected, we can state that the operator adjective raised the role of the object, but dismissed it at the same time.}}
+is also unsatisfactory. {\textbf{\textcolor{blue}{In a way, we have already answered this statement by means of the grammatical definition that we have given for relational and operator adjectives, namely that they cannot take a postnominal position (unlike gradable adjectives). It follows that we can avoid discussing the case that `former' modifies the role of Clinton, given that the statement `Clinton is former' is \textit{de facto} ungrammatical. Not only this, but the adjective `former' (as other operator adjectives such as `alleged' or `counterfeit') is neither intersective, nor subsective, but privative \cite{partee2001privative}, meaning that it \textit{entails the negation of the noun property}. Therefore, to answer the question of why the role property of presidents would be selected, we can state that the operator adjective raised the role of the object, but dismissed it at the same time.}}
 As there is at the moment no agreed representation for such an operator in an
 ontology, it underlines the fact that more sophisticated ontology representations than first-order logic are required to understood natural
 language in general.
@@ -849,7 +849,7 @@ of SPARQL aggregation operations, as shown in~\ref{ex:operator}.
        } ORDER BY DESC( COUNT(DISTINCT ?uri) ) 
          OFFSET 0 LIMIT 1
        \end{verbatim}
-       \label{ex:operator1}
+       \label{ex:operator}
 \end{enumerate}
 
 \textbf{\textcolor{blue}{`Frequent' here does not appear to be an operator (and thus privative) adjective, but rather a gradable one. `Former' below on the contrary is definitely operator.}}
