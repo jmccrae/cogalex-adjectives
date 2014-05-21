@@ -63,8 +63,8 @@ while effective for nouns and verbs, breaks down in the case of adjectives.
 We argue that this is primarily due to a lack of logical expressivity in the 
 underlying ontology languages. In particular, beyond the straightforward \emph{intersective adjectives}, there exist \emph{gradable adjectives}, requiring fuzzy or
 non-monotonic semantics, as well as \emph{operator adjectives}, requiring second-order logic for modelling. 
-We consider how we can extend the ontology-lexicon interface as realized by extant models such as \emph{lemon} in the face of the issues mentioned above, in particular those arising in the context of modelling the ontological semantics of adjectives. We show how more complex logical formalisms \textbf{\textcolor{blue}{that are}} required to capture the ontological semantics of adjectives can be backward 
-engineered into OWL-based modelling by means of pseudo-classes. We discuss the implications of this modelling in the context of an application \textbf{to ontology-based question answering\textcolor{blue}{...of an application (ontology-based question answering).}}.
+We consider how we can extend the ontology-lexicon interface as realized by extant models such as \emph{lemon} in the face of the issues mentioned above, in particular those arising in the context of modelling the ontological semantics of adjectives. We show how more complex logical formalisms that are required to capture the ontological semantics of adjectives can be backward 
+engineered into OWL-based modelling by means of pseudo-classes. We discuss the implications of this modelling in the context of application to ontology-based question answering.
 \end{abstract}
 
 
@@ -234,10 +234,9 @@ impact~\cite{teodorescu2006adjective}, e.g.,
 \label{ex:actor}
 \end{enumerate}
 
-One further case that is important to distinguish is that of \emph{relational} adjectives which have a meaning 
-that expresses a relationship between two individuals or events\footnote{Our definition of relational here is based on the idea of
-    relational nouns~\cite{de1988interpretation} as a word that requires an argument. 
-    It is important to specify that relational adjectives can also have another definition in literature \cite{morzycki2013nonscales}.}, for example:
+Finally, we define \emph{object-relational} adjectives which have a meaning 
+that expresses a relationship between two individuals or events\footnote{Our definition of relational here is borrowed from the idea of
+    relational nouns~\cite{de1988interpretation} as a word that requires an argument.}, for example:
 
 \begin{enumerate}[resume,noitemsep,nolistsep]
 \item He is related to her.
@@ -283,7 +282,7 @@ we understand this as the realization of two frames, given in~\ref{ex:juan_frame
 \item Juan is a Spanish researcher. \label{ex:juan}
 \item \begin{enumerate}
 \item Juan is a researcher.
-\item Juan is a Spanish $?$ \textbf{\textcolor{blue}{here you mean $?$ as $N?$ right?. Then we should write (where Spanish is $N?$, cause otherwise it looks like a question mark)}}.
+\item Juan is a Spanish $N?$
 \end{enumerate}
 \label{ex:juan_frames}
 \end{enumerate}
@@ -388,9 +387,6 @@ A common example of this is colours, where we may say that some object is
 redder than another if it is closer to some ideal value of red 
 (e.g., RGB {\tt 0xff0000}).
 
-\textcolor{blue}{We have already mentioned absolute gradable adjectives above; it still appears here that absolute gradable adjectives are still gradable, which are (per definition) not.}
-\textcolor{green}{Absolute gradables are gradable and intersective!}
-
 While these concepts well handle the comparative usage of adjectives, the 
 predicative and superlative usage of adjectives is complicated by three factors
 that we will outline below. We notice that gradable classes are not 
@@ -483,13 +479,13 @@ high:Sense lemon:reference [
 %One problem I see with the modelling in 3.2.1 of high we do not model the actual reference class, i.e. the noun. That's fine, but it is worth mentioning that the semantics (at least the degree and contravariance/variance) is independent of the specific noun (e.g. whether we talk about mountains or mice), but the threshold for instance and defaultValue are surely going to be specific for the noun/class modified. This needs to be pointed out IMHO.}}
 
 
-\textbf{As an example of a way in which it would be possible to interpret these 
-annotations, we consider Markov Logic~\cite{richardson2006markov}, which is \textcolor{blue}{Rephrase: We consider the ML as an example through which it could be possible.. It is}} an 
+As an example of a logic in which these 
+annotations could be interpreted, we consider Markov Logic~\cite{richardson2006markov}, which is an 
 extension of first-order logic, in which each clause is given a cost. The process 
 of reasoning is thus transformed into an optimization problem of finding the 
 extension, which minimizes the summed weight of all violated clauses. As such, we
 can formulate a gradable adjective based on the number of known instances. 
-For example, we can specify `big' \textbf{w.r.t. \textcolor{blue}{what does it stand for?}} \emph{size} for some class $C$ as in~(\ref{ex:big}).
+For example, we can specify `big' with respect to \emph{size} for some class $C$ as in~(\ref{ex:big}).
 %
 \begin{enumerate}[resume,noitemsep]
 \item $\forall x \in C, y \in C : size(x) > size(y) \rightarrow big_C(x) : \alpha$ \\
@@ -498,7 +494,7 @@ $\forall x \in C, y \in C : size(x) < size(y) \rightarrow \neg big_C(x) : \beta$
 \end{enumerate}
 %
 In this way, the classification of an object into `big' or `small' can be defined as follows.
-For an individual $x \in C$, the property $big_C(x)$ holds \textbf{if and only if \textcolor{blue}{shouldn't it be iff?}}: 
+For an individual $x \in C$, the property $big_C(x)$ holds if and only if: 
 
 \vspace{-1.0em}
 $$|\{y \in C, size(y) > size(x)\}| \alpha < |\{y \in C, size(y) < size(x)\}| \beta$$
@@ -627,7 +623,14 @@ SUMO does not provide a well-structured subset net for e.\,g. \texttt{Person}%, 
 
 \subsection{Operator adjectives} \label{sec:operators}
 
-\textbf{\textcolor{blue}{To clarify why we introduce operator and relational adjectives at this point, we might want to tell that these kinds of adjectives are not gradable, but they are usually related to their `classificatory' or `taxonomic' meaning \cite{mcnally2004relational}, which should make them particularly suitable for being modeled in ontologies (although we present here some bottlenecks as well). Both operator and relational adjectives are characterized by a not-postnominal position (this is why i don't think `known' below is an ok example for relational adjective [we can in fact say `he is known' out of `he is a known actor']).}}
+Operator adjectives are those that combine with a noun to modify the meaning of the noun itself. 
+There are two primary issues with the understanding of the adjective in this manner. 
+Firstly, the reference of the lexical item does not generally refer to an existing item 
+in the ontology, but rather is novel and productive, in the sense that it generates a new class. Secondly, the compositional nature 
+of adjective-noun compounds is no longer simple, as in the cases of intersective and gradable adjectives.
+This means that, in order to understand a concept such as a `fake gun', we must first
+derive a class of {\tt FakeGun}s from the class of {\tt Gun}s. Thus the modified noun phrase
+must be an argument of the operator adjective.
 
 \begin{enumerate}[resume,noitemsep]
 \item \textbf{\textcolor{blue}{Clinton is a male tall former president}} \label{ex:clinton}
@@ -636,19 +639,7 @@ SUMO does not provide a well-structured subset net for e.\,g. \texttt{Person}%, 
 \item \textbf{\textcolor{blue}{$ |= $ Clinton is tall (tall $ \Rightarrow$ subsective gradable adjective)}}
 \item \textbf{\textcolor{blue}{$\emptyset$ Clinton is former.}} \textbf{\textcolor{blue}{(Since this example was the same as (2a,b) above, I've changed 2(a)(b) into `Mary is a technical engineer $\Rightarrow$ *Mary is technical)}}
 \end{enumerate}
-\textcolor{green}{Relational adjectives and operator adjectives are not exclusively attributive. But,
-    as they require some secondary argument (class or individual resp.) they can only be understood
-    with this second argument, although that argument may be omitted, e.g., he is a `known person' means
-he is known to somebody (e.g., the police)}
 
-Operator adjectives are those that combine with a noun to modify the meaning of the noun itself. 
-There are two primary issues with the understanding of the adjective in this manner. 
-Firstly, the reference of the lexical item does not generally refer to an existing item 
-in the ontology, but rather is novel and productive \textbf{\textcolor{blue}{, in the sense that it generates a new class}}. Secondly, the compositional nature 
-of adjective-noun compounds is no longer simple, as in the cases of intersective and gradable adjectives.
-This means that, in order to understand a concept such as a `fake gun', we must first
-derive a class of {\tt FakeGun}s from the class of {\tt Gun}s. Thus the modified noun phrase
-must be an argument of the operator adjective.
 To this extent we claim that it is not generally possibly to represent the 
 meaning of an operator adjective within the context of an OWL ontology.
 Instead, following Bankston~\cite{bankston2003modeling}, we claim that
@@ -738,16 +729,15 @@ language in general.
 %I have problems with this example, I see the class of president as containing a set of individuals representing a role played by someone beginning and ending at some time point.
 %So former would be a class that out of these role individuals selects all those with ending point before now. This seems quite doable in FOL to me ;-)}}
 
-\subsection{Relational adjectives}
+\subsection{Object-relational adjectives}
 
 Relational adjectives are those that require a second argument, such as `known', which
 can only be understood as being `known' to some person, in comparison to `famous'.
 As such, the modelling of relational adjectives is similar to we can model `known' with the frame `$X$ is known to $Y$' and
 reference {\tt foaf:knows} as:
-\textbf{\textcolor{blue}{Another example, apart from `known', (that you can use in postnominal position, and therefore does not really represent relational adjective) could be: `Jemma is a single parent' $\Rightarrow$ `Jemma is a parent', but $\emptyset$ `Jemma is single'}}
-\textcolor{green}{`single' is an operator here, it adds the restriction (`there can be only one') to the class of Parent, `Jemma is single' is another sense of `single'}
 
-
+ It is important to specify that relational adjectives can also have another definition in literature \cite{morzycki2013nonscales}.
+ 
 \begin{small}\begin{verbatim}
 lexicon:known a lemon:LexicalEntry ;
   lemon:canonicalForm known:Lemma ;
@@ -779,7 +769,7 @@ known:Object lemon:marker lexicon:to .
 %\item \textbf{\textcolor{blue}{This is an industrial gas turbine}}
 %\end{enumerate}
 
-\textcolor{green}{Yeah, perhaps we should find another name? Any suggestions?}
+
 
 \section{Adjectives in question answering}
 
@@ -841,8 +831,8 @@ The positive form of those adjectives only occurs in `how' questions, denoting t
 \end{enumerate}
 The comparative form denotes the property they are bound to, together with an aggregation operation, usually a filter 
 invoking a term of comparison that depends on whether the adjective is covariant or contravariant.
-\begin{enumerate}
-\item \begin{enumerate}[resume,noitemsep,nolistsep]
+\begin{enumerate}[resume]
+\item \begin{enumerate}[noitemsep,nolistsep]
  \item $|[$Which mountains are higher than the Nanga Parbat?$|]=$
        \begin{small}\begin{verbatim}
        SELECT DISTINCT ?uri WHERE { 
@@ -970,17 +960,16 @@ require models that are non-monotonic, fuzzy and second-order. As such, we
 conclude that more sophisticated semantic models are required to represent the semantics
 of such words. However, the separation of syntax and semantics remains a robust
 model, which can be easily adapted to the task of representing adjectives. As 
-a final note, we consider the claims that not all languages have adjectives\footnote{http://linguistlist.org/issues/4/4-442.html}, but \textbf{we contend that the underlying semantics of the words we discuss here
-is representable in all nearly languages \textcolor{blue}{bold statement, since we haven't provided multilingual examples}}. Based on our analysis of realistic
-questions as applied in QALD, we furthermore believe that this model \textbf{should be applicable
-to a range of domains and languages with little issue \textcolor{blue}{more realistic}}, even if further 
+a final note, we consider the claims that not all languages have adjectives\footnote{http://linguistlist.org/issues/4/4-442.html}. Based on our analysis of realistic
+questions as applied in QALD, we nevertheless believe that this model should be applicable
+to a range of domains and languages with little issue, even if further 
 validation is necessary.
 
 %\section*{Acknowledgements}
 %\vspace{-1.0em}
-\begin{spacing}{.4}
+
 \bibliographystyle{acl}
 \bibliography{cogalex-adjectives}
-\end{spacing}
+
 
 \end{document}
