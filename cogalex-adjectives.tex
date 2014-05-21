@@ -11,6 +11,7 @@
 \usepackage{textcomp} %for copyright and registered symbols
 \usepackage{soul}
 \usepackage{semantic}
+\usepackage{setspace}
 
 \usepackage{amssymb}%for \done and \crossed under itemize
 \newcommand{\done}{\item[\checkmark]}
@@ -186,8 +187,8 @@ Another important distinction is whether adjectives are
 or superlative statement with these adjectives makes sense. For example, adjectives such as 
 `big' or `tall' can express relationships such as `$X$ is bigger than $Y$'. 
 However it is not possible to say one individual is `more former'. Most gradable 
-adjectives are subsective, for example `a big mouse' is not `a big animal' \cite{morzycki2013nonscales}. An 
-important group of gradable adjectives are intersective; we call 
+adjectives are subsective, for example `a big mouse' is not `a big animal' \cite{morzycki2013nonscales}. \textbf{\textcolor{violet}{An 
+important group of gradable adjectives are intersective}\textcolor{blue}{here we should better specificy that these adjectives are indeed call `absolute' gradable, although they are not naturally gradable.}}; we call 
 such adjectives `absolute' (following \cite{rusiecki1985adjectives}) as they 
 refer to an ideal point on some scale. For example, a `straight line' is `straight' in 
 that it has no bends or kinks. However, we can still talk about a line being 
@@ -356,12 +357,12 @@ the concept of \emph{covariance} and \emph{contravariance}, which refers to
 whether the comparative form indicates a higher property value for the subject 
 or the object. That is that `big' is covariant with size, as bigger things have 
 a higher size value, and `small' is contravariant with size.\footnote{
-    The use of these terms is borrowed from type systems, and resembles the concept of `converse observables' as mentioned by (\cite{Bennett06kr}:42). As stated by the author, adjectives often come in pairs of polar opposites (e.\,g. $\text{\em conv}(\text{\em tall})=\text{\em short}$, and both refer to the same observable (in this case \textit{size}. Some observables analogously hold converse relationships with other observables (e.\,g. $\text{\em conv}(\text{\em flexibility})=\text{\em rigidity}$ or $\text{\em conv}(\text{\em tallness})=\text{\em shortness}$).} We also introduce 
+    The use of these terms is borrowed from type systems, and resembles the concept of `converse observables' as mentioned by (\cite{Bennett06kr}:42). As stated by the author, adjectives often come in pairs of polar opposites (e.\,g. $\text{\em conv}(\text{\em tall})=\text{\em short}$, and both refer to the same observable (in this case \textit{size}. Some observables analogously hold converse relationships with other observables (e.\,g. $\text{\em conv}(\text{\em flexibility})=\text{\em rigidity}$ or $\text{\em conv}(\text{\em tallness})=\text{\em shortness}$).} \textbf{\textcolor{violet}{We also introduce 
 a third concept of \emph{absolute gradability}, which states that these objects 
 are better described by these adjectives as they approach some ideal value. 
 A common example of this is colours, where we may say that some object is 
 redder than another if it is closer to some ideal value of red 
-(e.g., RGB {\tt 0xff0000}).
+(e.g., RGB {\tt 0xff0000}).}\textcolor{blue}{We have already mentioned absolute gradable adjectives above; it still appears here that absolute gradable adjectives are still gradable, which are (per definition) not.}}
 
 
 While these concepts well handle the comparative usage of adjectives, the 
@@ -944,7 +945,8 @@ validation is naturally necessary.
 
 \section*{Acknowledgements}
 
+\begin{spacing}{0.3}
 \bibliographystyle{acl}
 \bibliography{cogalex-adjectives}
-
+\end{spacing}
 \end{document}
