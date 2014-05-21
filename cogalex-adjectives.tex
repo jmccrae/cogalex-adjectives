@@ -32,7 +32,8 @@
 % smaller than 5cm (the original size); we will check this
 % in the camera-ready version and ask you to change it back.
 
-
+      
+      
 \title{Modelling the Semantics of Adjectives in the Ontology-Lexicon Interface}
 
 \author{John P. M\textsuperscript{c}Crae\\
@@ -142,7 +143,7 @@ with the most fundamental distinction between \emph{attributive} versus
 \emph{predicative} usage, that is the use of adjectives in noun phrases 
 (``$X$ is a $A~N$'') versus as objects of the copula (``$X$ is $A$''). 
 It should be noted that there are many adjectives for which only predicative or 
-attributive usage is allowed, as shown in~\ref{ex:awake} and~\ref{ex:baby}.
+attributive usage is allowed, as shown in~(\ref{ex:awake}) and~(\ref{ex:baby}).
 
 \begin{enumerate}[resume,noitemsep]
 \item \begin{enumerate}	
@@ -168,11 +169,10 @@ noun phrase is a member of both the class of the noun and the class of the
 adjective. For example, in the phrase ``Belgian violinist'' it refers to a 
 person in the class intersection $Belgian \sqcap Violinist(X)$, and hence we 
 can infer that a ``Belgian violinist'' is a subclass of a ``Belgian''.  Furthermore,
-we could conclude that if the same person were a surgeon, they would also
+we could conclude that if the same person were a surgeon, he/she would also
 be a ``Belgian Surgeon''.
 
-\item[Subsective] ($X\mathrm{~is~a~}A~N \Rightarrow X\mathrm{~is~a~}N$, but $X\mathrm{~is~a~}A~N \not\Rightarrow X\mathrm{~is~}A$) 
-Such adjectives acquire their specific meaning in combination with the noun the modify. For example, a ``skilful 
+\item[Subsective] ($X\mathrm{~is~a~}A~N \Rightarrow X\mathrm{~is~a~}N$, but $X\mathrm{~is~a~}A~N \not\Rightarrow X\mathrm{~is~}A$) Such adjectives acquire their specific meaning in combination with the noun the modify. For example, a ``skilful 
 violinist'' is certainly in the class $Violinist(X)$ but the described person is `skilful as a violinist', but not skilful in general, e.g. as a surgeon.
 
 \item[Privative] ($X\mathrm{~is~a~}A~N \not\Rightarrow X\mathrm{~is~a~}N$) 
@@ -196,8 +196,8 @@ Another important distinction is whether adjectives are
 \emph{gradable}, i.e. whether a comparative 
 or superlative statement with these adjectives makes sense. For example, adjectives such as 
 `big' or `tall' can express relationships such as `$X$ is bigger than $Y$'. 
-However it is not possible to say one individual is `more former'. Most gradable 
-adjectives are subsective, for example `a big mouse' is not `a big animal' \cite{morzycki2013nonscales}. 
+However it is not possible to say that one individual is `more former'. Most gradable 
+adjectives are subsective (e.\,g.`a big mouse' is not `a big animal' \cite{morzycki2013nonscales}). 
 %An 
 %important group of gradable adjectives are intersective we call 
 %such adjectives `absolute' (following \cite{rusiecki1985adjectives}) as they 
@@ -205,14 +205,16 @@ adjectives are subsective, for example `a big mouse' is not `a big animal' \cite
 %that it has no bends or kinks. However, we can still talk about a line being 
 %`straighter' in the sense of closer to the ideal of straightness than some other object
 
-Finally, we consider \emph{operator} or \emph{property-modifying} adjectives, 
-which can be considered to be the same as privative adjectives, but in this 
-case are understood as operators that change some property in the qualia 
-structure of the class. For example, we may express the adjective `former' 
+Finally, we consider \emph{operator} or \emph{property-modifying} adjectives. 
+They can be considered the same as privative adjectives, but in this 
+case they are understood as operators that change some property in the qualia 
+structure of the class. For instance, we may express the adjective `former' 
 in lambda calculus as a function that takes a class $C$ as input and returns the class 
 of entities that were a member of $C$ to some prior time point $t$~\cite{partee2003there}:
 
+\vspace{-1.0em}
 $$\lambda C [\lambda x \exists t C(x,t) \cap t < \mathrm{now}]$$
+\vspace{-1.5em}
 
 Such adjectives have not only a difference in semantic meaning but can also 
 frequently have syntactic impact, for example in adjective ordering 
@@ -260,13 +262,17 @@ except for extra arguments given by adjuncts, typically prepositional phrases.
 Most adjectives are thus associated with a predicative frame, which much
 like the standard noun predicate frame ($X\text{ is a }N$) is stereotyped in English as:
 
+\vspace{-1.0em}
 $$X\mathrm{~is~}A$$
+\vspace{-1.5em}
 
 For attributive, usage we associate this with a frame, which is stereotyped as,
 where the $N?$ argument is not semantically bound, but instead obtained by
 syntactic unification with a noun predicate frame.
 
+\vspace{-1.0em}
 $$X\text{ is }A~N?$$
+\vspace{-1.5em}
 
 As such, when we encounter the attributive usage of an adjective such as in~\ref{ex:juan}, 
 we understand this as the realization of two frames, given in~\ref{ex:juan_frames}.
@@ -497,7 +503,9 @@ $\forall x \in C, y \in C : size(x) < size(y) \rightarrow \neg big_C(x) : \beta$
 In this way, the classification of an object into big or small can be defined as follows.
 For an individual $x \in C$ the property $big_C(x)$ holds if and only if: 
 
+\vspace{-1.0em}
 $$|\{y \in C, size(y) > size(x)\}| \alpha < |\{y \in C, size(y) < size(x)\}| \beta$$
+\vspace{-1.5em}
 
 Where the values of $\alpha$ and $\beta$ are related to the degree defined
 in the ontology.
@@ -842,8 +850,8 @@ The positive form of those adjectives only occurs in `how' questions, denoting t
 \end{enumerate}
 The comparative form denotes the property they are bound to together with an aggregation operation, usually a filter 
 invoking a term of comparison that depends on whether the adjective is covariant or contravariant.
-\begin{enumerate}[resume,noitemsep]
-\item \begin{enumerate}
+\begin{enumerate}
+\item \begin{enumerate}[resume,noitemsep,nolistsep]
  \item $|[$Which mountains are higher than the Nanga Parbat?$|]=$
        \begin{small}\begin{verbatim}
        SELECT DISTINCT ?uri WHERE { 
@@ -864,6 +872,8 @@ invoking a term of comparison that depends on whether the adjective is covariant
        % duplicate
 \end{enumerate}
 \end{enumerate}
+
+\vspace{-1.5em}
 Finally, the superlative form denotes the property they are bound to together with an aggregation operation, 
 usually an ordering with a cut-off of all results except the first one, as exemplified in~\ref{ex:superlative2}. 
 Is some cases the superlative property is already encoded in the ontology, e.g., {\tt dbo:highestPlace}.
@@ -908,6 +918,7 @@ Is some cases the superlative property is already encoded in the ontology, e.g.,
 %\end{enumerate}
 % duplicate
 
+\vspace{-1.5em}
 There are some instances of operator adjectives, e.g. `former', which is used in a context 
 where it does not have a specific semantic contribution:
 \begin{enumerate}[resume,noitemsep]
@@ -949,7 +960,7 @@ however it remains unclear if such reasoning introduces more complexity than
 the extra senses. %\textcolor{blue}{More than Buillon's study (we could then also cite the German study of \cite{beck2000relational} or the Spanish study of \cite{mcnally2004relational}) we could spend some more words on Pustejovsky. Here what I would suggest:}}
 Furthermore, In his analysis of adjectives, Larson \shortcite{larson1998event} suggests that many adjectives denote properties of \textit{events}, rather than of simple heads or nouns (which does not fall very far from the statement, made above, that relational adjectives denote properties of kinds). Pustejovsky \shortcite{pustejovsky1992event,pustejovsky1991generative} and \cite{lenci2000qualia} state that lexical and semantic decomposition can be achieved \textit{generatively}, assigning to each lexical item a specific \textit{qualia structure}. For instance, in an expression like:
 
-\begin{enumerate}[resume,noitemsep]
+\begin{enumerate}[resume,noitemsep,nolistsep]
 \item The round, heavy, wooden, inlaid magnifying glass \label{ex:qualia}
 \begin{itemize}[noitemsep]
 \item `round' represents the \textit{Formal} role (giving indications of shape and dimensionality)
@@ -977,8 +988,8 @@ to a range of domains and languages with little issue, even if further
 validation is naturally necessary.
 
 %\section*{Acknowledgements}
-
-\begin{spacing}{.5}
+%\vspace{-1.0em}
+\begin{spacing}{.4}
 \bibliographystyle{acl}
 \bibliography{cogalex-adjectives}
 \end{spacing}
