@@ -36,21 +36,27 @@
       
 \title{Modelling the Semantics of Adjectives in the Ontology-Lexicon Interface}
 
-\author{John P. M\textsuperscript{c}Crae\\
+%\author{John P. M\textsuperscript{c}Crae\\
+%  Universit\"at Bielefeld \\
+%  Bielefeld\\
+%  Germany \\
+%  {\tt \footnotesize jmccrae@cit-ec.uni-bielefeld.de} \\ \And
+%  Francesca Quattri \\
+%  Hong Kong Polytechnic University \\
+%  Hong Kong \\
+%  {\tt \footnotesize francesca.quattri@connect.polyu.hk} \\ \And
+%  Christina Unger, Philipp Cimiano \\
+%  Universit\"at Bielefeld \\
+%  Bielefeld\\
+%  Germany \\
+%  {\tt \footnotesize \{cunger,cimiano\}@cit-ec.uni-bielefeld.de}}
+
+\author{Joe Bloggs\\
   Affiliation / Address line 1 \\
   Affiliation / Address line 2 \\
   Affiliation / Address line 3 \\
-  {\tt email@domain} \\\And
-  Francesca Quattri \\
-  Affiliation / Address line 1 \\
-  Affiliation / Address line 2 \\
-  Affiliation / Address line 3 \\
-  {\tt email@domain} \\\And
-  Christina Unger, Philipp Cimiano \\
-  Affiliation / Address line 1 \\
-  Affiliation / Address line 2 \\
-  Affiliation / Address line 3 \\
-{\tt email@domain}}
+  {\tt email@domain}}
+
 
 \date{}
 
@@ -100,7 +106,7 @@ questions such as~(\ref{ex:australia}) require understanding of the semantics of
 in the QALD dataset for this question is shown in~(\ref{ex:australia_query}). 
 In particular, the interpretation of this question involves the understanding of 
 how the word `high' relates to the property {\tt dbo:elevation}, including ordering 
-and subset selection operations, \textbf{and how to express \textcolor{blue}{and requires expressing}} this semantics in a formal manner.
+and subset selection operations, the expression of the semantics of the phrase in a formal manner.
 
 \begin{enumerate}
 \item \begin{enumerate} 
@@ -139,7 +145,7 @@ of question answering over the DBpedia knowledge base.
 \section{Classification of adjectives}
 
 There are a number of classifications of adjectives. First we will start 
-with the most fundamental distinction between \emph{attributive} versus 
+with the most fundamental distinction between \emph{attributive} and 
 \emph{predicative} usage, that is the use of adjectives in noun phrases 
 (``$X$ is a $A~N$'') versus as objects of the copula (``$X$ is $A$''). 
 It should be noted that there are many adjectives for which only predicative or 
@@ -147,10 +153,10 @@ attributive usage is allowed, as shown in~(\ref{ex:awake}) and~(\ref{ex:baby}).
 
 \begin{enumerate}[resume,noitemsep]
 \item \begin{enumerate}	
-%\item \ \,Clinton is a former president.
-%\item $^\ast$Clinton is former.
-\item \ \,Mary is a technical engineer. \label{ex:engineer}
-\item $^\ast$Mary is technical.
+\item \ \,Clinton is a former president.
+\item $^\ast$Clinton is former.
+%\item \ \,Mary is a technical engineer. \label{ex:engineer}
+%\item $^\ast$Mary is technical. (Technically this is allowed in English)
 \end{enumerate}
 \label{ex:technical}
 \item \begin{enumerate}	
@@ -359,7 +365,7 @@ from intersective adjectives:
 \item They occur in comparative constructions, in English with either `-er' or `more' \cite{kennedy1999scalar}, e.g. `smaller' and `more frequent', as opposed to intersectives such as `*less geological' and `*more wooden'.
 \item Gradable adjectives can be defined as `scalar', since their value can ideally be measured on a scale of set degrees, which is dependent on the object of the adjective (`big' can be defined based on the number of stores of a `building' or the height of a `person').
 \item They have a context-dependent truth-conditional variability, meaning that their positive form
-    is understood in relations to the class of the object modified by the adjective. In other words, an
+    is understood in relations to the class of the object modified by the adjective. For example, an
     `expensive watch' has a different price scale to an `expensive bottle of water'.
 %is the sum of the relation between the degree of the concept possessed by the object (as measured by the predicate) and the context-dependent standard of comparison based on the same concept \cite{kennedy2007vagueness}. It follows that the properties denoted by adjectives like `expensive' or `small' or `big' vary in intensity according to the context (and time) of use.} \textcolor{blue}{This part was considered not to be clear by Philipp, he comments: ``Examples would help here definitely, e.g. for what we mean with standard of comparison, intensity, sum of relation between the degree and context-depenedent standard etc. These notions are hard to grasp.''. We could rephrase it by saying: Gradable adjectives have a context-dependent truth-conditional variability. This means that the value of the adjective depends (and is gradable) according to the object it qualifies \cite{kennedy2007vagueness}. Adjectives such `big', `expensive' or `small' are given different values according to the objects they are associated with.}} 
 %\item \textbf{\textcolor{violet}{The arguments of gradable adjectives are mapped into abstract representations of measurements or degrees~\cite{kennedy2007vagueness}.} \textcolor{blue}{This part was considered not clear by Philipp. Possible rephrase: It follows that 
@@ -373,8 +379,10 @@ by, for example, whether they can modified by adverbs such as `completely' or `u
 As such, we define gradable adjectives relative to a particular 
 property. These adjectives are also called `observable'~\cite{Bennett06kr}\footnote{Note that in many cases the property is quite abstract such as in 
 `breakable'.}, that is it is natural to say that `big' refers to 
-`size', however it is then clear that `small' also refers to `size' and as antonyms 
-\textbf{they cannot both refer to the same ontological concept \textcolor{blue}{Rephrase: ..they cannot both refer to the same value of the same ontological concept}}. As such, we introduce 
+`size', however it is then clear that `small' also refers to `size' and as antonyms
+they cannot both have exactly the same concept in the ontology, therefore
+we cannot refer directly to the property `size' alone.
+As such, we introduce 
 the concept of \emph{covariance} and \emph{contravariance}, which refers to 
 whether the comparative form indicates a higher property value for the subject 
 or the object. That is that `big' is covariant with size, as bigger things have 
@@ -397,8 +405,8 @@ split the world's population into `tall' and `not tall' (This is known as \emph{
 %existence of a specific threshold to relate them to other properties or observables.}} 
 Furthermore, while it may 
 be easy to say that someone with height 6'6'' (198cm) is `tall', it is not clear 
-whether someone with height 6' (182cm) is `tall', also given that this height should be compared to an average (different)
-height for a man, or a woman. 
+whether someone with height 6' (182cm) is `tall', although compared to an average (different)
+height for a man, they are `taller'.
 As such, one frequently used way to deal with this class of vague adjectives (and nouns) is via fuzzy logic \cite{Goguen1969fuzzy,Zadeh1975fuzzy,Zadeh1965fuzzy,DuboisPrade88en,Bennett06kr}.
 Secondly, we notice that these class boundaries are 
 non-monotonic, that is that with knowledge of more instances of the relative 
@@ -442,6 +450,7 @@ with the standard OWL reasoning.
 \begin{itemize}[noitemsep]
 	\item {\tt boundTo} indicates the property that a scalar refers to (e.g., `size' for `big')
 	\item {\tt threshold} specifies a sensible minimal value for which the adjective can be said to hold
+        \item {\tt absoluteValue} is the ideal value of an absolute scalar
 	\item {\tt degree} is specified as {\tt weak}, {\tt medium}, {\tt strong} or {\tt very strong}, corresponding to approximately 50\%, 25\%, 5\% or 1\% of all known individuals
 	\item {\tt comparator} indicates an object property that is equivalent to the comparison of the adjective (e.g., an object property {\tt biggerThan} may be considered a comparator for the adjective class {\tt big})
 	\item {\tt measure} indicates a unit that can be used as a measure for this adjective, e.g., `John is 175 \textit{centimetres} tall'.
@@ -577,7 +586,7 @@ sumo:Book oils:default [
 
 Then, if we understand a lexical entry `high' as referring to a scalar covariant pseudo-class for {\tt sumo:height},
 it is possible to understand that a `high' object exceeds the default minimum set established for the same object and owns at the same time a value for `high' which does not go beyond the established default maximum. %The decision to set an arbitrary threshold for objective measures to every specific kind of \texttt{Artifact} enlisted in SUMO presents advantages and disadvantages or bottlenecks. One obvious advantage is that SUMO poses itself, with this further extension on default physical measurements, as the first ontology of its kind to present defaults in correlation with its \texttt{Artifact}s. These approximated values, which ideally should represent the most commonly known form of each of the \texttt{Artifact}, can become handy in need of measurements or further information on the \texttt{Artifact}s. The approximated values also enable to draw a comparison between the children of the same parent. In this way, it might be possible, given for instance the defaults for \texttt{Bed}, to approximate the defaults for \texttt{KingBed}, \texttt{SingleBed}, \texttt{SofaBed}, \texttt{Futon} or \texttt{DoubleBed}, simply by adding or subtracting height, width, length and weight values with \texttt{Bed} as threshold.
-A further weakness of the SUMO approach is captured by the following example:
+A further weakness of this approach is captured by the following example:
 
 \begin{enumerate}[resume,noitemsep]
     \item Avery Johnson is a short basketball player. \label{ex:avery}
@@ -632,13 +641,13 @@ This means that, in order to understand a concept such as a `fake gun', we must 
 derive a class of {\tt FakeGun}s from the class of {\tt Gun}s. Thus the modified noun phrase
 must be an argument of the operator adjective.
 
-\begin{enumerate}[resume,noitemsep,nolistsep]
-\item \textbf{\textcolor{blue}{Clinton is a male tall former president}} \label{ex:clinton}
-\item \textbf{\textcolor{blue}{$ |= $ Clinton is president.}}
-\item \textbf{\textcolor{blue}{$ |= $ Clinton is male (male $\Rightarrow$ intersective gradable adjective)}}
-\item \textbf{\textcolor{blue}{$ |= $ Clinton is tall (tall $ \Rightarrow$ subsective gradable adjective)}}
-\item \textbf{\textcolor{blue}{$\emptyset$ Clinton is former.}} \textbf{\textcolor{blue}{(Since this example was the same as (2a,b) above, I've changed 2(a)(b) into `Mary is a technical engineer $\Rightarrow$ *Mary is technical)}}
-\end{enumerate}
+%\begin{enumerate}[resume,noitemsep,nolistsep]
+%\item \textbf{\textcolor{blue}{Clinton is a male tall former president}} \label{ex:clinton}
+%\item \textbf{\textcolor{blue}{$ |= $ Clinton is president.}}
+%\item \textbf{\textcolor{blue}{$ |= $ Clinton is male (male $\Rightarrow$ intersective gradable adjective)}}
+%\item \textbf{\textcolor{blue}{$ |= $ Clinton is tall (tall $ \Rightarrow$ subsective gradable adjective)}}
+%\item \textbf{\textcolor{blue}{$\emptyset$ Clinton is former.}} \textbf{\textcolor{blue}{(Since this example was the same as (2a,b) above, I've changed 2(a)(b) into `Mary is a technical engineer $\Rightarrow$ *Mary is technical)}}
+%\end{enumerate}
 
 To this extent we claim that it is not generally possibly to represent the 
 meaning of an operator adjective within the context of an OWL ontology.
@@ -646,21 +655,27 @@ Instead, following Bankston~\cite{bankston2003modeling}, we claim that
 the reference of an operator adjective must be a higher order predicate.
 If we assume that there are operators of the form of a function, then
 the argument of a operator is the attributed noun phrase. As such, we introduce a frame \emph{operator attributive}, that has one argument
-which is the noun. The interpretation of a phrase like~(\ref{ex:president1}) is like~(\ref{ex:president2}).
-
-\begin{enumerate}[resume,noitemsep]
-\item \begin{enumerate}
-\item Obama is a president. Clinton is a former president. \label{ex:president1}
-\item $\text{\em President}(\text{\em Obama}) \sqcap [\text{\em former}(\text{\em President})](\text{\em Clinton})$ \label{ex:president2}
-\end{enumerate}
-\end{enumerate}
-
-If we understand {\em President} as \texttt{Artifact} or \texttt{Human} that has the role of leading a country
-(and therefore being true for {\em Obama} and {\em Clinton}), then {\em former} creates a new class in the ontology (i.e. \texttt{FormerPresident}) which selects
-people who were presidents.  An alternative
-    interpretation would be that `former' modifies the role of Clinton, however this raises the
-    question of why the role property of presidents would be selected, and as such
-is also unsatisfactory. %{\textbf{\textcolor{blue}{In a way, we have already answered this statement by means of the grammatical definition that we have given for relational and operator adjectives, namely that they cannot take a postnominal position (unlike gradable adjectives). It follows that we can avoid discussing the case that `former' modifies the role of Clinton, given that the statement `Clinton is former' is \textit{de facto} ungrammatical. Not only this, but the adjective `former' (as other operator adjectives such as `alleged' or `counterfeit') is neither intersective, nor subsective, but privative \cite{partee2001privative}, meaning that it \textit{entails the negation of the noun property}. Therefore, to answer the question of why the role property of presidents would be selected, we can state that the operator adjective raised the role of the object, but dismissed it at the same time.}}
+which is the noun. Thus we understand that the interpretation of `fake gun' is
+by means of an operator $fake$, which is a function that takes a class 
+and produces a new class, i.e., $[fake(Gun)](X)$. It is of course not possible
+in first-order logic to have such a function, but is in higher-order
+logic.
+%
+%The interpretation of a phrase like~(\ref{ex:president1}) is like~(\ref{ex:president2}).
+%
+%\begin{enumerate}[resume,noitemsep]
+%\item \begin{enumerate}
+%\item Obama is a president. Clinton is a former president. \label{ex:president1}
+%\item $\text{\em President}(\text{\em Obama}) \sqcap [\text{\em former}(\text{\em President})](\text{\em Clinton})$ \label{ex:president2}
+%\end{enumerate}
+%\end{enumerate}
+%
+%If we understand {\em President} as \texttt{Artifact} or \texttt{Human} that has the role of leading a country
+%(and therefore being true for {\em Obama} and {\em Clinton}), then {\em former} creates a new class in the ontology (i.e. \texttt{FormerPresident}) which selects
+%people who were presidents.  An alternative
+%    interpretation would be that `former' modifies the role of Clinton, however this raises the
+%    question of why the role property of presidents would be selected, and as such
+%is also unsatisfactory. %{\textbf{\textcolor{blue}{In a way, we have already answered this statement by means of the grammatical definition that we have given for relational and operator adjectives, namely that they cannot take a postnominal position (unlike gradable adjectives). It follows that we can avoid discussing the case that `former' modifies the role of Clinton, given that the statement `Clinton is former' is \textit{de facto} ungrammatical. Not only this, but the adjective `former' (as other operator adjectives such as `alleged' or `counterfeit') is neither intersective, nor subsective, but privative \cite{partee2001privative}, meaning that it \textit{entails the negation of the noun property}. Therefore, to answer the question of why the role property of presidents would be selected, we can state that the operator adjective raised the role of the object, but dismissed it at the same time.}}
 As there is at the moment no agreed representation for such an operator in an
 ontology, it underlines the fact that more sophisticated ontology representations than first-order logic are required to understood natural
 language in general.
@@ -899,7 +914,8 @@ In some cases, the superlative property is already encoded in the ontology, e.g.
 
 \vspace{-1.5em}
 There are some instances of operator adjectives. Examples are `former', as in \ref{ex:former},
-which does not refer to an element in the DBpedia ontology, and `professional', which refers 
+which does not refer to an element in the DBpedia ontology but is instead a disambiguation clue
+in the given query, and `professional', which refers 
 to the property \texttt{dbo:occupation}, see \ref{ex:professional}.
 \begin{enumerate}[resume,noitemsep]
 \item $|[$the former Dutch queen Juliana$|]=\texttt{res:Juliana}$ \label{ex:former}
@@ -929,7 +945,7 @@ Bankston's analysis~\shortcite{bankston2003modeling} however shows that the fund
 A more thorough discussion of non-gradable, non-intersective adjectives is given by Morzycki~\shortcite{morzycki2013nonscales}.
 Bouillion~\shortcite{bouillon1999adjective} consider the case of the French adjective `vieux' (`old'), which he interprets as selecting two different
 elements in the event structure of an attributed noun, that is whether the
-state, e.g., being a `mayor' for `mayor', is considered old or the individual
+state, e.g., `being a mayor' for `mayor', is considered old or the individual
 itself. In this way, the introduction of two senses for `vieux' is avoided, 
 however it remains unclear if such reasoning introduces more complexity than
 the extra senses. %\textcolor{blue}{More than Buillon's study (we could then also cite the German study of \cite{beck2000relational} or the Spanish study of \cite{mcnally2004relational}) we could spend some more words on Pustejovsky. Here what I would suggest:}}
@@ -956,7 +972,7 @@ require models that are non-monotonic, fuzzy and second-order. As such, we
 conclude that more sophisticated semantic models are required to represent the semantics
 of such words. However, the separation of syntax and semantics remains a robust
 model, which can be easily adapted to the task of representing adjectives. As 
-a final note, we consider the claims that not all languages have adjectives\footnote{http://linguistlist.org/issues/4/4-442.html}. Based on our analysis of realistic
+a final note, we consider the claims that not all languages have adjectives\footnote{http://linguistlist.org/issues/4/4-442.html}, but based on our analysis of realistic
 questions as applied in QALD, we nevertheless believe that this model should be applicable
 to a range of domains and languages with little issue, even if further 
 validation is necessary.
