@@ -775,9 +775,9 @@ Of the 150 training and test questions of the QALD-4 benchmark\footnote{\url{htt
 for question answering over linked data, 67 contain adjectives. 
 
 Some of the occurring adjectives do not have a semantic contribution, or at least none that is separable from the noun, 
-as exemplified in the noun phrases in~(\ref{ex:intersectives1}) and (\ref{ex:intersectives2})\footnote{$|[\cdot|]$ stands for 
+as exemplified in the noun phrases in~(\ref{ex:intersectives1}) and (\ref{ex:intersectives2}).\footnote{$|[\cdot|]$ stands for 
 `denotes' and the prefixes \texttt{dbo} and \texttt{res} abbreviate the DBpedia namespaces \texttt{http://dbpedia.org/ontology/}
-and \texttt{http://dbpedia.org/resource/}, respectively}.
+and \texttt{http://dbpedia.org/resource/}, respectively.}
 \begin{enumerate}[resume,noitemsep]
 \item \begin{enumerate}
  \item $|[$official website$|]=\texttt{dbo:website}$
@@ -855,7 +855,8 @@ invoking a term of comparison that depends on whether the adjective is covariant
 \vspace{-1.5em}
 Finally, the superlative form denotes the property they are bound to, together with an aggregation operation, 
 usually an ordering with a cut-off of all results except the first one, as exemplified in~(\ref{ex:superlative2}). 
-In some cases, the superlative property is already encoded in the ontology, e.g., {\tt dbo:highestPlace}\footnote{The prefix \texttt{dbp} abbreviates the DBpedia namespace \texttt{http://dbpedia.org/property/}}.
+In some cases, the superlative property is already encoded in the ontology, e.g., in the case of the property {\tt dbo:highestPlace}. 
+%\footnote{The prefix \texttt{dbp} abbreviates the DBpedia namespace \texttt{http://dbpedia.org/property/}}.
 \begin{enumerate}[resume,noitemsep]
 \item $|[$What is the longest river?$|]=$
        \begin{small}\begin{verbatim}
@@ -897,17 +898,14 @@ In some cases, the superlative property is already encoded in the ontology, e.g.
 % duplicate
 
 \vspace{-1.5em}
-\textbf{There are some instances of operator adjectives, e.g. `former', which is used in a context 
-where it does not have a specific semantic contribution \textcolor{blue}{This i don't understand}}:
+There are some instances of operator adjectives. Examples are `former', as in \ref{ex:former},
+which does not refer to an element in the DBpedia ontology, and `professional', which refers 
+to the property \texttt{dbo:occupation}, see \ref{ex:professional}.
 \begin{enumerate}[resume,noitemsep]
-\item $|[$the former Dutch queen Juliana$|]=\texttt{res:Juliana}$
-\end{enumerate}
-
-Finally, there is only one instance of an operator adjective:
-\begin{enumerate}[resume,noitemsep]
+\item $|[$the former Dutch queen Juliana$|]=\texttt{res:Juliana}$ \label{ex:former}
 \item %$|[$professional$|]=\texttt{dbo:occupation}$ (as opposed to, e.g., hobby),\\
        %for example 
-    $|[$professional surfer$|]=\exists\,\texttt{dbo:occupation}\,.\,\texttt{res:Surfing}$
+    $|[$professional surfer$|]=\exists\,\texttt{dbo:occupation}\,.\,\texttt{res:Surfing}$ \label{ex:professional}
 \end{enumerate}
 
 %\textbf{\textcolor{blue}{We can argue that there are at least two interpretations for these adjectives: (a) either they are absolute gradable (on the same line of other adjective, such as `straight' or `sole'), or (b) they are a kind of privative and again operator adjectives. In fact, contrarily to their definition, they do not entail the negation of the noun property (as in the case of former president), in an explicit, but in an implicit way (`first' necessarily denies `second', and it is not gradable).}}
