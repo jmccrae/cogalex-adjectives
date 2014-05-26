@@ -63,7 +63,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-The treatment of the semantics of adjectives is notoriously challenging, and we consider this problem in the context of the so called ontology-lexicon interface which attempts to capture the semantics of words by reference to an ontology in description logics or some other, typically first-order, logical formalism.
+The modelling of the semantics of adjectives is notoriously challenging. We consider this problem in the context of the so called ontology-lexicon interface which attempts to capture the semantics of words by reference to an ontology in description logics or some other, typically first-order, logical formalism.
 The use of first order logic (hence also description logics),
 while effective for nouns and verbs, breaks down in the case of adjectives. 
 We argue that this is primarily due to a lack of logical expressivity in the 
@@ -86,27 +86,25 @@ engineered into OWL-based modelling by means of pseudo-classes. We discuss the i
      \url{http://creativecommons.org/licenses/by/4.0/}
 }
 
+
 Ontology-lexicon models, such as \emph{lemon} (Lexicon Model for Ontologies)~
-\cite{mccrae2012inter}, have become an important model for handling a 
-number of tasks in natural language processing. In particular, such 
-ontology-lexica are built around the separation of a lexical layer describing 
-how a word or phrase acts syntactically and morphologically, and a semantic layer 
+\cite{mccrae2012inter} model the semantics of open class words by capturing their semantics with respect to the semantic vocabulary defined in a given ontology. Such 
+ontology-lexica are built around the separation of a \emph{lexical layer} describing 
+how a word or phrase acts syntactically and morphologically, and a \emph{semantic layer} 
 describing how the meaning of a word is expressed in a formal logical model, 
 such as OWL (Web Ontology Language)~\cite{mcguinness2004owl}. It has been 
 shown that this principle known as \emph{semantics by reference}~
 \cite{buitelaar2010ontology} is an effective model that can support the task of developing
 question answering systems \cite{unger2011pythia} and natural language 
 generation \cite{cimiano2013exploiting} over backends based on Semantic Web data models.
-The Pythia system, which builds on the \emph{lemon} formalism to declaratively capture the lexicon-ontology interface, for example, has been instantiated to the case of answering questions from DBpedia \cite{unger2011pythia}
+The Pythia system, which builds on the \emph{lemon} formalism to declaratively capture the lexicon-ontology interface, for example, has been instantiated to the case of answering questions from DBpedia \cite{unger2011pythia}.
 However, as has been 
 shown by the Question Answering over Linked Data \cite[QALD]{lopez2013evaluating}
 benchmarking campaigns, there are many questions that can be asked over this database that require 
 a deeper representation of the semantics of words, adjectives in particular. For example, 
-questions such as~(\ref{ex:australia}) require understanding of the semantics of `high' in a manner that goes beyond the expressivity of OWL. The answer given 
-in the QALD dataset for this question is shown in~(\ref{ex:australia_query}). 
-In particular, the interpretation of this question involves the understanding of 
-how the word `high' relates to the property {\tt dbo:elevation}, including ordering 
-and subset selection operations, the expression of the semantics of the phrase in a formal manner.
+questions such as~(\ref{ex:australia}) require understanding of the semantics of `high' in a manner that goes beyond the expressivity of OWL. The formalization of this question as an executable query formulated with respect to the SPARQL query language is provided in ~(\ref{ex:australia_query}). 
+In particular, the interpretation of this question involves the formal interpretation of the word `high' as relating to the property {\tt dbo:elevation}, including ordering 
+and subset selection operations.
 
 \begin{enumerate}
 \item \begin{enumerate} 
@@ -240,7 +238,7 @@ impact~\cite{teodorescu2006adjective}, e.g.,
 \label{ex:actor}
 \end{enumerate}
 
-Finally, we define \emph{object-relational} adjectives which have a meaning 
+Finally, we define \emph{object-relational} adjectives as those adjectives which have a meaning 
 that expresses a relationship between two individuals or events\footnote{Our definition of relational here is borrowed from the idea of
     relational nouns~\cite{de1988interpretation} as a word that requires an argument. Our definition is also different from the one for `relational adjectives' as proposed by \cite{morzycki2013nonscales}.}, for example:
 
@@ -265,7 +263,7 @@ that expresses a relationship between two individuals or events\footnote{Our def
 \section{Representation of adjectives in the ontology-lexicon interface}
 
 In general it is assumed that adjectives form frames with exactly one argument 
-except for extra arguments given by adjuncts, typically prepositional phrases. 
+except for extra arguments provided by adjuncts, typically prepositional phrases. 
 Most adjectives are thus associated with a predicative frame, which much
 like the standard noun predicate frame ($X\text{ is a }N$) is stereotyped in English as:
 
@@ -273,9 +271,8 @@ like the standard noun predicate frame ($X\text{ is a }N$) is stereotyped in Eng
 $$X\mathrm{~is~}A$$
 \vspace{-1.5em}
 
-For attributive usage, we associate this with a frame, which is stereotyped as it follows,
-where the $N?$ argument is not semantically bound, but instead obtained by
-syntactic unification to a noun predicate frame.
+The attributive usage of an adjective is associate to a stereotypical frame where the $N?$ argument is not semantically bound, but can instead be obtained by syntactic unification to a noun predicate frame:
+
 
 \vspace{-1.0em}
 $$X\text{ is }A~N?$$
@@ -293,7 +290,7 @@ we understand this as the realization of two frames, given in~\ref{ex:juan_frame
 \label{ex:juan_frames}
 \end{enumerate}
 
-Note we do not provide modelling for adjectives where the meaning is unique for a particular noun phrase,
+Note that we do not provide modelling for adjectives where the meaning is unique for a particular noun phrase,
 such as `polar bear', which we would capture as a normal noun phrase with 
 meaning \emph{ursus maritimus}.
 
@@ -308,7 +305,7 @@ ontology-lexicon interface.
 The primary mechanism of modelling the syntax-semantics interface in the context 
 of \emph{lemon} is by means of assigning a \emph{frame} as a \emph{syntactic 
 behaviour} of an entry and giving it \emph{syntactic arguments}, which can then 
-be linked to the \emph{lexical sense}, which stands in proxy for a true semantic 
+be linked to the \emph{lexical sense}, which stands proxy for a true semantic 
 frame in the ontology. For example, the modelling of an adjective such as 
 `Belgian' can be achieved as follows (depicted in Figure 
 \ref{example-belgian})\footnote{We assume that the namespaces are defined for 
@@ -339,17 +336,15 @@ belgian:sense lemon:reference [ a owl:Restriction ;
               lemon:isA belgian:AttrSynArg , belgian:PredSynArg .
 \end{verbatim}\end{small}
 
-Note that here we use the external vocabulary LexInfo \cite{cimiano2011lexinfo} 
+Note that here we use the external vocabulary defined in the LexInfo ontology \cite{cimiano2011lexinfo} 
 to define the meaning of the arguments of the frame as the \emph{attributive 
 argument}, corresponding to the frame stereotype `$X\text{ is }A~N?$' and the 
 \emph{copulative argument} for the frame stereotype `$X\mathrm{~is~}A$'. Furthermore,
 the class of Belgians is not named in our reference ontology DBpedia, so we 
 introduce an anonymous class with the axiomatization, 
 $\exists\,\text{\em nationality}\,.\,\text{\em Belgium}$. It is in fact common that the 
-referent of an adjective is not named in an ontology and as such we tend to 
-model denominal adjectives as classes of the form $\exists\,\text{\em prop}.\text{\em Value}$, 
-where $\text{\em Value}$ is the reference of the noun from which the adjective is
-derived. This modelling is so common that it has already been encoded as two
+referent of an adjective is not named in an ontology. An obvious choice is thus to model denominal adjectives as classes of the form $\exists\,\text{\em prop}.\text{\em Value}$, 
+where $\text{\em Value}$ is an individual that represents the semantics of the noun from which the adjective was derived. This modelling is so common that it has already been encoded as two
 design patterns, called {\tt IntersectiveObjectPropertyAdjective} and {\tt
 IntersectiveDatatypePropertyAdjective} (see \cite{mccrae2014design}).
 Similarly, most deverbal adjectives refer to an event, and as such
@@ -363,7 +358,8 @@ from intersective adjectives:
 
 \begin{itemize}[noitemsep]
 \item They occur in comparative constructions, in English with either `-er' or `more' \cite{kennedy1999scalar}, e.g. `smaller' and `more frequent', as opposed to intersectives such as `*less geological' and `*more wooden'.
-\item Gradable adjectives can be defined as `scalar', since their value can ideally be measured on a scale of set degrees, which is dependent on the object of the adjective (`big' can be defined based on the number of stores of a `building' or the height of a `person').
+\item Gradable adjectives can be defined as `scalar', since their value can ideally be measured on a scale of set degrees
+%, which is dependent on the object of the adjective (`big' can be defined based on the number of stores of a `building' or the height of a `person').
 \item They have a context-dependent truth-conditional variability, meaning that their positive form
     is understood in relations to the class of the object modified by the adjective. For example, an
     `expensive watch' has a different price scale to an `expensive bottle of water'.
@@ -378,16 +374,12 @@ by, for example, whether they can modified by adverbs such as `completely' or `u
 
 As such, we define gradable adjectives relative to a particular 
 property. These adjectives are also called `observable'~\cite{Bennett06kr}\footnote{Note that in many cases the property is quite abstract such as in 
-`breakable'.}, that is it is natural to say that `big' refers to 
-`size', however it is then clear that `small' also refers to `size' and as antonyms
-they cannot both have exactly the same concept in the ontology, therefore
-we cannot refer directly to the property `size' alone.
-As such, we introduce 
-the concept of \emph{covariance} and \emph{contravariance}, which refers to 
+`breakable'.} as they are related to some observable or measurable property, e.g. \emph{size} in the case of \emph{`big'}. However, a specification of the observable property is clearly not sufficient to differentiate between the meaning of antonyms such as \emph{big} and \emph{small.}
+Thus, we introduce the notions of \emph{covariance} and \emph{contravariance}, which specify 
 whether the comparative form indicates a higher property value for the subject 
-or the object. That is that `big' is covariant with size, as bigger things have 
+or the object. In this sense `big' is covariant with size, as bigger things have 
 a higher size value, and `small' is contravariant with size.\footnote{
-    The use of these terms is borrowed from type systems, and resembles the concept of `converse observables' as mentioned by (\cite{Bennett06kr}:42). As stated by the author, adjectives often come in pairs of polar opposites (e.\,g. $\text{\em conv}(\text{\em tall})=\text{\em short}$, and both refer to the same observable (in this case \textit{size}). Some observables analogously hold converse relationships with other observables (e.\,g. $\text{\em conv}(\text{\em flexibility})=\text{\em rigidity}$ or $\text{\em conv}(\text{\em tallness})=\text{\em shortness}$).} 
+    The use of these terms is borrowed from type systems, and resembles the concept of `converse observables' as introduced by (\cite{Bennett06kr}:42). As stated by the author, adjectives often come in pairs of polar opposites (e.\,g. $\text{\em conv}(\text{\em tall})=\text{\em short}$, and both refer to the same observable (in this case \textit{size}). Some observables analogously hold converse relationships with other observables (e.\,g. $\text{\em conv}(\text{\em flexibility})=\text{\em rigidity}$ or $\text{\em conv}(\text{\em tallness})=\text{\em shortness}$).} 
     We also introduce 
 a third concept of \emph{absolute gradability}, which states that these objects 
 are better described by these adjectives as they approach some ideal value. 
@@ -395,7 +387,7 @@ A common example of this is colours, where we may say that some object is
 redder than another if it is closer to some ideal value of red 
 (e.g., RGB {\tt 0xff0000}).
 
-While these concepts well handle the comparative usage of adjectives, the 
+While these notions can handle the comparative structure of the semantics of adjectives, the 
 predicative and superlative usage of adjectives is complicated by three factors
 that we will outline below. We notice that gradable classes are not 
 crisply defined like in the case of many intersective adjectives. In fact, while we can clearly define all people in the world as `Belgian' or 
@@ -416,8 +408,7 @@ world. This non-monotonicity also affects the class boundaries of the gradable
 class itself. For example, in the 18th century, the average height of a male was 
 5'5'' (165cm)\footnote{\url{https://en.wikipedia.org/wiki/Human_height}}; as such a male of 6' would have clearly been considered tall. 
 
-It follows that each instance added to our ontology must 
-revise the class boundaries of a gradable class, hence leading to the fact that 
+It follows that each instance added to our ontology might lead to a revision of the class boundaries of a gradable class, hence leading to the fact that 
 gradable adjectives are fundamentally non-monotonic. We must also notice 
 that gradability can only be understood relative to the class that we wish to 
 grade, that is that while it is unclear as to whether 6' is tall for a male, 
@@ -676,9 +667,11 @@ logic.
 %    interpretation would be that `former' modifies the role of Clinton, however this raises the
 %    question of why the role property of presidents would be selected, and as such
 %is also unsatisfactory. %{\textbf{\textcolor{blue}{In a way, we have already answered this statement by means of the grammatical definition that we have given for relational and operator adjectives, namely that they cannot take a postnominal position (unlike gradable adjectives). It follows that we can avoid discussing the case that `former' modifies the role of Clinton, given that the statement `Clinton is former' is \textit{de facto} ungrammatical. Not only this, but the adjective `former' (as other operator adjectives such as `alleged' or `counterfeit') is neither intersective, nor subsective, but privative \cite{partee2001privative}, meaning that it \textit{entails the negation of the noun property}. Therefore, to answer the question of why the role property of presidents would be selected, we can state that the operator adjective raised the role of the object, but dismissed it at the same time.}}
-As there is at the moment no agreed representation for such an operator in an
-ontology, it underlines the fact that more sophisticated ontology representations than first-order logic are required to understood natural
-language in general.
+%As there is at the moment no agreed way of representing the semantics of such an operator in an ontology
+%for such an operator in an
+%ontology, it underlines the fact that more sophisticated ontology representations than first-order logic are %required to understood natural
+%language in general.
+To fully capture the semantics of such an operator adjective, formalisms beyond first-order logic are thus clearly needed.
 
 %This means that we must acknowledge operator adjectives in both the lexicon and the ontology. 
 %To this extent we define a frame called operator adjective frame, whose prototype is:
@@ -748,7 +741,7 @@ language in general.
 
 Object-relational adjectives are those that require a second argument, such as `known', which
 can only be understood as being `known' to some person, in comparison to `famous'.
-As such, the modelling of relational adjectives is similar to we can model `known' with the frame `$X$ is known to $Y$' and
+Thus, the modelling of the relational adjective \emph{known} is quite similar to the semantics of the corresponding verb \emph{know}. It can be modelled for instance via the frame `$X$ is known to $Y$' and
 reference {\tt foaf:knows} as:
  
 \begin{small}\begin{verbatim}
@@ -937,12 +930,13 @@ to the property \texttt{dbo:occupation}, see \ref{ex:professional}.
 
 \section{Related work}
 
-The categorization of adjectives in terms of formal semantics goes back to Montague~\shortcite{montague1970english} and Vendler~\shortcite{vendler1968adjectives}, however one of the most significant attempts to assign a formal meaning was carried out in the Mikrokosmos project~\cite{raskin1995lexical}. This was one of the first works to treat the case of a micro-theory of adjectives, in which the results were ``machine-tractable'', in that they could be formally defined by a computer. However, the applications of this were limited and no formal logic was attached to the semantic representations. Nevertheless, much of the modelling resembles ours. In particular, scalar adjectives in the Microkosmos project are modeled by association with an attribute and a range, e.g., `big' is described as being {\tt >0.75} (i.e., 75\% of all known instances) on the {\tt size-attribute}. Still, these classifications do not clearly separate meaning and syntax and also require a separate modelling of comparatives and class-specific meanings for many adjectives.
+The categorization of adjectives in terms of formal semantics goes back to Montague~\shortcite{montague1970english} and Vendler~\shortcite{vendler1968adjectives}. However, one of the most significant attempts to assign a formal meaning was carried out in the Mikrokosmos project~\cite{raskin1995lexical}. The approach to adjective modelling in the Mikrokosmos provided one of the first computational implementation of a microtheory of adjective meaning.
+
+This was one of the first works to treat the case of a micro-theory of adjectives, in which the results were ``machine-tractable'', in that they could be formally defined by a computer. However, the applications of this were limited and no formal logic was attached to the semantic representations. Nevertheless, much of the modelling resembles ours. In particular, scalar adjectives in the Microkosmos project are modeled by association with an attribute and a range, e.g., `big' is described as being {\tt >0.75} (i.e., 75\% of all known instances) on the {\tt size-attribute}. Still, these classifications do not clearly separate meaning and syntax and also require a separate modelling of comparatives and class-specific meanings for many adjectives.
 
 Amoia and Garden~\shortcite{amoia2006adjective} handled the problem of adjectives in the context of textual entailment. They analyzed 15 classes that show the subtle interaction between the semantic class (e.g., `privative') and the issues of attributive/predicative use and gradability.  
-Abdullah and Frost~\shortcite{abdullah2005adjectives} tackles the privative nature of adjectives by arguing that the adjectives modify the set themselves, in a manner that is naturally second-order. Similarly, Partee~\shortcite{partee2003there} proposed a limited second-order model by means of an `head primary principle' requiring that adjectives are interpreted within their context. %, \textbf{\textcolor{blue}{here is not clear then what `head' in the principle's name stands for; is it the head noun they are bound to?}}. 
-Bankston's analysis~\shortcite{bankston2003modeling} however shows that the fundamental nature of many adjectives is higher-order, and provides a very sophisticated formal representation framework for this syntactic class.
-A more thorough discussion of non-gradable, non-intersective adjectives is given by Morzycki~\shortcite{morzycki2013nonscales}.
+Abdullah and Frost~\shortcite{abdullah2005adjectives} focused on the modelling of privative adjectives by arguing that these adjectives modify the underlying set itself in a manner that is naturally second-order. Similarly, Partee~\shortcite{partee2003there} proposed a limited second-order model by means of the `head primary principle' requiring that adjectives are interpreted within their context. %, \textbf{\textcolor{blue}{here is not clear then what `head' in the principle's name stands for; is it the head noun they are bound to?}}. 
+Bankston's analysis~\shortcite{bankston2003modeling}, however, shows that the fundamental nature of many adjectives is higher-order, and provides a very sophisticated formal representation framework for adjectives. A more thorough discussion of non-gradable, non-intersective adjectives is given by Morzycki~\shortcite{morzycki2013nonscales}.
 Bouillion~\shortcite{bouillon1999adjective} consider the case of the French adjective `vieux' (`old'), which he interprets as selecting two different
 elements in the event structure of an attributed noun, that is whether the
 state, e.g., `being a mayor' for `mayor', is considered old or the individual
@@ -965,17 +959,9 @@ Finally, Peters and Peters~\shortcite{peters2000treatment} provide one of the fe
 
 \section{Conclusion}
 
-In this paper we have presented a method for modelling adjectives with the
-ontology-lexicon model, \emph{lemon}. In particular, we found that adjectives
-frequently go beyond the first-order logic model used by OWL, but instead 
-require models that are non-monotonic, fuzzy and second-order. As such, we 
-conclude that more sophisticated semantic models are required to represent the semantics
-of such words. However, the separation of syntax and semantics remains a robust
-model, which can be easily adapted to the task of representing adjectives. As 
-a final note, we consider the claims that not all languages have adjectives\footnote{http://linguistlist.org/issues/4/4-442.html}, but based on our analysis of realistic
-questions as applied in QALD, we nevertheless believe that this model should be applicable
-to a range of domains and languages with little issue, even if further 
-validation is necessary.
+In this paper we have proposed an approach to model the semantics of adjectives in the context 
+of the lexicon-ontology interface with a focus on the ontology-lexicon model lemon. We have argued that the semantics of adjectives, in particular gradable and privative adjectives, is beyond what can be expressed in first-order logics, OWL in particular. Instead, capturing the semantics of such adjectives requires formalisms that are non-monotonic, second-order and can represent fuzzy concepts. We have proposed an extension of lemon by the lemon OILs vocabulary that add `syntactic sugar' that allows to represent the semantics of adjectives in a way that abstracts from the actual representational formalism used. Future work will show whether this model is scalable and applicable to most adjectives as well as domains and natural languages.
+
 
 %\section*{Acknowledgements}
 %\vspace{-1.0em}
