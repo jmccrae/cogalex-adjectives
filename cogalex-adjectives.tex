@@ -25,7 +25,7 @@
 \newcommand{\done}{\item[\checkmark]}
 \newcommand{\crossed}{\item[$\times$]}
 
-%\setlength\titlebox{5cm}
+\setlength\titlebox{7.5cm}
 
 % You can expand the titlebox if you need extra space
 % to show all the authors. Please do not make the titlebox
@@ -36,27 +36,26 @@
       
 \title{Modelling the Semantics of Adjectives in the Ontology-Lexicon Interface}
 
-%\author{John P. M\textsuperscript{c}Crae\\
-%  Universit\"at Bielefeld \\
-%  Bielefeld\\
-%  Germany \\
-%  {\tt \footnotesize jmccrae@cit-ec.uni-bielefeld.de} \\ \And
-%  Francesca Quattri \\
-%  Hong Kong Polytechnic University \\
-%  Hong Kong \\
-%  {\tt \footnotesize francesca.quattri@connect.polyu.hk} \\ \And
-%  Christina Unger, Philipp Cimiano \\
-%  Universit\"at Bielefeld \\
-%  Bielefeld\\
-%  Germany \\
-%  {\tt \footnotesize \{cunger,cimiano\}@cit-ec.uni-bielefeld.de}}
-
-\author{Joe Bloggs\\
-  Affiliation / Address line 1 \\
-  Affiliation / Address line 2 \\
-  Affiliation / Address line 3 \\
-  {\tt email@domain}}
-
+\author{John P. M\textsuperscript{c}Crae\\
+  Universit\"at Bielefeld \\
+  Bielefeld\\
+  Germany \\
+  {\tt \footnotesize jmccrae@cit-ec.uni-bielefeld.de} \\ \\
+	{\bf Christina Unger} \\
+	Universit\"at Bielefeld \\
+  Bielefeld\\
+  Germany \\
+  {\tt \footnotesize cunger@cit-ec.uni-bielefeld.de}\\
+ \And
+  Francesca Quattri\\
+  Hong Kong Polytechnic University \\
+ Hong Kong \\
+  {\tt \footnotesize francesca.quattri@connect.polyu.hk} \\ \\ \\
+  {\bf Philipp Cimiano} \\
+  Universit\"at Bielefeld \\
+  Bielefeld\\
+  Germany \\
+  {\tt \footnotesize cimiano@cit-ec.uni-bielefeld.de}}
 
 \date{}
 
@@ -92,7 +91,11 @@ Ontology-lexicon models, such as \emph{lemon} (Lexicon Model for Ontologies)~
 ontology-lexica are built around the separation of a \emph{lexical layer} describing 
 how a word or phrase acts syntactically and morphologically, and a \emph{semantic layer} 
 describing how the meaning of a word is expressed in a formal logical model, 
-such as OWL (Web Ontology Language)~\cite{mcguinness2004owl}. It has been 
+such as OWL (Web Ontology Language)~\cite{mcguinness2004owl}. 
+As such, the modelling is based around a lexical entry, which describes the morphology
+and syntax of a word, and is linked by means of a lexical sense to a ontology entity
+defined in formal logic.
+It has been 
 shown that this principle known as \emph{semantics by reference}~
 \cite{buitelaar2010ontology} is an effective model that can support the task of developing
 question answering systems \cite{unger2011pythia} and natural language 
@@ -120,6 +123,11 @@ SELECT DISTINCT ?uri WHERE {
 \end{enumerate}
 \end{enumerate}
 
+In the above query, we select an entity denoted by the query variable \texttt{?uri}
+that has the properties that the entity's type is a mountain, it is located in Australia,
+and has an elevation bound to the variable \texttt{?elevation}. We then sort the
+query in descending order by the value of the elevation and limit so the query returns
+only the first result, in effect choosing the largest value in the data set.
 It has been claimed that first-order logic and thus by extension description 
 logics, such as OWL, ``fail decidedly when it comes to adjectives''
 \cite{bankston2003modeling}. In fact, we largely agree that the semantics 
@@ -336,6 +344,13 @@ belgian:sense lemon:reference [ a owl:Restriction ;
               lemon:isA belgian:AttrSynArg , belgian:PredSynArg .
 \end{verbatim}\end{small}
 
+In this example, the word `Belgian' is associated with a lemma with representation
+`Belgian', two frame objects and a lexical sense. The frame objects describe the
+attributive and predicative usage, and are associated with an attributive and
+copulative argument respectively. The sense links the word to the anonymous
+ontological class for objects that have `Belgium' as the value of their `nationality'
+property and furthermore the arguments of each frame are linked to the sense, to
+establish a correspondence between the ontology class and the syntactic frames.
 Note that here we use the external vocabulary defined in the LexInfo ontology \cite{cimiano2011lexinfo} 
 to define the meaning of the arguments of the frame as the \emph{attributive 
 argument}, corresponding to the frame stereotype `$X\text{ is }A~N?$' and the 
@@ -594,9 +609,13 @@ A further weakness of this approach is captured by the following example:
 Here, we see the difficulty in interpreting the sentence, as Avery Johnson is in fact of average height (5'10'') but
 for the class of basketball players he is unusually short. While SUMO has some very specific listings of subsets for the same \texttt{Artifact}\footnote{For example, some of the subsets \texttt{Car} are: {\tt CrewDormCar}, {\tt GalleryCar}, {\tt MotorRailcar}, {\tt FreightCar}, {\tt BoxCar}, {\tt RefrigeratorCar}, {\tt FiveWellStackCar}, and more.}, %for which it is then relatively simple to define maximum and minimum defaults for each for them and therefore consequently readjust the defaults for \texttt{Car} so to be the most prototypical possible, in some other places of its conceptual taxonomy, the ontology is still behind and needs further extension. For instance, with reference to this example of the basketball player, 
 SUMO does not provide a well-structured subset net for e.\,g. \texttt{Person}%, which is just enlisted as an `instance for \texttt{Human}'. Further classifications of \texttt{Person} (e.\,g. in terms of gender or age) are still missing.
-. A way to solve this bottleneck could be to introduce, for every possible subclass of {\tt Person}, default values; as well as to introduce default values for the same Artifact in conjunction with a predicate or adjective (e.\,g. {\tt BigPerson}, {\tt BulkyPerson}). Nevertheless, this can potentially lead to an explosion in the amount of information we need to encode in the ontology.
+. A way to solve this bottleneck could be to introduce, for every possible subclass of {\tt Person}, default values; as well as to introduce default values for the same Artifact in conjunction with a predicate or adjective (e.\,g. {\tt BigPerson}, {\tt BulkyPerson}). 
+%Nevertheless, this can potentially lead to an explosion in the amount of information we need to encode in the ontology.
 %, essentially forcing us to encode a class (or default values) for every
 %combination of an adjective and a noun. 
+The creation of such \emph{ad hoc} subclasses is not feasible in general, as we would have to
+introduce a new class into the ontology for every combination of an adjective
+and a noun.
  On the other side though, the SUMO default measurements serve the purpose they were originally conceived for, namely to be an arbitrary, yet computable approximation of physical measures.
 
 %%The observable (hereby as $c$) is therefore treated not as a classical observable (unique in its kind), but rather as an instance of the same ($x$), to which specific (implied) default values are assigned (\textbf{$a$}): \[ [\textbf{a} \circ c](x)\]also representable as \[ \texttt{lsa}(x, \textbf{a}, c).\]}
@@ -826,7 +845,7 @@ often tightly interwoven with the meaning of the noun, as in the following examp
 All gradable adjectives that occur in the QALD-4 question set can be captured in terms of \emph{lemonOILS} 
 as \texttt{CovariantScalar} (e.g. `high') or \texttt{ContravariantScalar} (e.g. `young') (cf. Section~\ref{sec:gradables} above), 
 bound to a DBpedia datatype property (e.g. \texttt{elevation} or \texttt{birthDate}). 
-The positive form of those adjectives only occurs in `how' questions, denoting the property they are bound to, for example:
+The positive form of those adjectives only occurs in `how (much)' questions, denoting the property they are bound to, for example:
 \begin{enumerate}[resume,noitemsep] 
 \item \begin{enumerate}
  \item $|[$deep$|]=\texttt{dbo:depth}$ in `How deep is Lake Placid?'
@@ -960,7 +979,11 @@ Finally, Peters and Peters~\shortcite{peters2000treatment} provide one of the fe
 \section{Conclusion}
 
 In this paper we have proposed an approach to model the semantics of adjectives in the context 
-of the lexicon-ontology interface with a focus on the ontology-lexicon model lemon. We have argued that the semantics of adjectives, in particular gradable and privative adjectives, is beyond what can be expressed in first-order logics, OWL in particular. Instead, capturing the semantics of such adjectives requires formalisms that are non-monotonic, second-order and can represent fuzzy concepts. We have proposed an extension of lemon by the lemon OILs vocabulary that add `syntactic sugar' that allows to represent the semantics of adjectives in a way that abstracts from the actual representational formalism used. Future work will show whether this model is scalable and applicable to most adjectives as well as domains and natural languages.
+of the lexicon-ontology interface with a focus on the ontology-lexicon model \emph{lemon}. We have argued that the semantics of adjectives, in particular gradable and privative adjectives, is beyond what can be expressed in first-order logics, OWL in particular. Instead, capturing the semantics of such adjectives requires formalisms that are non-monotonic, second-order and can represent fuzzy concepts. We have proposed an extension of \emph{lemon} by the \emph{lemonOILS} vocabulary that add `syntactic sugar' that allows to represent the semantics of adjectives in a way that abstracts from the actual representational formalism used. This work has been used in the construction of lexical resources to support
+a question answering system, and we found that this framework is sufficient to enable
+tractable computation of natural language to SPARQL mapping over at least a small
+but varied set of test questions used in the QALD evaluation task.
+Future work will show whether this model is scalable and applicable to most adjectives as well as domains and natural languages.
 
 
 %\section*{Acknowledgements}
