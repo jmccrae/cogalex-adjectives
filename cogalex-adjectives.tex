@@ -798,10 +798,10 @@ known:Object lemon:marker lexicon:to .
 
 \section{Adjectives in question answering}
 
-Of the 150 training and test questions of the QALD-4 benchmark\footnote{\url{http://www.sc.cit-ec.uni-bielefeld.de/qald/}} 
-for question answering over linked data, 67 contain adjectives. 
+The 250 training and test questions of the QALD-4 benchmark\footnote{\url{http://www.sc.cit-ec.uni-bielefeld.de/qald/}} 
+for question answering over linked data contain 76 adjectives (not counting adjectives in names such as `Mean Hamster Software'). 
 
-Some of the occurring adjectives do not have a semantic contribution, or at least none that is separable from the noun, 
+18 of the occurring adjectives do not have a semantic contribution w.r.t. the underlying DBpedia ontology, or at least none that is separable from the noun, 
 as exemplified in the noun phrases in~(\ref{ex:intersectives1}) and (\ref{ex:intersectives2}).\footnote{$|[\cdot|]$ stands for 
 `denotes' and the prefixes \texttt{dbo} and \texttt{res} abbreviate the DBpedia namespaces \texttt{http://dbpedia.org/ontology/}
 and \texttt{http://dbpedia.org/resource/}, respectively.}
@@ -821,7 +821,7 @@ and \texttt{http://dbpedia.org/resource/}, respectively.}
  \label{ex:intersectives2}
 \end{enumerate}
 
-Otherwise, the most common kinds of adjectives among them are intersective and gradable adjectives.
+Otherwise, the most common kinds of adjectives among them are gradable (26) and intersective (13) adjectives.
 
 All intersective adjectives denote restriction classes that are not explicitely named in DBpedia, 
 in correspondence with the modelling proposed in Section~\ref{sec:intersectives} above, for example:
@@ -925,7 +925,7 @@ In some cases, the superlative property is already encoded in the ontology, e.g.
 % duplicate
 
 \vspace{-1.5em}
-There are some instances of operator adjectives. Examples are `former', as in \ref{ex:former},
+There are three instances of operator adjectives. Examples are `former', as in \ref{ex:former},
 which does not refer to an element in the DBpedia ontology but is instead a disambiguation clue
 in the given query, and `professional', which refers 
 to the property \texttt{dbo:occupation}, see \ref{ex:professional}.
