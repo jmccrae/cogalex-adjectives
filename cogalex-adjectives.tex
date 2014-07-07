@@ -219,7 +219,7 @@ adjectives are subsective (e.\,g.`a big mouse' is not `a big animal' \cite{morzy
 Finally, we consider \emph{operator} or \emph{property-modifying} adjectives. 
 They can be understood along the lines of privative adjectives but differ in that they represent 
 operators that modify some property in the qualia 
-structure of the class. For instance, we may express the adjective `former' 
+structure~\cite{pustejovsky1991generative} of the class. For instance, we may express the adjective `former' 
 in lambda calculus as a function that takes a class $C$ as input and returns the class 
 of entities that were a member of $C$ to some prior time point $t$~\cite{partee2003there}:
 
@@ -795,8 +795,11 @@ known:Object lemon:marker lexicon:to .
 
 \section{Adjectives in question answering}
 
-The 250 training and test questions of the QALD-4 benchmark\footnote{\url{http://www.sc.cit-ec.uni-bielefeld.de/qald/}} 
-for question answering over linked data contain 76 adjectives (not counting adjectives in names such as `Mean Hamster Software'). 
+In this section we empirically analyze the adequacy of the modelling proposed in 
+this paper with respect to the QALD-4\footnote{\url{http://www.sc.cit-ec.uni-bielefeld.de/qald/}}
+dataset, a shared dataset for Question Answering over Linked Data.
+The 250 training and test questions of the QALD-4 benchmark 
+contain 76 adjectives in total (not counting adjectives in names such as `Mean Hamster Software'). 
 
 18 of the occurring adjectives do not have a semantic contribution w.r.t. the underlying DBpedia ontology, or at least none that is separable from the noun, 
 as exemplified in the noun phrases in~(\ref{ex:intersectives1}) and (\ref{ex:intersectives2}).\footnote{$|[\cdot|]$ stands for 
