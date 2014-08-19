@@ -1,0 +1,33 @@
+<style>
+body {
+    background-color: #111; 
+}
+
+section { 
+    color: #fff;
+}
+
+.title h1 {
+    margin-top:50px;
+}
+
+section.title {
+    background: url('Fisher_mans_colours.jpg') no-repeat;
+    background-size: 120%;
+}
+
+section#classification-of-adjectives {
+    background: url('baskets-116760_1280.jpg') no-repeat;
+    background-size: 100%;
+}
+
+section#panic {
+    background: url('The_Big_Red_Button.jpg') no-repeat;
+    background-size: 120%;
+}
+
+section#conclusion {
+    background: url('Kopfbahnhof_Helsinki_innen_01.jpg') no-repeat;
+    background-size: 100%;
+}
+</style>

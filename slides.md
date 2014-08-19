@@ -40,6 +40,8 @@ What is the highest mountain in Australia?
 <img src="lemon-core-png"/>
 </div>
 
+# Classification of adjectives
+
 # Classifications of adjectives
 
 * Intersective: $X\mathrm{~is~a~}A~N \Rightarrow X\mathrm{~is~}A \wedge  X\mathrm{~is~a~}N$
@@ -126,6 +128,8 @@ sumo:Book oils:default [
     * “professional Surfer” &rarr; `dbo:occupation` `res:Surfing`
 * 8 non-ontological adjectives
     * “same”, “other”
+
+# Conclusion
 
 # Conclusions
 
