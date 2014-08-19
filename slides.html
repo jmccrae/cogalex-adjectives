@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+  <meta name="author" content="John P. McCrae1, Francesca Quattri2, Christina Unger1 and Philipp Cimiano1" />
+  <title>Modelling the Semantics of Adjectives in the Ontology-Lexicon Interface</title>
+  <style type="text/css">code{white-space: pre;}</style>
+<style>
+  html { background-color: black; }
+  body { background-color: white; border-radius: 12px}
+  /* A section is a slide. It's size is 800x600, and this will never change */
+  section {
+      font-family: Arial, serif;
+      font-size: 20pt;
+    }
+  address, blockquote, dl, fieldset, form, h1, h2, h3, h4, h5, h6, hr, ol, p, pre, table, ul, dl { padding: 10px 20px 10px 20px; }
+  h1, h2, h3 {
+    text-align: center;
+    margin: 10pt 10pt 20pt 10pt;
+  }
+  ul, ol {
+    margin: 10px 10px 10px 50px;
+  }
+  section.titleslide h1 { margin-top: 200px; }
+  h1.title { margin-top: 150px; }
+  h1 { font-size: 180%; }
+  h2 { font-size: 120%; }
+  h3 { font-size: 100%; }
+  q { quotes: "“" "”" "‘" "’"; }
+  blockquote { font-style: italic }
+  /* Figures are displayed full-page, with the caption on
+     top of the image/video */
+  figure {
+    background-color: black;
+  }
+  figcaption {
+    margin: 70px;
+  }
+  footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 40px;
+    text-align: right;
+    background-color: #F3F4F8;
+    border-top: 1px solid #CCC;
+  }
+
+  /* Transition effect */
+  /* Feel free to change the transition effect for original
+     animations. See here:
+     https://developer.mozilla.org/en/CSS/CSS_transitions
+     How to use CSS3 Transitions: */
+  section {
+      -moz-transition: left 400ms linear 0s;
+      -webkit-transition: left 400ms linear 0s;
+      -ms-transition: left 400ms linear 0s;
+      transition: left 400ms linear 0s;
+  }
+
+  /* Before */
+  section { left: -150%; }
+  /* Now */
+  section[aria-selected] { left: 0; }
+  /* After */
+  section[aria-selected] ~ section { left: +150%; }
+
+  /* Incremental elements */
+
+  /* By default, visible */
+  .incremental > * { opacity: 1; }
+
+  /* The current item */
+  .incremental > *[aria-selected] { color: red; opacity: 1; }
+
+  /* The items to-be-selected */
+  .incremental > *[aria-selected] ~ * { opacity: 0.2; }
+</style>
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body>
+<section class="title">
+  <h1 class="title">Modelling the Semantics of Adjectives in the Ontology-Lexicon Interface</h1>
+  <h2 class="author">John P. M<sup>c</sup>Crae<sup>1</sup>, Francesca Quattri<sup>2</sup>, Christina Unger<sup>1</sup> and Philipp Cimiano<sup>1</sup></h2>
+  <h3 class="date"><sup>1</sup>Universität Bielefeld, <sup>2</sup>Hong Kong Polytechnic University</h3>
+</section>
+<section id="introduction" class="slide level1">
+<h1>Introduction</h1>
+<ul>
+<li>Ontology-lexica separate the lexical and ontological layer</li>
+<li>Many beautiful linguistic theories:</li>
+</ul>
+<blockquote>
+<p>Fail decidedly when it comes to adjectives (Bankston, 2003)</p>
+</blockquote>
+<ul>
+<li>Does the OntoLex model fail too?</li>
+</ul>
+</section>
+<section id="question-answering-over-linked-data" class="slide level1">
+<h1>Question Answering over Linked Data</h1>
+<div>
+What is the highest mountain in Australia?
+</div>
+<div>
+<pre><code>SELECT DISTINCT ?uri WHERE { 
+  ?uri rdf:type dbo:Mountain . 
+  ?uri dbo:locatedInArea res:Australia . 
+  ?uri dbo:elevation ?elevation . 
+} ORDER BY DESC(?elevation) LIMIT 1</code></pre>
+</div>
+</section>
+<section id="ontolex-lemon" class="slide level1">
+<h1>OntoLex <em>lemon</em></h1>
+<div class="leftcol">
+<ul>
+<li>Model for representing lexical information relative to ontologies</li>
+<li>Consists of <strong>Lexical Entry</strong>
+<ul>
+<li>Morphosyntactic annotation</li>
+</ul></li>
+<li>Each of which may have <strong>Lexical Form</strong>
+<ul>
+<li>Individual morphemes</li>
+</ul></li>
+<li>And any number of <strong>Lexical Senses</strong>
+<ul>
+<li>Lexico-semantic annotations</li>
+<li>Reference to an ontological concept</li>
+</ul></li>
+</ul>
+</div>
+<div class="rightcol">
+<img src="lemon-core-png"/>
+</div>
+</section>
+<section id="classifications-of-adjectives" class="slide level1">
+<h1>Classifications of adjectives</h1>
+<ul>
+<li>Intersective: <span class="math">\(X\mathrm{~is~a~}A~N \Rightarrow X\mathrm{~is~}A \wedge  X\mathrm{~is~a~}N\)</span></li>
+<li>Subsective: <span class="math">\(X\mathrm{~is~a~}A~N \Rightarrow X\mathrm{~is~a~}N\)</span>, but <span class="math">\(X\mathrm{~is~a~}A~N \not\Rightarrow X\mathrm{~is~}A\)</span></li>
+<li>Privative: <span class="math">\(X\mathrm{~is~a~}A~N \not\Rightarrow X\mathrm{~is~a~}N\)</span></li>
+<li>Gradable: We can express ‘<span class="math">\(X\)</span> is <span class="math">\(A\)</span>-er than <span class="math">\(Y\)</span>’</li>
+<li>Operator: Modify the qualia structure of the adjective</li>
+<li>Object-Relational: Can express a relationship between two or more entities (e.g., with prepositional adjunct)</li>
+</ul>
+</section>
+<section id="intersective-adjectives" class="slide level1">
+<h1>Intersective adjectives</h1>
+<p><img src="../belgian-example.png" width="100%"/></p>
+</section>
+<section id="object-relational-adjectives" class="slide level1">
+<h1>Object-relational adjectives</h1>
+<p><img src="knows-example.png" width="100%"/></p>
+</section>
+<section id="gradable-adjectives" class="slide level1">
+<h1>Gradable adjectives</h1>
+<ul>
+<li>Frequently fuzzy</li>
+<li>Observable, related to some property</li>
+<li>Converse pairs (e.g., ‘big’/‘small’)</li>
+<li>Or absolutes (e.g., ‘red’)</li>
+<li>Non-monotonic (is a ‘big Yorkshire Terrier’ a ‘big dog’)
+<ul>
+<li>Often varies with time, e.g., for tallness</li>
+</ul></li>
+</ul>
+</section>
+<section id="gradable-adjectives-versus-owl" class="slide level1">
+<h1>Gradable adjectives versus OWL</h1>
+<ul>
+<li>OWL (Web Ontology Language) is a decidable subset of FOL (first-order logic)
+<ul>
+<li>Not fuzzy</li>
+<li>Strictly monotonic</li>
+</ul></li>
+<li>The representation of gradable adjectives is fundamentally impossible</li>
+</ul>
+</section>
+<section id="panic" class="slide level1">
+<h1>PANIC!</h1>
+</section>
+<section id="pseudo-classes" class="slide level1">
+<h1>Pseudo-classes</h1>
+<ul>
+<li>There have been attempts to extend OWL beyond FOL
+<ul>
+<li>Rule Interchange Format</li>
+<li>SILK</li>
+</ul></li>
+<li>We provide a practical vocabulary, that can interface with these system, e.g.,</li>
+</ul>
+<pre>
+:high_pseudo_class
+  rdfs:subClassOf oils:CovariantScalar ;
+  oils:boundTo dbpedia:elevation ;
+  oils:degree oils:strong .
+</pre>
+
+</section>
+<section id="supervaluation-and-defaults" class="slide level1">
+<h1>Supervaluation and defaults</h1>
+<ul>
+<li>Include default values on ontological classes</li>
+</ul>
+<pre>
+sumo:Book oils:default [
+    oils:defaultFor sumo:height ;
+    oils:defaultMin "10in" ;
+    oils:defaultMax "11in" ] 
+</pre>
+
+<ul>
+<li>Easy interpretation of adjectives</li>
+<li>Requires defaults for each class
+<ul>
+<li>These should be inferable from examples</li>
+</ul></li>
+</ul>
+</section>
+<section id="operators" class="slide level1">
+<h1>Operators</h1>
+<ul>
+<li>Operators change the meaning of the noun
+<ul>
+<li>e.g., a ‘fake gun’ is not a ‘gun’</li>
+</ul></li>
+<li>Higher-order operations e.g., <span class="math">\(\mathrm{fake} = \lambda C \lambda x fake(C)(x)\)</span></li>
+</ul>
+</section>
+<section id="adjectives-in-question-answering" class="slide level1">
+<h1>Adjectives in Question Answering</h1>
+<ul>
+<li>We analyzed 250 questions in QALD-4 dataset
+<ul>
+<li>76 contained adjectives</li>
+</ul></li>
+<li>18 no semantic contribution
+<ul>
+<li>“official website” → <code>dbo:website</code></li>
+</ul></li>
+<li>13 intersective adjectives
+<ul>
+<li>“Danish” → <span class="math">\(\exists\)</span> <code>dbo:country</code>.<code>res:Denmark</code></li>
+</ul></li>
+<li>27 gradable adjectives
+<ul>
+<li>“high” → <code>dbo:elevation</code></li>
+<li>“highest” → <code>dbo:highestPlace</code></li>
+</ul></li>
+<li>3 operator adjectives, primarily disambiguators
+<ul>
+<li>“professional Surfer” → <code>dbo:occupation</code> <code>res:Surfing</code></li>
+</ul></li>
+<li>8 non-ontological adjectives
+<ul>
+<li>“same”, “other”</li>
+</ul></li>
+</ul>
+</section>
+<section id="conclusions" class="slide level1">
+<h1>Conclusions</h1>
+<ul>
+<li>Adjectives are more challenging to resolve as
+<ul>
+<li>Non-monotonic</li>
+<li>Fuzzy</li>
+<li>Higher-order</li>
+</ul></li>
+<li>OWL and other FOL not sufficient for full natural language</li>
+<li>Ontology-lexicon models such as <em>lemon</em> are extensible with non-FOL ontologies</li>
+</ul>
+</section>
+<!-- {{{{ dzslides core
+#
+#
+#     __  __  __       .  __   ___  __
+#    |  \  / /__` |    | |  \ |__  /__`
+#    |__/ /_ .__/ |___ | |__/ |___ .__/ core :€
+#
+#
+# The following block of code is not supposed to be edited.
+# But if you want to change the behavior of these slides,
+# feel free to hack it!
+#
+-->
+
+<div id="progress-bar"></div>
+
+<!-- Default Style -->
+<style>
+  * { margin: 0; padding: 0; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+  details { display: none; }
+  body {
+    width: 800px; height: 600px;
+    margin-left: -400px; margin-top: -300px;
+    position: absolute; top: 50%; left: 50%;
+    overflow: hidden;
+  }
+  section {
+    position: absolute;
+    pointer-events: none;
+    width: 100%; height: 100%;
+  }
+  section[aria-selected] { pointer-events: auto; }
+  html { overflow: hidden; }
+  body { display: none; }
+  body.loaded { display: block; }
+  .incremental {visibility: hidden; }
+  .incremental[active] {visibility: visible; }
+  #progress-bar{
+    bottom: 0;
+    position: absolute;
+    -moz-transition: width 400ms linear 0s;
+    -webkit-transition: width 400ms linear 0s;
+    -ms-transition: width 400ms linear 0s;
+    transition: width 400ms linear 0s;
+  }
+  figure {
+    width: 100%;
+    height: 100%;
+  }
+  figure > * {
+    position: absolute;
+  }
+  figure > img, figure > video {
+    width: 100%; height: 100%;
+  }
+</style>
+
+<script>
+  var Dz = {
+    remoteWindows: [],
+    idx: -1,
+    step: 0,
+    slides: null,
+    progressBar : null,
+    params: {
+      autoplay: "1"
+    }
+  };
+
+  Dz.init = function() {
+    document.body.className = "loaded";
+    this.slides = $$("body > section");
+    this.progressBar = $("#progress-bar");
+    this.setupParams();
+    this.onhashchange();
+    this.setupTouchEvents();
+    this.onresize();
+  }
+  
+  Dz.setupParams = function() {
+    var p = window.location.search.substr(1).split('&');
+    p.forEach(function(e, i, a) {
+      var keyVal = e.split('=');
+      Dz.params[keyVal[0]] = decodeURIComponent(keyVal[1]);
+    });
+  // Specific params handling
+    if (!+this.params.autoplay)
+      $$.forEach($$("video"), function(v){ v.controls = true });
+  }
+
+  Dz.onkeydown = function(aEvent) {
+    // Don't intercept keyboard shortcuts
+    if (aEvent.altKey
+      || aEvent.ctrlKey
+      || aEvent.metaKey
+      || aEvent.shiftKey) {
+      return;
+    }
+    if ( aEvent.keyCode == 37 // left arrow
+      || aEvent.keyCode == 38 // up arrow
+      || aEvent.keyCode == 33 // page up
+    ) {
+      aEvent.preventDefault();
+      this.back();
+    }
+    if ( aEvent.keyCode == 39 // right arrow
+      || aEvent.keyCode == 40 // down arrow
+      || aEvent.keyCode == 34 // page down
+    ) {
+      aEvent.preventDefault();
+      this.forward();
+    }
+    if (aEvent.keyCode == 35) { // end
+      aEvent.preventDefault();
+      this.goEnd();
+    }
+    if (aEvent.keyCode == 36) { // home
+      aEvent.preventDefault();
+      this.goStart();
+    }
+    if (aEvent.keyCode == 32) { // space
+      aEvent.preventDefault();
+      this.toggleContent();
+    }
+    if (aEvent.keyCode == 70) { // f
+      aEvent.preventDefault();
+      this.goFullscreen();
+    }
+  }
+
+  /* Touch Events */
+
+  Dz.setupTouchEvents = function() {
+    var orgX, newX;
+    var tracking = false;
+
+    var db = document.body;
+    db.addEventListener("touchstart", start.bind(this), false);
+    db.addEventListener("touchmove", move.bind(this), false);
+
+    function start(aEvent) {
+      aEvent.preventDefault();
+      tracking = true;
+      orgX = aEvent.changedTouches[0].pageX;
+    }
+
+    function move(aEvent) {
+      if (!tracking) return;
+      newX = aEvent.changedTouches[0].pageX;
+      if (orgX - newX > 100) {
+        tracking = false;
+        this.forward();
+      } else {
+        if (orgX - newX < -100) {
+          tracking = false;
+          this.back();
+        }
+      }
+    }
+  }
+
+  /* Adapt the size of the slides to the window */
+
+  Dz.onresize = function() {
+    var db = document.body;
+    var sx = db.clientWidth / window.innerWidth;
+    var sy = db.clientHeight / window.innerHeight;
+    var transform = "scale(" + (1/Math.max(sx, sy)) + ")";
+
+    db.style.MozTransform = transform;
+    db.style.WebkitTransform = transform;
+    db.style.OTransform = transform;
+    db.style.msTransform = transform;
+    db.style.transform = transform;
+  }
+
+
+  Dz.getDetails = function(aIdx) {
+    var s = $("section:nth-of-type(" + aIdx + ")");
+    var d = s.$("details");
+    return d ? d.innerHTML : "";
+  }
+
+  Dz.onmessage = function(aEvent) {
+    var argv = aEvent.data.split(" "), argc = argv.length;
+    argv.forEach(function(e, i, a) { a[i] = decodeURIComponent(e) });
+    var win = aEvent.source;
+    if (argv[0] === "REGISTER" && argc === 1) {
+      this.remoteWindows.push(win);
+      this.postMsg(win, "REGISTERED", document.title, this.slides.length);
+      this.postMsg(win, "CURSOR", this.idx + "." + this.step);
+      return;
+    }
+    if (argv[0] === "BACK" && argc === 1)
+      this.back();
+    if (argv[0] === "FORWARD" && argc === 1)
+      this.forward();
+    if (argv[0] === "START" && argc === 1)
+      this.goStart();
+    if (argv[0] === "END" && argc === 1)
+      this.goEnd();
+    if (argv[0] === "TOGGLE_CONTENT" && argc === 1)
+      this.toggleContent();
+    if (argv[0] === "SET_CURSOR" && argc === 2)
+      window.location.hash = "#" + argv[1];
+    if (argv[0] === "GET_CURSOR" && argc === 1)
+      this.postMsg(win, "CURSOR", this.idx + "." + this.step);
+    if (argv[0] === "GET_NOTES" && argc === 1)
+      this.postMsg(win, "NOTES", this.getDetails(this.idx));
+  }
+
+  Dz.toggleContent = function() {
+    // If a Video is present in this new slide, play it.
+    // If a Video is present in the previous slide, stop it.
+    var s = $("section[aria-selected]");
+    if (s) {
+      var video = s.$("video");
+      if (video) {
+        if (video.ended || video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      }
+    }
+  }
+
+  Dz.setCursor = function(aIdx, aStep) {
+    // If the user change the slide number in the URL bar, jump
+    // to this slide.
+    aStep = (aStep != 0 && typeof aStep !== "undefined") ? "." + aStep : ".0";
+    window.location.hash = "#" + aIdx + aStep;
+  }
+
+  Dz.onhashchange = function() {
+    var cursor = window.location.hash.split("#"),
+        newidx = 1,
+        newstep = 0;
+    if (cursor.length == 2) {
+      newidx = ~~cursor[1].split(".")[0];
+      newstep = ~~cursor[1].split(".")[1];
+      if (newstep > Dz.slides[newidx - 1].$$('.incremental > *').length) {
+        newstep = 0;
+        newidx++;
+      }
+    }
+    this.setProgress(newidx, newstep);
+    if (newidx != this.idx) {
+      this.setSlide(newidx);
+    }
+    if (newstep != this.step) {
+      this.setIncremental(newstep);
+    }
+    for (var i = 0; i < this.remoteWindows.length; i++) {
+      this.postMsg(this.remoteWindows[i], "CURSOR", this.idx + "." + this.step);
+    }
+  }
+
+  Dz.back = function() {
+    if (this.idx == 1 && this.step == 0) {
+      return;
+    }
+    if (this.step == 0) {
+      this.setCursor(this.idx - 1,
+                     this.slides[this.idx - 2].$$('.incremental > *').length);
+    } else {
+      this.setCursor(this.idx, this.step - 1);
+    }
+  }
+
+  Dz.forward = function() {
+    if (this.idx >= this.slides.length &&
+        this.step >= this.slides[this.idx - 1].$$('.incremental > *').length) {
+        return;
+    }
+    if (this.step >= this.slides[this.idx - 1].$$('.incremental > *').length) {
+      this.setCursor(this.idx + 1, 0);
+    } else {
+      this.setCursor(this.idx, this.step + 1);
+    }
+  }
+
+  Dz.goStart = function() {
+    this.setCursor(1, 0);
+  }
+
+  Dz.goEnd = function() {
+    var lastIdx = this.slides.length;
+    var lastStep = this.slides[lastIdx - 1].$$('.incremental > *').length;
+    this.setCursor(lastIdx, lastStep);
+  }
+
+  Dz.setSlide = function(aIdx) {
+    this.idx = aIdx;
+    var old = $("section[aria-selected]");
+    var next = $("section:nth-of-type("+ this.idx +")");
+    if (old) {
+      old.removeAttribute("aria-selected");
+      var video = old.$("video");
+      if (video) {
+        video.pause();
+      }
+    }
+    if (next) {
+      next.setAttribute("aria-selected", "true");
+      var video = next.$("video");
+      if (video && !!+this.params.autoplay) {
+        video.play();
+      }
+    } else {
+      // That should not happen
+      this.idx = -1;
+      // console.warn("Slide doesn't exist.");
+    }
+  }
+
+  Dz.setIncremental = function(aStep) {
+    this.step = aStep;
+    var old = this.slides[this.idx - 1].$('.incremental > *[aria-selected]');
+    if (old) {
+      old.removeAttribute('aria-selected');
+    }
+    var incrementals = $$('.incremental');
+    if (this.step <= 0) {
+      $$.forEach(incrementals, function(aNode) {
+        aNode.removeAttribute('active');
+      });
+      return;
+    }
+    var next = this.slides[this.idx - 1].$$('.incremental > *')[this.step - 1];
+    if (next) {
+      next.setAttribute('aria-selected', true);
+      next.parentNode.setAttribute('active', true);
+      var found = false;
+      $$.forEach(incrementals, function(aNode) {
+        if (aNode != next.parentNode)
+          if (found)
+            aNode.removeAttribute('active');
+          else
+            aNode.setAttribute('active', true);
+        else
+          found = true;
+      });
+    } else {
+      setCursor(this.idx, 0);
+    }
+    return next;
+  }
+
+  Dz.goFullscreen = function() {
+    var html = $('html'),
+        requestFullscreen = html.requestFullscreen || html.requestFullScreen || html.mozRequestFullScreen || html.webkitRequestFullScreen;
+    if (requestFullscreen) {
+      requestFullscreen.apply(html);
+    }
+  }
+  
+  Dz.setProgress = function(aIdx, aStep) {
+    var slide = $("section:nth-of-type("+ aIdx +")");
+    if (!slide)
+      return;
+    var steps = slide.$$('.incremental > *').length + 1,
+        slideSize = 100 / (this.slides.length - 1),
+        stepSize = slideSize / steps;
+    this.progressBar.style.width = ((aIdx - 1) * slideSize + aStep * stepSize) + '%';
+  }
+  
+  Dz.postMsg = function(aWin, aMsg) { // [arg0, [arg1...]]
+    aMsg = [aMsg];
+    for (var i = 2; i < arguments.length; i++)
+      aMsg.push(encodeURIComponent(arguments[i]));
+    aWin.postMessage(aMsg.join(" "), "*");
+  }
+  
+  function init() {
+    Dz.init();
+    window.onkeydown = Dz.onkeydown.bind(Dz);
+    window.onresize = Dz.onresize.bind(Dz);
+    window.onhashchange = Dz.onhashchange.bind(Dz);
+    window.onmessage = Dz.onmessage.bind(Dz);
+  }
+
+  window.onload = init;
+</script>
+
+
+<script> // Helpers
+  if (!Function.prototype.bind) {
+    Function.prototype.bind = function (oThis) {
+
+      // closest thing possible to the ECMAScript 5 internal IsCallable
+      // function 
+      if (typeof this !== "function")
+      throw new TypeError(
+        "Function.prototype.bind - what is trying to be fBound is not callable"
+      );
+
+      var aArgs = Array.prototype.slice.call(arguments, 1),
+          fToBind = this,
+          fNOP = function () {},
+          fBound = function () {
+            return fToBind.apply( this instanceof fNOP ? this : oThis || window,
+                   aArgs.concat(Array.prototype.slice.call(arguments)));
+          };
+
+      fNOP.prototype = this.prototype;
+      fBound.prototype = new fNOP();
+
+      return fBound;
+    };
+  }
+
+  var $ = (HTMLElement.prototype.$ = function(aQuery) {
+    return this.querySelector(aQuery);
+  }).bind(document);
+
+  var $$ = (HTMLElement.prototype.$$ = function(aQuery) {
+    return this.querySelectorAll(aQuery);
+  }).bind(document);
+
+  $$.forEach = function(nodeList, fun) {
+    Array.prototype.forEach.call(nodeList, fun);
+  }
+
+</script>
+<!-- vim: set fdm=marker: }}} -->
+</body>
+</html>
