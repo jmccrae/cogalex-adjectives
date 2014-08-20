@@ -49,7 +49,7 @@ What is the highest mountain in Australia?
 * Subsective: $X\mathrm{~is~a~}A~N \Rightarrow X\mathrm{~is~a~}N$, but $X\mathrm{~is~a~}A~N \not\Rightarrow X\mathrm{~is~}A$
 * Privative: $X\mathrm{~is~a~}A~N \not\Rightarrow X\mathrm{~is~a~}N$
 * Gradable: We can express ‘$X$ is $A$-er than $Y$’
-* Operator: Modify the qualia structure of the adjective
+* Operator: Modify the qualia structure of the noun
 * Object-Relational: Can express a relationship between two or more entities (e.g., with prepositional adjunct)
 
 # Intersective adjectives
@@ -66,7 +66,7 @@ What is the highest mountain in Australia?
 * Observable, related to some property
 * Converse pairs (e.g., ‘big’/‘small’)
 * Or absolutes (e.g., ‘red’)
-* Non-monotonic (is a ‘big Yorkshire Terrier’ a ‘big dog’)
+* Non-monotonic (a ‘big Yorkshire Terrier’ is not a ‘big dog’)
     * Often varies with time, e.g., for tallness
 
 # Gradable adjectives versus OWL
@@ -74,7 +74,7 @@ What is the highest mountain in Australia?
 * OWL (Web Ontology Language) is a decidable subset of FOL (first-order logic)
     * Not fuzzy
     * Strictly monotonic
-* The representation of gradable adjectives is fundamentally impossible
+* The representation of gradable adjectives is impossible in OWL
 
 # PANIC!
 
@@ -113,6 +113,8 @@ sumo:Book oils:default [
     * e.g., a ‘fake gun’ is not a ‘gun’
 * Higher-order operations e.g.,
     $\mathrm{fake} = \lambda C \lambda x [fake(C)](x)$
+
+# Results
 
 # Adjectives in Question Answering
 

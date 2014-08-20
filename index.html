@@ -75,7 +75,7 @@
   /* The items to-be-selected */
   .incremental > *[aria-selected] ~ * { opacity: 0.2; }
 </style>
-  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
   <style>
   body {
       background-color: #000; 
@@ -120,6 +120,18 @@
   }
   
   section#panic h1 {
+      font-size:400%;
+      margin-top: 150px;
+      text-shadow: black 0px 0px 5px;
+  }
+  
+  
+  section#results {
+      background: url('Chest_X-ray_1300276.JPG') no-repeat;
+      background-size: 100%;
+  }
+  
+  section#results h1 {
       font-size:400%;
       margin-top: 150px;
       text-shadow: black 0px 0px 5px;
@@ -213,7 +225,7 @@ What is the highest mountain in Australia?
 <li>Subsective: <span class="math">\(X\mathrm{~is~a~}A~N \Rightarrow X\mathrm{~is~a~}N\)</span>, but <span class="math">\(X\mathrm{~is~a~}A~N \not\Rightarrow X\mathrm{~is~}A\)</span></li>
 <li>Privative: <span class="math">\(X\mathrm{~is~a~}A~N \not\Rightarrow X\mathrm{~is~a~}N\)</span></li>
 <li>Gradable: We can express ‘<span class="math">\(X\)</span> is <span class="math">\(A\)</span>-er than <span class="math">\(Y\)</span>’</li>
-<li>Operator: Modify the qualia structure of the adjective</li>
+<li>Operator: Modify the qualia structure of the noun</li>
 <li>Object-Relational: Can express a relationship between two or more entities (e.g., with prepositional adjunct)</li>
 </ul>
 </section>
@@ -232,7 +244,7 @@ What is the highest mountain in Australia?
 <li>Observable, related to some property</li>
 <li>Converse pairs (e.g., ‘big’/‘small’)</li>
 <li>Or absolutes (e.g., ‘red’)</li>
-<li>Non-monotonic (is a ‘big Yorkshire Terrier’ a ‘big dog’)
+<li>Non-monotonic (a ‘big Yorkshire Terrier’ is not a ‘big dog’)
 <ul>
 <li>Often varies with time, e.g., for tallness</li>
 </ul></li>
@@ -246,7 +258,7 @@ What is the highest mountain in Australia?
 <li>Not fuzzy</li>
 <li>Strictly monotonic</li>
 </ul></li>
-<li>The representation of gradable adjectives is fundamentally impossible</li>
+<li>The representation of gradable adjectives is impossible in OWL</li>
 </ul>
 </section>
 <section id="panic" class="slide level1">
@@ -299,6 +311,9 @@ sumo:Book oils:default [
 </ul></li>
 <li>Higher-order operations e.g., <span class="math">\(\mathrm{fake} = \lambda C \lambda x [fake(C)](x)\)</span></li>
 </ul>
+</section>
+<section id="results" class="slide level1">
+<h1>Results</h1>
 </section>
 <section id="adjectives-in-question-answering" class="slide level1">
 <h1>Adjectives in Question Answering</h1>

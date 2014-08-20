@@ -48,6 +48,18 @@ section#panic h1 {
 }
 
 
+section#results {
+    background: url('Chest_X-ray_1300276.JPG') no-repeat;
+    background-size: 100%;
+}
+
+section#results h1 {
+    font-size:400%;
+    margin-top: 150px;
+    text-shadow: black 0px 0px 5px;
+}
+
+
 section#conclusion {
     background: url('Kopfbahnhof_Helsinki_innen_01.jpg') no-repeat;
     background-size: 100%;
