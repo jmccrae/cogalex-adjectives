@@ -16,6 +16,7 @@
 <div>
 What is the highest mountain in Australia?
 </div>
+<br/>
 <div>
     SELECT DISTINCT ?uri WHERE { 
       ?uri rdf:type dbo:Mountain . 
@@ -26,7 +27,7 @@ What is the highest mountain in Australia?
 
 # OntoLex _lemon_
 
-<div class="leftcol">
+<div class="leftcol" style="font-size:70%;">
 * Model for representing lexical information relative to ontologies
 * Consists of **Lexical Entry**
     * Morphosyntactic annotation
@@ -37,7 +38,7 @@ What is the highest mountain in Australia?
     * Reference to an ontological concept
 </div>
 <div class="rightcol">
-<img src="lemon-core-png"/>
+<img src="lemon-core.png" style="margin-top: 80px;"/>
 </div>
 
 # Classification of adjectives
@@ -57,7 +58,7 @@ What is the highest mountain in Australia?
 
 # Object-relational adjectives
 
-<img src="knows-example.png" width="100%"/>
+<img src="known-example.png" width="100%"/>
 
 # Gradable adjectives
 
@@ -81,7 +82,7 @@ What is the highest mountain in Australia?
 
 * There have been attempts to extend OWL beyond FOL
     * Rule Interchange Format
-    * SILK
+    * Probabilistic OWL
 * We provide a practical vocabulary, that can interface with these system, e.g.,
     
 <pre>
@@ -111,7 +112,7 @@ sumo:Book oils:default [
 * Operators change the meaning of the noun
     * e.g., a ‘fake gun’ is not a ‘gun’
 * Higher-order operations e.g.,
-    $\mathrm{fake} = \lambda C \lambda x fake(C)(x)$
+    $\mathrm{fake} = \lambda C \lambda x [fake(C)](x)$
 
 # Adjectives in Question Answering
 
@@ -121,11 +122,13 @@ sumo:Book oils:default [
     * “official website” &rarr; `dbo:website`
 * 13 intersective adjectives
     * “Danish” &rarr; $\exists$ `dbo:country`.`res:Denmark`
+
+# Adjectives in Question Answering (II)
 * 27 gradable adjectives
     * “high” &rarr; `dbo:elevation`
     * “highest” &rarr; `dbo:highestPlace`
 * 3 operator adjectives, primarily disambiguators
-    * “professional Surfer” &rarr; `dbo:occupation` `res:Surfing`
+    * “professional Surfer” &rarr; `dbo:occupation=res:Surfing`
 * 8 non-ontological adjectives
     * “same”, “other”
 
@@ -139,3 +142,18 @@ sumo:Book oils:default [
     * Higher-order
 * OWL and other FOL not sufficient for full natural language
 * Ontology-lexicon models such as _lemon_ are extensible with non-FOL ontologies
+
+# Thanks
+
+<div style="font-size:120%; text-align:center;">
+Thank you for your attention!
+</div>
+
+<div style="font-size:80%;margin-top:50px; text-align:center;">
+Images from WikiMedia
+</div>
+
+<div style="font-size:80%; margin-top:50px; text-align:center;">
+Share these slides:<br/>
+<a href="http://jmccrae.github.io/cogalex-adjectives/">http://jmccrae.github.io/cogalex-adjectives</a>
+</div>

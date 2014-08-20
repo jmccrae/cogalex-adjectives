@@ -1,6 +1,6 @@
 <style>
 body {
-    background-color: #111; 
+    background-color: #000; 
 }
 
 section { 
@@ -9,6 +9,15 @@ section {
 
 .title h1 {
     margin-top:50px;
+    text-shadow: black 0px 0px 2px;
+}
+
+.title h2 {
+    text-shadow: black 0px 0px 2px;
+}
+
+.title h3 {
+    text-shadow: black 0px 0px 2px;
 }
 
 section.title {
@@ -21,13 +30,40 @@ section#classification-of-adjectives {
     background-size: 100%;
 }
 
+section#classification-of-adjectives h1 {
+    font-size:400%;
+    margin-top: 150px;
+    text-shadow: black 0px 0px 5px;
+}
+
 section#panic {
     background: url('The_Big_Red_Button.jpg') no-repeat;
     background-size: 120%;
 }
 
+section#panic h1 {
+    font-size:400%;
+    margin-top: 150px;
+    text-shadow: black 0px 0px 5px;
+}
+
+
 section#conclusion {
     background: url('Kopfbahnhof_Helsinki_innen_01.jpg') no-repeat;
     background-size: 100%;
 }
+
+section#conclusion h1 {
+    font-size:400%;
+    margin-top: 150px;
+    text-shadow: black 0px 0px 5px;
+}
+
+
+.leftcol { float:left;max-width:50%; }
+.rightcol { float:right;width:48%; }
+
+.rightcol img { width: 100%; }
+
+
 </style>
