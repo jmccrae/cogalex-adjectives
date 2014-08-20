@@ -53,7 +53,7 @@ What is the highest mountain in Australia?
 
 # Intersective adjectives
 
-<img src="../belgian-example.png" width="100%"/>
+<img src="belgian-example.png" width="100%"/>
 
 # Object-relational adjectives
 
